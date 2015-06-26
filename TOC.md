@@ -1,10 +1,10 @@
- - Assetic
+ - Assetic  苗帅
    - [如何使用 Assetic 进行资产管理](assetic-assetmgmt.md)
    - [如何裁剪 CSS/JS 文件(使用 UglifyJS 和 UglifyCSS)](minify-cssjs.md)
    - [如何使用 YUI Compressor 裁剪 Javascripts 和 Stylesheets](minify-js-stylesheet.md)
    - [如何使用 Assetic 和 Twig Functions 进行图像优化](assetic-image-optimization.md)
    - [如何将 Assetic Filter 应用到具体的文件扩展名上](assetic-file-extension.md)
- - Bundles
+ - Bundles  苗帅
    - [如何安装第三方 Bundles](install-3rdparty-bundles.md)
    - [可复用 Bundles 的最佳实践](bestpractice-reusable-bundles.md)
    - [如何使用 Bundle 的继承来重写部分 Bundle](override-parts-bundle.md)
@@ -12,12 +12,12 @@
    - [如何在 Bundle 内部加载服务配置](load-service-configuration.md)
    - [如何为一个 Bundle 创建友好的配置](create-friendly-configuration.md)
    - [如何简化多个 Bundle 的配置](simply-config-bundles.md)
- - 缓存
+ - 缓存  苗帅
    - [如何使用 Varnish 加速我的Web站点](varnish-speedup.md)
    - [缓存包含 CSRF 保护表单的页面](caching-csrf-pages.md)
- - Composer
+ - Composer  苗帅
    - [安装 Composer](installing-composer.md)
- - 配置
+ - 配置  苗帅
    - [如何掌握并创建新的环境](master-create-newenv.md)
    - [如何重写 Symfony 默认的目录结构](override-default-directory.md)
    - [在独立注入类中使用参数](parameter-injection-class.md)
@@ -27,25 +27,25 @@
    - [如何使用 Apache Router](use-apache-router.md)
    - [配置 Web Server](config-web-server.md)
    - [如何组织配置文件](organize-config-files.md)
- - 控制台
+ - 控制台  苗帅
    - [如何创建一个控制台命令](create-console-command.md)
    - [如何使用控制台](howto-use-console.md)
    - [如何从 Controller 调用一个命令](call-command.md)
    - [如何在控制台生成 URL 和 发送邮件](generate-url-email.md)
    - [如何在控制台命令中启用日志](enable-logging-inconsole.md)
    - [如何把命令定义为服务](define-commands-as-service.md)
- - Controller
+ - Controller  苗帅
    - [如何定制错误页](customize-error-pages.md)
    - [如何把 Controller 定义为服务](define-controller-as-service.md)
    - [如何上传文件](howto-upload-files.md)
- - 调试
+ - 调试  赵洁
    - [如何将你的开发环境优化为调试环境](optimize-for-debugging.md)
- - 部署
+ - 部署  赵洁
    - [如何部署一个 Symfony 应用](deploy-symfony-application.md)
    - [部署在 Microsoft Azure 云](deploy-azure-cloud.md)
    - [部署在 Heroku 云](deploy-heroku-cloud.md)
    - [部署在 Platform.sh](deploy-platform-sh.md)
- - Doctrine
+ - Doctrine  赵洁
    - [如何使用 Doctrine 上传文件](file-upload-doctrine.md)
    - [如何使用 Doctrine 扩展: Timestampable, Sluggable, Translatable, etc](use-doctrine-extension.md)
    - [如何注册事件监听器和订阅](register-event-listener.md)
@@ -58,21 +58,21 @@
    - [如何实现一个简单的注册表单](implement-simple-registration.md)
    - [控制台命令](console-commands.md)
    - **不翻译**[(configuration)如何在数据库中使用 PdoSessionHandler 存储 Sessions](pdosessionhandler-store-sessions.md)
- - 电子邮件
+ - 电子邮件  赵洁
    - [如何发送一封电子邮件](email.md)
    - [如何使用 Gmail 发送电子邮件](gmail.md)
    - [如何使用云服务发送电子邮件](cloud.md)
    - [如何在开发时使用电子邮件](dev-environment.md)
    - [如何缓存电子邮件](spool.md)
    - [如何在功能测试中测试电子邮件是否发送](testing.md)
- - 事件分发器
+ - 事件分发器  赵洁
    - [如何在过滤器的前后设置事件分发器](before-after-filters.md)
    - [如何以非继承方式扩展一个类](class-extension.md)
    - [如何以非继承方式自定义方法](method-behavior.md)
    - **不翻译**[(service container)如何创建事件监听器](event-listener.md)
- - 表达式
+ - 表达式  赵洁
    - [如何在安全，路由，服务和验证中使用表达式](expressions.md)
- - 表单
+ - 表单  王鑫
    - [如何自定义表单渲染](form-customization.md)
    - [如何使用数据转换](data-transformers.md)
    - [如何利用表单事件动态修改表单](dynamic-form-modification.md)
@@ -85,24 +85,24 @@
    - [如何使用 submit() 函数处理表单提交](direct-submit.md)
    - **不翻译**[(validation)如何创建一个自定义验证限制](custom-constraint.md)
    - **不翻译**[(doctrine)如何使用 Doctrine 处理文件上传](file-upload-doctrine.md)
- - 前端
+ - 前端  王鑫
    - [使用 Bower 安装 Symfony](bower.md)
- - 日志
+ - 日志  王鑫
    - [如何使用 Monolog 记录日志](monolog.md)
    - [如何对电子邮件错误配置 Monolog](monolog-email.md)
    - [如何对显示控制台信息配置 Monolog](monolog-console.md)
    - [如何配置 Monolog 从日志中排除 404 错误](monolog-regex-based-excludes.md)
    - [如何记录消息到不同的文件](channels-handlers.md)
- - 分析器
+ - 分析器  王鑫
    - [如何创建一个自定义数据收集器](data-collector.md)
    - [如何使用匹配器有条件地启用分析器](matchers.md)
    - [切换分析器存储](storage.md)
    - [如何编程访问分析器数据](profiling-data.md)
- - 请求
+ - 请求  王鑫
    - [如何配置 Symfony 使其工作在负载均衡和反转代理](load-balancer-reverse-proxy.md)
    - [如何注册一个新的请求格式和 Mime 类型](mime-type.md)
    - **不翻译**[(session)在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
- - 路由
+ - 路由  王鑫
    - [如何强制路由总是使用 HTTPS 或者 HTTP](scheme.md)
    - [如何在路由参数中允许"/"字符](slash-in-parameter.md)
    - [如何不用自定义控制器配置重定向](redirect-in-config.md)
@@ -111,7 +111,7 @@
    - [如何创建一个自定义路由加载器](custom-route-loader.md)
    - [使用结尾反斜线重定向 URL](redirect-trailing-slash.md)
    - [如何从路由向控制器传输额外的信息](extra-information.md)
- - 安全  
+ - 安全  王运里
    - [如何建立一个传统的登录表单](form-login-setup.md)
    - [如何从数据库(实体提供者)读取安全用户](entity-provider.md)
    - [如何添加 "记住我" 登录功能](remember-me.md)
@@ -135,13 +135,13 @@
    - [如何动态选择密码加密算法](named-encoders.md)
    - [安全访问控制是如何工作的](access-control.md)
    - [如何使用多用户提供者](multiple-user-providers.md)
- - 序列化  
+ - 序列化  王运里
    - [如何使用序列化](serializer.md)
- - 服务容器     
+ - 服务容器  王运里
    - [如何创建事件监听器](event-listener.md)
    - [如何使用作用域](scopes.md)
    - [如何在 Bundle 中使用 Compiler Passes](compiler-passes.md)
- - 会话
+ - 会话  袁泽林
    - [会话代理实例](proxy-examples.md)
    - [在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
    - [配置 Session 文件的保存目录](sessions-directory.md)
@@ -149,17 +149,17 @@
    - [限制 Session 元数据的写入](limit-metadata-writes.md)
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
    - [避免匿名用户开始 Session 会话](avoid-session-start.md)
- - PSR-7
+ - PSR-7   袁泽林
    - [The PSR-7 Bridge](psr7.md)
- - symfony1
+ - symfony1   袁泽林
    - [Symfony2 与 Symfony1 的区别](symfony1.md)
- - 模板
+ - 模板  袁泽林
    - [如何注入变量到所有的模板(如全局变量)](global-variables.md)
    - [如何使用和注册命名空间路径](namespaced-paths.md)
    - [如何在模板中使用 PHP 而不是 Twig](PHP.md)
    - [如何写一个自定义的 Twig 扩展](twig-extension.md)
    - [如何不用一个自定义的控制器渲染一个模板](render-without-controller.md)
- - 测试
+ - 测试  袁泽林  
    - [如何在功能测试中模拟 HTTP 认证](http-authentication.md)
    - [如何在功能测试中用 Token 模拟认证](simulating-authentication.md)
    - [如何测试多个客户端的交互](insulating-clients.md)
@@ -169,19 +169,19 @@
    - [如何在运行测试之前自定义引导过程](bootstrap.md)
    - **不翻译**[(email)如何在功能测试中测试一封电子邮件被发送](testing.md)
    - **不翻译**[(form)如何对表单单元测试](unit-testing.md)
- - 升级
+ - 升级  袁泽林
    - [升级一个补丁版本](patch-version.md)
    - [升级一个副版本](minor-version.md)
    - [升级一个主版本](major-version.md)
    - ["XXX is deprecated" E-USER-DEPRECATED 的警告是什么意思?](deprecation-warnings.md)
- - 验证
+ - 验证  周思宇
    - [如何创建一个自定义的验证限制](custom-constraint.md)
    - [如何处理不同的错误级别](severity.md)
- - Web 服务器 
+ - Web 服务器  周思宇 
    - [如何使用内建的 PHP Web 服务器](built-in.md)
    - **不翻译**[(configuration) 配置一个 Web 服务器](config-web-server.md)
- - Web 服务   
+ - Web 服务  周思宇   
    - [如何在一个 Symfony 控制器中创建一个 SOAP 的 Web 服务](php-soap-extension.md)
- - 工作流
+ - 工作流  周思宇
    - [如何在 Git 中创建并保存一个 Symfony 项目](new-project-git.md)
    - [如何在 SubVersion 中创建并保存一个 Symfony 项目](new-project-svn.md)
