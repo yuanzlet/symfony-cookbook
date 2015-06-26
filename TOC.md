@@ -57,7 +57,7 @@
    - [如何提供为多个Doctrine的实现提供模型类](provide-model-class.md)
    - [如何实现一个简单的注册表单](implement-simple-registration.md)
    - [控制台命令](console-commands.md)
-   - [(configuration)如何在数据库中使用 PdoSessionHandler 存储 Sessions](pdosessionhandler-store-sessions.md)
+   - **不翻译**[(configuration)如何在数据库中使用 PdoSessionHandler 存储 Sessions](pdosessionhandler-store-sessions.md)
  - 电子邮件
    - [如何发送一封电子邮件](email.md)
    - [如何使用 Gmail 发送电子邮件](gmail.md)
@@ -69,7 +69,7 @@
    - [如何在过滤器的前后设置事件分发器](before-after-filters.md)
    - [如何以非继承方式扩展一个类](class-extension.md)
    - [如何以非继承方式自定义方法](method-behavior.md)
-   - [(service container)如何创建事件监听器](event-listener.md)
+   - **不翻译**[(service container)如何创建事件监听器](event-listener.md)
  - 表达式
    - [如何在安全，路由，服务和验证中使用表达式](expressions.md)
  - 表单
@@ -83,8 +83,8 @@
    - [如何对表单单元测试](unit-testing.md)
    - [如何为表单类配置空数据](use-empty-data.md)
    - [如何使用 submit() 函数处理表单提交](direct-submit.md)
-   - [(validation)如何创建一个自定义验证限制](custom-constraint.md)
-   - [(doctrine)如何使用 Doctrine 处理文件上传](file-upload-doctrine.md)
+   - **不翻译**[(validation)如何创建一个自定义验证限制](custom-constraint.md)
+   - **不翻译**[(doctrine)如何使用 Doctrine 处理文件上传](file-upload-doctrine.md)
  - 前端
    - [使用 Bower 安装 Symfony](bower.md)
  - 日志
@@ -101,7 +101,7 @@
  - 请求
    - [如何配置 Symfony 使其工作在负载均衡和反转代理](load-balancer-reverse-proxy.md)
    - [如何注册一个新的请求格式和 Mime 类型](mime-type.md)
-   - [(session)在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
+   - **不翻译**[(session)在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
  - 路由
    - [如何强制路由总是使用 HTTPS 或者 HTTP](scheme.md)
    - [如何在路由参数中允许"/"字符](slash-in-parameter.md)
@@ -147,7 +147,7 @@
    - [配置 Session 文件的保存目录](sessions-directory.md)
    - [在遗留的应用上使用 Symfony Session](php-bridge.md)
    - [限制 Session 元数据的写入](limit-metadata-writes.md)
-   - [(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
+   - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
    - [避免匿名用户开始 Session 会话](avoid-session-start.md)
  - PSR-7
    - [The PSR-7 Bridge](psr7.md)
@@ -167,8 +167,8 @@
    - [如何测试与数据库交互的代码](database.md)
    - [如何测试 Doctrine 仓库](doctrine.md)
    - [如何在运行测试之前自定义引导过程](bootstrap.md)
-   - [(email)如何在功能测试中测试一封电子邮件被发送](testing.md)
-   - [(form)如何对表单单元测试](unit-testing.md)
+   - **不翻译**[(email)如何在功能测试中测试一封电子邮件被发送](testing.md)
+   - **不翻译**[(form)如何对表单单元测试](unit-testing.md)
  - 升级
    - [升级一个补丁版本](patch-version.md)
    - [升级一个副版本](minor-version.md)
@@ -179,7 +179,7 @@
    - [如何处理不同的错误级别](severity.md)
  - Web 服务器 
    - [如何使用内建的 PHP Web 服务器](built-in.md)
-   - [(configuration) 配置一个 Web 服务器](config-web-server.md)
+   - **不翻译**[(configuration) 配置一个 Web 服务器](config-web-server.md)
  - Web 服务   
    - [如何在一个 Symfony 控制器中创建一个 SOAP 的 Web 服务](php-soap-extension.md)
  - 工作流
