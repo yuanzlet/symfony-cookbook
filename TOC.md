@@ -8,6 +8,7 @@
    - [如何安装第三方 Bundles](install-3rdparty-bundles.md)
    - [可复用 Bundles 的最佳实践](bestpractice-reusable-bundles.md)
    - [如何使用 Bundle 的继承来重写部分 Bundle](override-parts-bundle.md)
+   - [如何重写部分 Bundle](override.md)
    - [如何移除 AcmeDemoBundle](remove-acmedemobundle.md)
    - [如何在 Bundle 内部加载服务配置](load-service-configuration.md)
    - [如何为一个 Bundle 创建友好的配置](create-friendly-configuration.md)
