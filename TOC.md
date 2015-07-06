@@ -1,5 +1,6 @@
  - Assetic  苗帅
    - [如何使用 Assetic 进行资产管理](assetic-assetmgmt.md)
+   - [使用 PHP 库联合，编译和最小化 Web 资产](php.md)
    - [如何裁剪 CSS/JS 文件(使用 UglifyJS 和 UglifyCSS)](minify-cssjs.md)
    - [如何使用 YUI Compressor 裁剪 Javascripts 和 Stylesheets](minify-js-stylesheet.md)
    - [如何使用 Assetic 和 Twig Functions 进行图像优化](assetic-image-optimization.md)
