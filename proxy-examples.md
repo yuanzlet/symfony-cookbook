@@ -11,7 +11,7 @@ $proxy = new YourProxy(new PdoSessionHandler());
 $session = new Session(new NativeSessionStorage(array(), $proxy));
 ```
 
-下面，您将会学习两个实例，可用于 **YourProxy**：会话数据的加密和只读客人会议。
+下面，您将会学习两个实例，可用于 **YourProxy**：会话数据的加密和只读的客人会话。
 
 ## 会话数据的加密
 
@@ -47,9 +47,9 @@ class EncryptedSessionProxy extends SessionHandlerProxy
 }
 ```
 
-## 只读客人会议
+## 只读客人会话
 
-有一些应用程序，其会话被客人（guest）用户需求，但没有特别的需要储存会话的需求。在这种情况下，您可以在会话被写入之前拦截他。
+有一些应用程序，其会话被客人（guest）用户需求，但没有特别的需要储存会话的需求。在这种情况下，您可以在会话被写入之前拦截它。
 
 ```PHP
 use Foo\User;
