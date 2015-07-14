@@ -93,7 +93,7 @@ class AcmeEntity
     // ...
 }
 ```  
-YAML：
+YAML:
 ```
 # src/AppBundle/Resources/config/validation.yml
 AppBundle\Entity\AcmeEntity:
@@ -103,7 +103,7 @@ AppBundle\Entity\AcmeEntity:
             - AppBundle\Validator\Constraints\ContainsAlphanumeric: ~
 ```
 
-XML：
+XML:
 ```
 <!-- src/AppBundle/Resources/config/validation.xml -->
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -119,7 +119,7 @@ XML：
     </class>
 </constraint-mapping>
 ```
-PHP
+PHP:
 ```：
 // src/AppBundle/Entity/AcmeEntity.php
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -145,7 +145,7 @@ class AcmeEntity
 
 如果您的限制验证具有依赖关系，就如同一个数据库的连接操作，那么它将被视为依赖注入与服务定位器中的一个服务项，那么这个服务项必须包含 ```validator.constraint_validator``` 标签和 ```alias``` 属性 
 
-YAML：
+YAML:
 ```
 # app/config/services.yml
 services:
@@ -155,7 +155,7 @@ services:
             - { name: validator.constraint_validator, alias: alias_name }
 ```
 
-XML：
+XML:
 ```
 public function validatedBy()
 {
@@ -179,6 +179,7 @@ public function validatedBy()
 }
 ```
 就如同上文提到的，Symfony 会自动查找以constraint命名并且添加了验证的类。如果你约束验证程序被定义为一种服务项，那么你应该重载```validatedBy()```方法，边去它是重要的你重写 ```validatedBy()``` 方法并且返回您定义该服务项时使用的别名，否则Symfony 不会使用这个限制验证类的服务项，使得该限制验证类被实例化的时候不会有任何依赖项被注入。
+
 ## 限制验证类 
 一个验证类可以返回一个类作用域的对象属性
 
