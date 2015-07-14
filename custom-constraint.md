@@ -4,7 +4,7 @@
  
 ##创建限制类    
 
-首先，你可以通过继承 [Constraint](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html "Constraint")  来创建一个验证：    
+首先，您可以通过继承 [Constraint](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html "Constraint")  来创建一个验证：    
 
 ```  
 // src/AppBundle/Validator/Constraints/  ContainsAlphanumeric.php  
@@ -13,7 +13,7 @@ namespace AppBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;  
 
 /**  
- * @注释  
+ * @Annotation 
  */  
 class ContainsAlphanumeric extends Constraint  
 {  
@@ -21,11 +21,11 @@ class ContainsAlphanumeric extends Constraint
 }  
 ```  
 
-当创建一个新类时，很有必要为新创建的限制类添加上```@注释```文档注释，通过注释可以增加新建类代码的可读性，使其更好的被使用。您可以在新建创建的类中选择公有属性进行注释与说明。
+> 当创建一个新类时，很有必要为新创建的限制类添加上 **@Annotation** 文档注释，通过注释可以增加新建类代码的可读性，使其更好的被使用。您可以在新创建的类中选择公有属性进行注释与说明。
 
 ## 创建验证器  
 
-正如你看到一样，一个验证限制类是十分简洁的，并不是通过该限制验证类直接执行验证，而是通过另一个限制验证类 "constraint validator" 中指定的 ```validatedBy()``` 方法进行验证，在该方法中存在一些默认的简单算法逻辑：
+正如您看到一样，一个验证限制类是十分简洁的，并不是通过该限制验证类直接执行验证，而是通过另一个限制验证类 "constraint validator" 中指定的 **validatedBy()** 方法进行验证，在该方法中存在一些默认的简单算法逻辑：
 
 ```
 // in the base Symfony\Component\Validator\Constraint class  
@@ -35,9 +35,9 @@ public function validatedBy()
 } 
 ```
 
-换句话说，当您创建一个自定义的限制验证类的时候，（例如：```MyConstraint```）Symfony 会自动调用另一个类进行验证。
+换句话说，当您创建一个自定义的限制验证类的时候，（例如：**MyConstraint**）当实际执行验证的时候 Symfony 会自动调用另一个类 **MyConstraintValidator** 进行验证。
 
-这个验证类也很简洁，只包括一个 ```validate()``` 方法：
+这个验证类也很简洁，只包括一个 **validate()** 方法：
 
 ```
 // src/AppBundle/Validator/Constraints/ContainsAlphanumericValidator.php  
@@ -75,6 +75,7 @@ class ContainsAlphanumericValidator extends ConstraintValidator
 就和使用 Symfony 本身提供的接口一样，使用一个自定义的验证限制类也同样很简单：
 
 Annotations:
+
 ```  
 // src/AppBundle/Entity/AcmeEntity.php
 use Symfony\Component\Validator\Constraints as Assert;
@@ -92,8 +93,10 @@ class AcmeEntity
 
     // ...
 }
-```  
+``` 
+
 YAML:
+
 ```
 # src/AppBundle/Resources/config/validation.yml
 AppBundle\Entity\AcmeEntity:
@@ -104,6 +107,7 @@ AppBundle\Entity\AcmeEntity:
 ```
 
 XML:
+
 ```
 <!-- src/AppBundle/Resources/config/validation.xml -->
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -119,7 +123,9 @@ XML:
     </class>
 </constraint-mapping>
 ```
+
 PHP:
+
 ```：
 // src/AppBundle/Entity/AcmeEntity.php
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -138,14 +144,14 @@ class AcmeEntity
 }
 ```
 
-如果在您定义的类中含有可选择的属性时，您应该在创建自定义类的时候就公有的申明这些属性，那么这些可选择的属性就可以像使用 核心 Symfony
- 约束类中的属性一样使用它们。   
+如果在您定义的类中含有可选择的属性时，您应该在创建自定义类的时候就以公有的方式声明这些属性，那么这些可选择的属性就可以像使用 核心 Symfony 约束类中的属性一样使用它们。   
 
 ## 带有依赖关系的限制验证 
 
-如果您的限制验证具有依赖关系，就如同一个数据库的连接操作，那么它将被视为依赖注入与服务定位器中的一个服务项，那么这个服务项必须包含 ```validator.constraint_validator``` 标签和 ```alias``` 属性 
+如果您的限制验证具有依赖关系，就如同一个数据库的连接操作，那么它将被视为依赖注入与服务定位器中的一个服务项，那么这个服务项必须包含 **validator.constraint_validator** 标签和 **alias** 属性。
 
 YAML:
+
 ```
 # app/config/services.yml
 services:
@@ -156,6 +162,7 @@ services:
 ```
 
 XML:
+
 ```
 public function validatedBy()
 {
@@ -164,6 +171,7 @@ public function validatedBy()
 ```
 
 PHP:
+
 ```
 // app/config/services.php
 $container
@@ -171,26 +179,29 @@ $container
     ->addTag('validator.constraint_validator', array('alias' => 'alias_name'));
 ```
 
-这时候您新建的类就可以用此别名去引用相应的限制类了
+这时候您新建的类就可以用此别名去引用相应的限制类了:
+
 ```
 public function validatedBy()
 {
     return 'alias_name';
 }
 ```
-就如同上文提到的，Symfony 会自动查找以constraint命名并且添加了验证的类。如果你约束验证程序被定义为一种服务项，那么你应该重载```validatedBy()```方法，边去它是重要的你重写 ```validatedBy()``` 方法并且返回您定义该服务项时使用的别名，否则Symfony 不会使用这个限制验证类的服务项，使得该限制验证类被实例化的时候不会有任何依赖项被注入。
 
-## 限制验证类 
-一个验证类可以返回一个类作用域的对象属性
+就如同上文提到的，Symfony 会自动查找以 constraint 命名并且添加了验证的类。如果您的约束验证程序被定义为一种服务项，那么您应该覆写 **validatedBy()** 方法来返回您定义该服务项时使用的别名，否则 Symfony 不会使用这个限制验证类的服务项，使得该限制验证类被实例化的时候不会有任何依赖项被注入。
+
+## 限制验证类
+
+一个验证类可以返回一个类作用域的对象属性:
 
 ```
 public function getTargets()
 {
     return self::CLASS_CONSTRAINT;
 }
-
 ```
-验证类中的 ```validate()``` 方法把这个对象作为它的第一个参数。
+
+验证类中的 **validate()** 方法把这个对象作为它的第一个参数:
 
 ```
 class ProtocolClassValidator extends ConstraintValidator
@@ -217,9 +228,10 @@ class ProtocolClassValidator extends ConstraintValidator
 }
 ```
 
-注意，一个限制验证类是作用于其本身，而不是一个属性。
+注意，一个限制验证类是作用于其本身，而不是一个属性:
 
 Annotations:
+
 ```
 /**
  * @AcmeAssert\ContainsAlphanumeric
@@ -231,6 +243,7 @@ class AcmeEntity
 ```
 
 YAML:
+
 ```
 # src/AppBundle/Resources/config/validation.yml
 AppBundle\Entity\AcmeEntity:
@@ -239,6 +252,7 @@ AppBundle\Entity\AcmeEntity:
 ```
 
 XML:
+
 ```
 <!-- src/AppBundle/Resources/config/validation.xml -->
 <class name="AppBundle\Entity\AcmeEntity">
