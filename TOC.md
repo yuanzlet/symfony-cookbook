@@ -74,7 +74,7 @@
    - **不翻译**[(service container)如何创建事件监听器](event-listener.md)
  - 表达式  赵洁
    - [如何在安全，路由，服务和验证中使用表达式](expressions.md)
- - 表单  王鑫
+ - 表单  苗帅
    - [如何自定义表单渲染](form-customization.md)
    - [如何使用数据转换](data-transformers.md)
    - [如何利用表单事件动态修改表单](dynamic-form-modification.md)
@@ -87,24 +87,24 @@
    - [如何使用 submit() 函数处理表单提交](direct-submit.md)
    - **不翻译**[(validation)如何创建一个自定义验证限制](custom-constraint.md)
    - **不翻译**[(doctrine)如何使用 Doctrine 处理文件上传](file-upload-doctrine.md)
- - 前端  王鑫
+ - 前端  苗帅
    - [使用 Bower 安装 Symfony](bower.md)
- - 日志  王鑫
+ - 日志  苗帅
    - [如何使用 Monolog 记录日志](monolog.md)
    - [如何对电子邮件错误配置 Monolog](monolog-email.md)
    - [如何对显示控制台信息配置 Monolog](monolog-console.md)
    - [如何配置 Monolog 从日志中排除 404 错误](monolog-regex-based-excludes.md)
    - [如何记录消息到不同的文件](channels-handlers.md)
- - 分析器  王鑫
+ - 分析器  于倩
    - [如何创建一个自定义数据收集器](data-collector.md)
    - [如何使用匹配器有条件地启用分析器](matchers.md)
    - [切换分析器存储](storage.md)
    - [如何编程访问分析器数据](profiling-data.md)
- - 请求  王鑫
+ - 请求  于倩
    - [如何配置 Symfony 使其工作在负载均衡和反转代理](load-balancer-reverse-proxy.md)
    - [如何注册一个新的请求格式和 Mime 类型](mime-type.md)
    - **不翻译**[(session)在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
- - 路由  王鑫
+ - 路由  于倩
    - [如何强制路由总是使用 HTTPS 或者 HTTP](scheme.md)
    - [如何在路由参数中允许"/"字符](slash-in-parameter.md)
    - [如何不用自定义控制器配置重定向](redirect-in-config.md)
