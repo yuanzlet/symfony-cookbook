@@ -29,14 +29,14 @@
    - [如何使用 Apache Router](use-apache-router.md)
    - [配置 Web Server](config-web-server.md)
    - [如何组织配置文件](organize-config-files.md)
- - 控制台  苗帅 -- 待校对
+ - 控制台  苗帅 -- 已校对
    - [如何创建一个控制台命令](create-console-command.md)
    - [如何使用控制台](howto-use-console.md)
    - [如何从 Controller 调用一个命令](call-command.md)
    - [如何在控制台生成 URL 和 发送邮件](generate-url-email.md)
    - [如何在控制台命令中启用日志](enable-logging-inconsole.md)
    - [如何把命令定义为服务](define-commands-as-service.md)
- - Controller  苗帅 -- 待校对
+ - Controller  苗帅 -- 已校对
    - [如何定制错误页](customize-error-pages.md)
    - [如何把 Controller 定义为服务](define-controller-as-service.md)
    - [如何上传文件](howto-upload-files.md)
