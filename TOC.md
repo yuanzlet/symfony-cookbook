@@ -1,11 +1,11 @@
- - Assetic  苗帅 -- 待校对
+ - Assetic  苗帅 -- 已校对
    - [如何使用 Assetic 进行资产管理](assetic-assetmgmt.md)
    - [使用 PHP 库联合，编译和最小化 Web 资产](assert-php.md)
    - [如何裁剪 CSS/JS 文件(使用 UglifyJS 和 UglifyCSS)](minify-cssjs.md)
    - [如何使用 YUI Compressor 裁剪 Javascripts 和 Stylesheets](minify-js-stylesheet.md)
    - [如何使用 Assetic 和 Twig Functions 进行图像优化](assetic-image-optimization.md)
    - [如何将 Assetic Filter 应用到具体的文件扩展名上](assetic-file-extension.md)
- - Bundles  苗帅 -- 待校对
+ - Bundles  苗帅 -- 已校对
    - [如何安装第三方 Bundles](install-3rdparty-bundles.md)
    - [可复用 Bundles 的最佳实践](bestpractice-reusable-bundles.md)
    - [如何使用 Bundle 的继承来重写部分 Bundle](override-parts-bundle.md)
@@ -14,12 +14,12 @@
    - [如何在 Bundle 内部加载服务配置](load-service-configuration.md)
    - [如何为一个 Bundle 创建友好的配置](create-friendly-configuration.md)
    - [如何简化多个 Bundle 的配置](simply-config-bundles.md)
- - 缓存  苗帅 -- 待校对
+ - 缓存  苗帅 -- 已校对
    - [如何使用 Varnish 加速我的Web站点](varnish-speedup.md)
    - [缓存包含 CSRF 保护表单的页面](caching-csrf-pages.md)
- - Composer  苗帅 -- 待校对
+ - Composer  苗帅 -- 已校对
    - [安装 Composer](installing-composer.md)
- - 配置  苗帅 -- 待校对
+ - 配置  苗帅 -- 已校对
    - [如何掌握并创建新的环境](master-create-newenv.md)
    - [如何重写 Symfony 默认的目录结构](override-default-directory.md)
    - [在独立注入类中使用参数](parameter-injection-class.md)

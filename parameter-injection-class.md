@@ -18,6 +18,8 @@ var_dump($config['logging']);
 
 现在检查结果进一步看看：  
 
+YAML:
+
 ```YAML
 my_bundle:
     logging: true
@@ -35,6 +37,8 @@ my_bundle: ~
 # The Configurator does not know anything about
 # "%kernel.debug%" being a parameter.
 ```  
+
+XML:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -56,6 +60,8 @@ my_bundle: ~
          "%kernel.debug%" being a parameter. -->
 </container>
 ```  
+
+PHP:
 
 ```PHP
 $container->loadFromExtension('my_bundle', array(
@@ -133,14 +139,9 @@ class AppExtension extends Extension
 }
 ```  
 
->在 Extension 中设置默认
-
->在 TwigBundle 和 AsseticBundle 中的 **Configurator** 类中有一些 **%kernel.debug%** 的应用实例。然而这是因为默认的参数值是由 Extension 类设置的。例如在 AsseticBundle 中，你可以找到：  
-
+> ## 在 Extension 中设置默认
+> 在 TwigBundle 和 AsseticBundle 中的 **Configurator** 类中有一些 **%kernel.debug%** 的应用实例。然而这是因为默认的参数值是由 Extension 类设置的。例如在 AsseticBundle 中，你可以找到：  
 >```
 >$container->setParameter('assetic.debug', $config['debug']);
 >```
-
->**%kernel.debug%** 字符串作为争论处理的解释者通过向进行评估的容器进行解释。这两种方法达到同一个目标。AsseticBundle 不会使用 **%kernel.debug%** 相反的会使用新的 **%assetic.debug%** 参数。  
-
-
+>**%kernel.debug%** 字符串作为争论处理的解释者通过向进行评估的容器进行解释。这两种方法达到同一个目标。AsseticBundle 不会使用 **%kernel.debug%** ，相反的会使用新的 **%assetic.debug%** 参数。  
