@@ -1,247 +1,352 @@
-# 如何组织配置文件
 
-最好的开发你的 Symfony 应用程序的方法就是使用 [PHP 的内部网页服务器](http://symfony.com/doc/current/cookbook/web_server/built_in.html)。然而，当使用老版本的 PHP 时或者当在开发环境运行应用程序时，你就会需要一个全功能的网页服务器。这篇文章介绍了在 Symfony 中使用 Apache 或者 Nginx 的一些方法。  
+Symfony 的标准版本默认定义了三种[运行环境](http://symfony.com/doc/current/cookbook/configuration/environments.html)名为 **dev**, **prod** 和 **test**。环境简单的代表了用不同的配置执行相同的基础代码的方式。  
 
-当使用 Apache 时。你可以将 PHP 设置成 [Apache module](http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html#web-server-apache-mod-php) 或者使用 [PHP FPM](http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html#web-server-apache-fpm) FastCGI。FastCGI 也是[用 Nginx](http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html#web-server-nginx) 使用 PHP 的最好的方法。  
-
->**网页目录**
-
->网页目录是你的所有应用程序的公共以及静态文件的家，包括图片，样式表和 JavaScript 文件。它也是前端控制器（**app.php** 和 **app_dev.php**）住的地方。  
-
->当你配置你的网页目录时，网页目录作为文档的根。在下面的例子中，**web/** 目录将会是文档的根。这个目录是 **/var/www/project/web/**。  
-
->如果你的虚拟主机请求你将 **web/** 目录更改到另外的位置（例如 **public_html/**）确保你[重写了 web/ 的位置](http://symfony.com/doc/current/cookbook/configuration/override_dir_structure.html#override-web-dir)。  
-
-## 使用 mod_php/PHP-CGI 的 Apache ##
-
-使得你的应用程序在 Apache 下运行的**最小配置**是：  
+为了选择每个环境需要加载的配置文件，Symfony 执行 **AppKernel** 类的 **registerContainerConfiguration()** 方法：  
 
 ```
-<VirtualHost *:80>
-    ServerName domain.tld
-    ServerAlias www.domain.tld
+// app/AppKernel.php
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
-    DocumentRoot /var/www/project/web
-    <Directory /var/www/project/web>
-        AllowOverride All
-        Order Allow,Deny
-        Allow from All
-    </Directory>
+class AppKernel extends Kernel
+{
+    // ...
 
-    # uncomment the following lines if you install assets as symlinks
-    # or run into problems when compiling LESS/Sass/CoffeScript assets
-    # <Directory /var/www/project>
-    #     Options FollowSymlinks
-    # </Directory>
-
-    ErrorLog /var/log/apache2/project_error.log
-    CustomLog /var/log/apache2/project_access.log combined
-</VirtualHost>
-```  
-
->如果你的系统支持 **APACHE_LOG_DIR** 变量，你就可能想要使用 **${APACHE_LOG_DIR}/** 来代替硬编码 **/var/log/apache2/**。  
-
-使用下面的**可选配置**来禁用 **.htaccess** 支持从而增加网页服务器的效率：  
-
-```
-<VirtualHost *:80>
-    ServerName domain.tld
-    ServerAlias www.domain.tld
-
-    DocumentRoot /var/www/project/web
-    <Directory /var/www/project/web>
-        AllowOverride None
-        Order Allow,Deny
-        Allow from All
-
-        <IfModule mod_rewrite.c>
-            Options -MultiViews
-            RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^(.*)$ app.php [QSA,L]
-        </IfModule>
-    </Directory>
-
-    # uncomment the following lines if you install assets as symlinks
-    # or run into problems when compiling LESS/Sass/CoffeScript assets
-    # <Directory /var/www/project>
-    #     Options FollowSymlinks
-    # </Directory>
-
-    ErrorLog /var/log/apache2/project_error.log
-    CustomLog /var/log/apache2/project_access.log combined
-</VirtualHost>
-```  
-
->如果你使用 **php-cgi**，Apache 将默认不会通过 HTTP 基本的 PHP 的用户名和密码。为了取消这个限制，你应当使用下面这一小段配置代码：  
->```
->RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
->```  
-
-### 在 Apache 2.4 下使用 mod_php/PHP-CGI ###
-
-在 Apache 2.4 下，**Order Allow**,**Deny** 已经被 **Require all granted** 所取代。因此，你需要像下面这样修正你的**目录**权限设置：  
-
-```
-<Directory /var/www/project/web>
-    Require all granted
-    # ...
-</Directory>
-```  
-
-获取更多的有关于 Apache 配置的选项，阅读官方的 [Apache 文档](http://httpd.apache.org/docs/)。  
-
-## Apache 的 PHP-FPM ##
-
-为了使用 Apache 的 PHP5-FPM，首先你必须确定你有安装二进制的 **php-fpm** FastCGI 进程管理器以及 Apache 的 FastCGI 模块（例如，在基于 Debian 的系统中你以及已经安装 **libapache2-mod-fastcgi** 和 **php5-fpm** 包）。  
-
-PHP-FPM 使用一种叫做 *pools* 的东西处理输入的 FastCGI 请求。你可以在 FPM 中设置任意的 pools 的数量。在 pool 中你可以配置监听 TCP 套接字(IP 和 端口)或者 Unix 主机套接字。每一个 pool 也可以在不同的 UID 和 GID 下运行：  
-
-```
-; a pool called www
-[www]
-user = www-data
-group = www-data
-
-; use a unix domain socket
-listen = /var/run/php5-fpm.sock
-
-; or listen on a TCP socket
-listen = 127.0.0.1:9000
-```  
-
-### Apache 2.4 下使用 mod_proxy_fcgi ###
-
-如果你使用的是 Apache 2.4，你可以轻松应用 **mod_proxy_fcgi** 来向 PHP-FPM 传递内部请求。配置 PHP-FPM 监听 TCP 套接字（**mod_proxy** 目前[暂时不支持 Unix 套接字](https://issues.apache.org/bugzilla/show_bug.cgi?id=54101)），在你的 Apache 配置中启用 **mod_proxy** 和 **mod_proxy_fcgi** 并且使用 SetHandler 直接将 PHP 文件的请求传递给 PHP FPM：  
-
-```
-<VirtualHost *:80>
-    ServerName domain.tld
-    ServerAlias www.domain.tld
-
-    # Uncomment the following line to force Apache to pass the Authorization
-    # header to PHP: required for "basic_auth" under PHP-FPM and FastCGI
-    #
-    # SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
-
-    # For Apache 2.4.9 or higher
-    # Using SetHandler avoids issues with using ProxyPassMatch in combination
-    # with mod_rewrite or mod_autoindex
-    <FilesMatch \.php$>
-        SetHandler proxy:fcgi://127.0.0.1:9000
-    </FilesMatch>
-
-    # If you use Apache version below 2.4.9 you must consider update or use this instead
-    # ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/project/web/$1
-
-    # If you run your Symfony application on a subpath of your document root, the
-    # regular expression must be changed accordingly:
-    # ProxyPassMatch ^/path-to-app/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/project/web/$1
-
-    DocumentRoot /var/www/project/web
-    <Directory /var/www/project/web>
-        # enable the .htaccess rewrites
-        AllowOverride All
-        Require all granted
-    </Directory>
-
-    # uncomment the following lines if you install assets as symlinks
-    # or run into problems when compiling LESS/Sass/CoffeScript assets
-    # <Directory /var/www/project>
-    #     Options FollowSymlinks
-    # </Directory>
-
-    ErrorLog /var/log/apache2/project_error.log
-    CustomLog /var/log/apache2/project_access.log combined
-</VirtualHost>
-```  
-
-### Apache 2.2 的 PHP-FPM ###
-
-在 Apache 2.2 或者更低的版本中，你不能使用 **mod_proxy_fcgi**。你必须使用 [FastCgiExternalServer](http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html#FastCgiExternalServer) 来代替这个。因此，你的 Apache 配置应当像下面所示：  
-
-```
-<VirtualHost *:80>
-    ServerName domain.tld
-    ServerAlias www.domain.tld
-
-    AddHandler php5-fcgi .php
-    Action php5-fcgi /php5-fcgi
-    Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
-    FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host 127.0.0.1:9000 -pass-header Authorization
-
-    DocumentRoot /var/www/project/web
-    <Directory /var/www/project/web>
-        # enable the .htaccess rewrites
-        AllowOverride All
-        Order Allow,Deny
-        Allow from all
-    </Directory>
-
-    # uncomment the following lines if you install assets as symlinks
-    # or run into problems when compiling LESS/Sass/CoffeScript assets
-    # <Directory /var/www/project>
-    #     Options FollowSymlinks
-    # </Directory>
-
-    ErrorLog /var/log/apache2/project_error.log
-    CustomLog /var/log/apache2/project_access.log combined
-</VirtualHost>
-```  
-
-如果你更喜欢使用 Unix 套接字，你必须使用 **-socket** 作为替代：  
-
-```
-FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -pass-header Authorization
-```  
-
-## Nginx ##
-
-使得你的应用程序相似 Nginx 下运行的**最小配置**如下所示：  
-
-```
-server {
-    server_name domain.tld www.domain.tld;
-    root /var/www/project/web;
-
-    location / {
-        # try to serve file directly, fallback to app.php
-        try_files $uri /app.php$is_args$args;
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
-    # DEV
-    # This rule should only be placed on your development environment
-    # In production, don't include this and don't deploy app_dev.php or config.php
-    location ~ ^/(app_dev|config)\.php(/|$) {
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_split_path_info ^(.+\.php)(/.*)$;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param HTTPS off;
-    }
-    # PROD
-    location ~ ^/app\.php(/|$) {
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_split_path_info ^(.+\.php)(/.*)$;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param HTTPS off;
-        # Prevents URIs that include the front controller. This will 404:
-        # http://domain.tld/app.php/some-path
-        # Remove the internal directive to allow URIs like this
-        internal;
-    }
-
-    error_log /var/log/nginx/project_error.log;
-    access_log /var/log/nginx/project_access.log;
 }
 ```  
 
->依赖于你的 PHP-FPM 配置，**fastcgi_pass** 也可以是 **fastcgi_pass 127.0.0.1:9000**。
+这个方法为 **dev** 环境加载 **app/config/config_dev.yml** 文件等等。反过来，这个文件加载位于 **app/config/config.yml** 的普通配置文件。因此，Symfony 的标准版本中的配置文件的结构如下所示：  
 
->这个**只是**在网页目录下执行 **app.php**, **app_dev.php** 和 **config.php**。所有其他的文件都会以文本形式存在。你**必须**确保如果你*确实*配置 **app_dev.php** 或者 **config.php** 使得这些文件安全且不能被任何外界使用者使用（每个文件顶部的 IP 地址检查码默认完成此项工作）。  
+```
+<your-project>/
+├─ app/
+│  └─ config/
+│     ├─ config.yml
+│     ├─ config_dev.yml
+│     ├─ config_prod.yml
+│     ├─ config_test.yml
+│     ├─ parameters.yml
+│     ├─ parameters.yml.dist
+│     ├─ routing.yml
+│     ├─ routing_dev.yml
+│     └─ security.yml
+├─ src/
+├─ vendor/
+└─ web/
+```  
 
->如果在你的网页目录下你有其他的 PHP 文件需要被执行，确保他们包含在上述的 location 区域。  
+默认的结构就是为了他的简便而选择的——每个环境一个文件。但是由于 Symfony 的其他的特征，你可以将其设置成更加适合你的需要的。下面一节将会介绍组织你的配置文件的不同方法。为了简化这个例子，只考虑 **dev** 和 **prod** 环境。  
 
-获取更多的 Nginx 配置选项，阅读官方的 [Nginx 文档](http://wiki.nginx.org/Symfony)。  
+## 每个环境下的不同的目录 ##
 
+代替在文件加 **_dev** 和 **_prod** 后缀，这个技术将所有相关的配置文件组织在和环境相同名称的目录之下：  
 
+```
+<your-project>/
+├─ app/
+│  └─ config/
+│     ├─ common/
+│     │  ├─ config.yml
+│     │  ├─ parameters.yml
+│     │  ├─ routing.yml
+│     │  └─ security.yml
+│     ├─ dev/
+│     │  ├─ config.yml
+│     │  ├─ parameters.yml
+│     │  ├─ routing.yml
+│     │  └─ security.yml
+│     └─ prod/
+│        ├─ config.yml
+│        ├─ parameters.yml
+│        ├─ routing.yml
+│        └─ security.yml
+├─ src/
+├─ vendor/
+└─ web/
+```  
+
+为了是这个起作用，改变 [registerContainerConfiguration()](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/KernelInterface.html#registerContainerConfiguration()) 方法的代码：  
+
+```
+// app/AppKernel.php
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
+
+class AppKernel extends Kernel
+{
+    // ...
+
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader->load($this->getRootDir().'/config/'.$this->getEnvironment().'/config.yml');
+    }
+}
+```  
+
+然后确保每一个 **config.yml** 文件都加载剩下的配置文件，包括普通文件。举例来说，这将是 **app/config/dev/config.yml** 文件的输入需要：  
+
+```YAML
+# app/config/dev/config.yml
+imports:
+    - { resource: '../common/config.yml' }
+    - { resource: 'parameters.yml' }
+    - { resource: 'security.yml' }
+
+# ...
+```  
+
+```XML
+<!-- app/config/dev/config.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd
+        http://symfony.com/schema/dic/symfony
+        http://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+    <imports>
+        <import resource="../common/config.xml" />
+        <import resource="parameters.xml" />
+        <import resource="security.xml" />
+    </imports>
+
+    <!-- ... -->
+</container>
+```  
+
+```PHP
+// app/config/dev/config.php
+$loader->import('../common/config.php');
+$loader->import('parameters.php');
+$loader->import('security.php');
+
+// ...
+``` 
+
+>由于参数解析的方式，你不能使用他们来动态建立输入路径。这也就意味着下列所示的一些将不起作用：  
+
+>```YAML
+># app/config/config.yml
+imports:
+    - { resource: "%kernel.root_dir%/parameters.yml" }
+>```
+
+>```XML
+><!-- app/config/config.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="%kernel.root_dir%/parameters.yml" />
+    </imports>
+</container>
+>```
+
+>```PHP
+>// app/config/config.php
+$loader->import('%kernel.root_dir%/parameters.yml');
+>```  
+
+## 语意性的配置文件 ##
+
+不同的组织策略可能需要应用程序有复杂的配置文件。举例来说，你可以每个 bundle 创建一个文件并且将几个文件定义所有的应用程序服务：  
+
+```
+<your-project>/
+├─ app/
+│  └─ config/
+│     ├─ bundles/
+│     │  ├─ bundle1.yml
+│     │  ├─ bundle2.yml
+│     │  ├─ ...
+│     │  └─ bundleN.yml
+│     ├─ environments/
+│     │  ├─ common.yml
+│     │  ├─ dev.yml
+│     │  └─ prod.yml
+│     ├─ routing/
+│     │  ├─ common.yml
+│     │  ├─ dev.yml
+│     │  └─ prod.yml
+│     └─ services/
+│        ├─ frontend.yml
+│        ├─ backend.yml
+│        ├─ ...
+│        └─ security.yml
+├─ src/
+├─ vendor/
+└─ web/
+```  
+
+除此之外，改变 **registerContainerConfiguration()** 方法的代码以确保 Symfony 知道新的文件组织方式：  
+
+```
+// app/AppKernel.php
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
+
+class AppKernel extends Kernel
+{
+    // ...
+
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader->load($this->getRootDir().'/config/environments/'.$this->getEnvironment().'.yml');
+    }
+}
+```  
+
+顺着以前章节所说的相同的技术，确保从每一个主文件（common.yml, dev.yml 和 prod.yml）输入恰当的配置文件。  
+
+## 高级技术 ##
+
+Symfony 使用 [Config 组件](http://symfony.com/doc/current/components/config/introduction.html)来加载配置文件，这提供了一些高级的特征。  
+
+### 混合和匹配配置格式 ###
+
+配置文件可以输入使用内建配置格式（**.yml**, **.xml**, **.php**, **.ini**）定义的文件：  
+
+```YAML
+# app/config/config.yml
+imports:
+    - { resource: 'parameters.yml' }
+    - { resource: 'services.xml' }
+    - { resource: 'security.yml' }
+    - { resource: 'legacy.php' }
+
+# ...
+```  
+
+```XML
+<!-- app/config/config.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd
+        http://symfony.com/schema/dic/symfony
+        http://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+    <imports>
+        <import resource="parameters.yml" />
+        <import resource="services.xml" />
+        <import resource="security.yml" />
+        <import resource="legacy.php" />
+    </imports>
+
+    <!-- ... -->
+</container>
+```  
+
+```PHP
+// app/config/config.php
+$loader->import('parameters.yml');
+$loader->import('services.xml');
+$loader->import('security.yml');
+$loader->import('legacy.php');
+
+// ...
+```  
+
+>**IniFileLoader** 解释了使用 [parse_ini_file](http://php.net/manual/en/function.parse-ini-file.php) 功能的文件内容。因此，你只能将参数设置成字符串的值。如果你想要使用其他的数据类型（例如布尔型，整型等等）那么请使用其他的加载器。  
+
+如果你使用其他的配置格式，你必须自己定义你的加载器类将它从 [FileLoader](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Loader/FileLoader.html) 扩展。当配置的值是动态时，你可以使用 PHP 配置来执行你自己的逻辑。除此之外，你可以定义你自己的服务来从数据库或者网页服务器加载配置。  
+
+### 全局配置文件 ###
+
+一些系统管理员可能更喜欢将敏感的参数储存在工程目录之外的文件中。可以想象你的网页的数据库正数储存在 **/etc/sites/mysite.com/parameters.yml** 文件中。当你从其他的配置文件中输入时，加载这个文件就好像指出整个文件路径一样简单：  
+
+```YAML
+# app/config/config.yml
+imports:
+    - { resource: 'parameters.yml' }
+    - { resource: '/etc/sites/mysite.com/parameters.yml' }
+
+# ...
+```  
+
+```XML
+<!-- app/config/config.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd
+        http://symfony.com/schema/dic/symfony
+        http://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+    <imports>
+        <import resource="parameters.yml" />
+        <import resource="/etc/sites/mysite.com/parameters.yml" />
+    </imports>
+
+    <!-- ... -->
+</container>
+```  
+
+```PHP
+// app/config/config.php
+$loader->import('parameters.yml');
+$loader->import('/etc/sites/mysite.com/parameters.yml');
+
+// ...
+```  
+
+大多数的时候，本地开发者不会在开发服务器上存在相同文件。由于这个原因，Config 组件提供了 **ignore_errors** 选项来在加载文件不存在时悄悄忽视错误：  
+
+```YAML
+# app/config/config.yml
+imports:
+    - { resource: 'parameters.yml' }
+    - { resource: '/etc/sites/mysite.com/parameters.yml', ignore_errors: true }
+
+# ...
+```  
+
+```XML
+<!-- app/config/config.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd
+        http://symfony.com/schema/dic/symfony
+        http://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+    <imports>
+        <import resource="parameters.yml" />
+        <import resource="/etc/sites/mysite.com/parameters.yml" ignore-errors="true" />
+    </imports>
+
+    <!-- ... -->
+</container>
+```  
+
+```PHP
+<!-- app/config/config.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd
+        http://symfony.com/schema/dic/symfony
+        http://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+    <imports>
+        <import resource="parameters.yml" />
+        <import resource="/etc/sites/mysite.com/parameters.yml" ignore-errors="true" />
+    </imports>
+
+    <!-- ... -->
+</container>
+```  
+
+正如你所看到的那样，有很多的组织你的配置文件的方法。你可以选择其中一种或者你甚至也可以创建你自己风格的组织文件的方式。不要被由 Symfony 产生的 Symfony 标准版本所限制。更多的个性化信息，参见“[如何重写 Symfony 的默认目录结构](http://symfony.com/doc/current/cookbook/configuration/override_dir_structure.html)”。
