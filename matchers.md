@@ -1,11 +1,14 @@
 # 如何使用匹配器有条件地启用分析器
 
-默认情况下，分析器只在开发环境中被启用。但可以想象的是作为一个开发商想要看到分析器即使在是产品中。另一种情况可能是，仅当一个管理员登录时，您想要启用分析器。你可以通过使用匹配器在这些情况下实现分析器的启用。  
+默认情况下，分析器只在开发环境中被启用。但可以想象的是作为一个开发商想要看到分析器即使是在产品中。另一种情况可能是，仅当一个管理员登录时，你想要启用分析器。你可以通过使用匹配器在这些情况下实现分析器的启用。  
 
 ## 使用内置的匹配  
-symfony 提供了一个内置的匹配器用来匹配路径和 IPS 。例如，如果你需要仅当 168.0.0.1 IP 访问网页时显示分析器，那么你可以使用这个配置：   
-YAML 
-```  
+
+Symfony 提供了一个内置的匹配器用来匹配路径和 IPS 。例如，如果你需要仅当 168.0.0.1 IP 访问网页时显示分析器，那么你可以使用这个配置： 
+
+YAML:
+
+``` YAML 
 # app/config/config.yml
 framework:
     # ...
@@ -13,8 +16,10 @@ framework:
         matcher:
             ip: 168.0.0.1
 ``` 
+
 XML:
-```
+
+```XML
 <!-- app/config/config.xml -->
 <framework:config>
     <framework:profiler
@@ -24,7 +29,8 @@ XML:
 ```
 
 PHP:
-```
+
+```PHP
 // app/config/config.php
 $container->loadFromExtension('framework', array(
     'profiler' => array(
@@ -37,7 +43,8 @@ $container->loadFromExtension('framework', array(
 还可以设置路径选项来定义应启用分析器的路径。 例如，设置它为 ^/admin/ 将使仅为 ^/admin/ 网址来启用分析器。  
 
 ## 创建一个自定义匹配器
-你也可以创建一个自定义的匹配器。这是一个检查是否启用或不启用分析器的服务。创建这个服务，创建一个类实现 requestmatcherinterface 接口。这个接口需要一个方法：matches()。 此方法返回假以禁用事件分析器和真来启用分析器。  
+
+你也可以创建一个自定义的匹配器。这是一个检查是否启用或不启用分析器的服务。创建这个服务，创建一个类实现 requestmatcherinterface 接口。这个接口需要一个方法：matches()。 此方法返回假以禁用事件分析器和返回真来启用分析器。  
 
 ```
 // src/AppBundle/Profiler/SuperAdminMatcher.php
@@ -66,16 +73,20 @@ class SuperAdminMatcher implements RequestMatcherInterface
  > 在 Symfony 2.6 中介绍了 [AuthorizationCheckerInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Authorization/AuthorizationCheckerInterface.html) 。之前，你必须使用[ SecurityContextInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/SecurityContextInterface.html) 中的 isGranted 方法。
 
 然后，您需要配置服务：  
-YAML 
-```  
+
+YAML:
+
+```YAML  
 # app/config/services.yml
 services:
     app.profiler.matcher.super_admin:
         class: AppBundle\Profiler\SuperAdminMatcher
         arguments: ["@security.authorization_checker"]
 ``` 
+
 XML:
-```
+
+```XML
 <!-- app/config/services.xml -->
 <services>
     <service id="app.profiler.matcher.super_admin"
@@ -85,7 +96,8 @@ XML:
 ```
 
 PHP:
-```
+
+```PHP
 // app/config/services.php
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -97,22 +109,24 @@ $container->setDefinition('app.profiler.matcher.super_admin', new Definition(
 
 ```  
 
-
 > Symfony 2.6 中介绍了安全认证检查服务（security.authorization_checker service） ，你必须使用 security.context 服务中的 isGranted() 方法。  
 
 现在服务已经被注册，唯一剩下要做的就是配置分析器使用该服务作为匹配器：
 
-YAML 
-```  
+YAML: 
+
+```YAML
 # app/config/config.yml
 framework:
     # ...
     profiler:
         matcher:
             service: app.profiler.matcher.super_admin
-``` 
-XML:
 ```
+
+XML:
+
+```XML
 <!-- app/config/config.xml -->
 <framework:config>
     <!-- ... -->
@@ -123,7 +137,8 @@ XML:
 ```
 
 PHP:
-```
+
+```PHP
 // app/config/config.php
 $container->loadFromExtension('framework', array(
     // ...
@@ -131,8 +146,4 @@ $container->loadFromExtension('framework', array(
         'service' => 'app.profiler.matcher.super_admin',
     ),
 ));
-
-```  
-
-
-这项工作的许可为 Creative Commons Attribution-Share Alike 3.0 Unported [License](http://creativecommons.org/licenses/by-sa/3.0/)。 
+``` 
