@@ -95,16 +95,16 @@
    - [如何对显示控制台信息配置 Monolog](monolog-console.md)
    - [如何配置 Monolog 从日志中排除 404 错误](monolog-regex-based-excludes.md)
    - [如何记录消息到不同的文件](channels-handlers.md)
- - 分析器  于倩
+ - 分析器  于倩 -- 已校对
    - [如何创建一个自定义数据收集器](data-collector.md)
    - [如何使用匹配器有条件地启用分析器](matchers.md)
    - [切换分析器存储](storage.md)
    - [如何编程访问分析器数据](profiling-data.md)
- - 请求  于倩
+ - 请求  于倩 -- 已校对
    - [如何配置 Symfony 使其工作在负载均衡和反转代理](load-balancer-reverse-proxy.md)
    - [如何注册一个新的请求格式和 Mime 类型](mime-type.md)
    - **不翻译**[(session)在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
- - 路由  于倩
+ - 路由  于倩 -- 已校对
    - [如何强制路由总是使用 HTTPS 或者 HTTP](scheme.md)
    - [如何在路由参数中允许"/"字符](slash-in-parameter.md)
    - [如何不用自定义控制器配置重定向](redirect-in-config.md)
