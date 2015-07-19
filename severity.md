@@ -125,7 +125,7 @@ class User
 
 > 2.6 在 Symfony 2.6节中的 **ConstraintViolation** 类中介绍了 **getConstraint()** 方法。
 
-当**用户**输入的对象在检验时失败，这时候就可以通过使用 [getConstraint()](http://api.symfony.com/2.7/Symfony/Component/Validator/ConstraintViolation.html#getConstraint() "getConstraint()") 方法来检索造成失败的限制。每个限制都会把 payload 选项作为一个公开属性进行展示。
+当**用户**输入的对象在检验时失败，这时候就可以通过使用 [getConstraint()](http://api.symfony.com/2.7/Symfony/Component/Validator/ConstraintViolation.html#getConstraint()) 方法来检索造成失败的限制。每个限制都会把 payload 选项作为一个公开属性进行展示。
 
 ```
 // a constraint validation failure, instance of
@@ -151,5 +151,3 @@ $severity = isset($constraint->payload['severity']) ? $constraint->payload['seve
     {%- endif -%}
 {%- endblock form_errors -%}
 ```
-
-

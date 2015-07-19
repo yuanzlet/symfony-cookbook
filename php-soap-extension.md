@@ -1,8 +1,8 @@
 # 如何在一个 Symfony 控制器中创建一个 SOAP 的 Web 服务
 
-我们可以使用几个简单的工具把控制器设置为一个 SOAP 服务器。当然，您必须安装  [PHP SOAP](http://php.net/manual/en/book.soap.php "PHP SOAP") 扩展。介于目前 PHP SOAP 扩展目前不能生成 WSDL，您必须重头开始创建一个 WSDL 或者使用第三方的生成器。
+我们可以使用几个简单的工具把控制器设置为一个 SOAP 服务器。当然，您必须安装  [PHP SOAP](http://php.net/manual/en/book.soap.php) 扩展。介于目前 PHP SOAP 扩展不能生成 WSDL，您必须从头开始创建一个 WSDL 或者使用第三方的生成器。
 
-> 这里有几个通过 PHP 实现的 SOAP 服务器。比如 [Zend SOAP](http://framework.zend.com/manual/current/en/modules/zend.soap.server.html "Zend SOAP") 和 [NuSOAP ](http://sourceforge.net/projects/nusoap/ "NuSOAP")。虽然在这些示例中只使用了 PHP SOAP 扩展，不过这个想法仍然应该适用于其他的实现。
+> 这里有几个通过 PHP 实现的 SOAP 服务器。比如 [Zend SOAP](http://framework.zend.com/manual/current/en/modules/zend.soap.server.html) 和 [NuSOAP ](http://sourceforge.net/projects/nusoap/)。虽然在这些示例中只使用了 PHP SOAP 扩展，不过这个想法仍然应该适用于其它的实现。
 
 SOAP 通过把 PHP 对象的方法公开给一个外部的实体（即使用 SOAP 服务的人 ）。首先，创建一个名为 **-HelloService-**  的类去表示您将要在 SOAP 中公开的功能。在这种情况下，SOAP 服务将会允许客户端去调用一个名为 **hello** 的方法用来发送一封电子邮件：
 
@@ -66,7 +66,7 @@ $container
     ->addArgument(new Reference('mailer'));
 ```
 
-下面是一个能够处理 SOAP 请求的控制器的示例。如果 **indexAction()** 可以通过路由或者 **soap** 协议访问，那么 WDSL文档就可以通过 **soap** 或 **wsdl** 协议检索。
+下面是一个能够处理 SOAP 请求的控制器的示例。如果 **indexAction()** 可以通过路由或者 **soap** 协议访问，那么 WDSL 文档就可以通过 **soap** 或 **wsdl** 协议检索。
 
 ```
 namespace Acme\SoapBundle\Controller;
@@ -93,9 +93,9 @@ class HelloServiceController extends Controller
 }
 ```
 
-请留意对  **ob_start()** 和 **ob_get_clean()** 方法的调用。这些方法控制着某些输出缓冲 [output buffering](http://php.net/manual/en/book.outcontrol.php "output buffering") ，这些缓冲允许您去接受 **$server->handle()** 的输出响应。这是非常有必要的，因为 Symfony 期望您的控制器返回一个带有把其输出当成它的内容的响应对象。并且，您必须把头部的 ”Content-Type“ 属性设置为 “text/xml”,这同样也是客户端所期望的。所以，您可以使用 **ob_start()**  来开始对 STDOUT 的缓冲，并且使用 **ob_get_clean()** 来把输出响应转存到响应的内容并且清理缓冲区。最后，就可以准备返回响应了。
+请留意对 **ob_start()** 和 **ob_get_clean()** 方法的调用。这些方法控制着某些输出缓冲 [output buffering](http://php.net/manual/en/book.outcontrol.php) ，这些缓冲允许您去接受 **$server->handle()** 的输出响应。这是非常有必要的，因为 Symfony 期望您的控制器返回一个带有把其输出当成它的内容的响应对象。并且，您必须把头部的 ”Content-Type“ 属性设置为 “text/xml”,这同样也是客户端所期望的。所以，您可以使用 **ob_start()** 来开始对 STDOUT 的缓冲，并且使用 **ob_get_clean()** 来把输出响应转存到响应的内容并且清理缓冲区。最后，就可以准备返回响应了。
 
-下面是一个通过使用 [NuSOAP](http://sourceforge.net/projects/nusoap/ "NuSOAPg") 来调用服务的例子。假定在这个例子中，上诉控制器中的 **indexAction** 是通过路由或者 **soap** 协议访问的：
+下面是一个通过使用 [NuSOAP](http://sourceforge.net/projects/nusoap/) 来调用服务的例子。假定在这个例子中，上述控制器中的 **indexAction** 是通过路由或者 **soap** 协议访问的：
 
 ```
 $client = new \Soapclient('http://example.com/app.php/soap?wsdl', true);

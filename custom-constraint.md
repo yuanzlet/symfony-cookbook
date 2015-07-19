@@ -1,10 +1,10 @@
 # 如何创建一个自定义的验证限制
 
-您可以通过继承一个限制基类 [Constraint](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html "Constraint") 来创建一个自定义的验证限制，比如，您可以创建一个简单的验证器来检查一个字符串是否只包含字母和数字。  
+您可以通过继承一个限制基类 [Constraint](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html) 来创建一个自定义的验证限制，比如，您可以创建一个简单的验证器来检查一个字符串是否只包含字母和数字。  
  
 ##创建限制类    
 
-首先，您可以通过继承 [Constraint](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html "Constraint")  来创建一个验证：    
+首先，您可以通过继承 [Constraint](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html)  来创建一个验证：    
 
 ```  
 // src/AppBundle/Validator/Constraints/  ContainsAlphanumeric.php  
@@ -68,7 +68,7 @@ class ContainsAlphanumericValidator extends ConstraintValidator
 }
 ```
 
-在这个验证类中，您并不需要设定一个返回值。相反的是，如果您需要验证的内容是合法的，那么该内容将会通过验证，如果该内容不能被检验通过，那么 ```buildViolation``` 方法会把错误信息作为参数传递给 [ConstraintViolationBuilderInterface](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html "ConstraintViolationBuilderInterface") 作为一个实例进行调用，然后 ```addViolation``` 方法会把不合法的部分标注到您需要检测的内容中。
+在这个验证类中，您并不需要设定一个返回值。相反的是，如果您需要验证的内容是合法的，那么该内容将会通过验证，如果该内容不能被检验通过，那么 ```buildViolation``` 方法会把错误信息作为参数传递给 [ConstraintViolationBuilderInterface](http://api.symfony.com/2.7/Symfony/Component/Validator/Constraint.html) 作为一个实例进行调用，然后 ```addViolation``` 方法会把不合法的部分标注到您需要检测的内容中。
 
 ## 使用新创建的限制验证 
 

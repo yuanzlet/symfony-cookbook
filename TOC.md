@@ -176,15 +176,15 @@
    - [升级一个副版本](minor-version.md)
    - [升级一个主版本](major-version.md)
    - ["XXX is deprecated" E-USER-DEPRECATED 的警告是什么意思?](deprecation-warnings.md)
- - 验证  杨旋 
+ - 验证  杨旋 -- 已校对
    - [如何创建一个自定义的验证限制](custom-constraint.md)
    - [如何处理不同的错误级别](severity.md)
- - Web 服务器  杨旋  
+ - Web 服务器  杨旋 -- 已校对
    - [如何使用内建的 PHP Web 服务器](built-in.md)
    - **不翻译**[(configuration) 配置一个 Web 服务器](config-web-server.md)
- - Web 服务  杨旋   
+ - Web 服务  杨旋 -- 已校对 
    - [如何在一个 Symfony 控制器中创建一个 SOAP 的 Web 服务](php-soap-extension.md)
- - 工作流  杨旋 
+ - 工作流  杨旋 -- 已校对
    - [如何在 Git 中创建并保存一个 Symfony 项目](new-project-git.md)
    - [如何在 SubVersion 中创建并保存一个 Symfony 项目](new-project-svn.md)
    
