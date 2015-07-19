@@ -1,15 +1,15 @@
 # 如何在控制台命令中启用日志
 
-控制台组件没有提供任何的立即可用的日志能力。正常来讲，你可以手动运行控制台命令观察输出结果，这就是为什么不提供日志的原因。然而，有些时候你就需要日志。举例来说，如果你是自动运行控制台命令，例如从工作或者开发脚本，很容易使用 Symfony 的日志能力而不是配置其他工具去收集控制台的输出并且编辑它。这个特别顺手如果你已经具有一些存在的聚合并且分析 Symfony 的日志的设置。  
+控制台组件没有提供任何的立即可用的日志能力。正常来讲，你可以手动运行控制台命令观察输出结果，这就是为什么不提供日志的原因。然而，有些时候你就需要日志。举例来说，如果你是自动运行控制台命令，例如从工作或者开发脚本，很容易使用 Symfony 的日志能力而不是配置其它工具去收集控制台的输出并且编辑它。这个特别顺手如果你已经具有一些存在的聚合并且分析 Symfony 日志的设置。  
 
 这里有两种日志的情况你将会需要：  
 
-- 从你的命令中手动的记录一些信息；
+- 从你的命令中手动地记录一些信息；
 - 记录未被发现的错误。  
 
-## 从控制台命令手动记录 ##
+## 从控制台命令手动记录
 
-这个真的很简单。当你像“[如何创建控制台命令](http://symfony.com/doc/current/cookbook/console/console_command.html)”中描述的那样在满堆栈框架下创建一个控制台命令时，你的命令扩展 [ContainerAwareCommand](http://api.symfony.com/2.7/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.html)。这也就意味着你可以很容易的通过容器访问标准日志服务并且使用它做记录：  
+这个真的很简单。当你像“[如何创建控制台命令](http://symfony.com/doc/current/cookbook/console/console_command.html)”中描述的那样在全堆栈框架下创建一个控制台命令时，你的命令扩展 [ContainerAwareCommand](http://api.symfony.com/2.7/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.html)。这也就意味着你可以很容易的通过容器访问标准日志服务并且使用它做记录：  
 
 ```
 // src/AppBundle/Command/GreetCommand.php
@@ -52,13 +52,15 @@ class GreetCommand extends ContainerAwareCommand
 
 依赖于你运行命令的（以及你的日志设置的）环境你会看到在 **app/logs/dev.log** 或者 **app/logs/prod.log** 中的日志条目。  
 
-## 启用自动错误记录 ##
+## 启用自动错误记录
 
 为了使得你的控制台自动记录你的所有命令的未捕获的错误，你可以使用 [console events](http://symfony.com/doc/current/components/console/events.html)。
 
->Console events 于 Symfony 2.3 中引入。  
+> Console events 于 Symfony 2.3 中引入。  
 
 首先在服务容器中配置一个控制台异常事件的监听器：  
+
+YAML:
 
 ```YAML
 # app/config/services.yml
@@ -70,6 +72,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: console.exception }
 ```  
+
+XML:
 
 ```XML
 <!-- app/config/services.xml -->
@@ -86,6 +90,8 @@ services:
     </services>
 </container>
 ```  
+
+PHP:
 
 ```PHP
 // app/config/services.php
@@ -143,13 +149,15 @@ class ConsoleExceptionListener
 }
 ```  
 
-在上述的代码中，当任何命令出现异常，监听器都会受到一个事件。你可以简单的通过服务配置传递日志服务的方式来记录它。你的方法会收到一个 [ConsoleExceptionEvent](http://api.symfony.com/2.7/Symfony/Component/Console/Event/ConsoleExceptionEvent.html) 对象，这个对象有获得事件和异常的信息的能力。  
+在上述的代码中，当任何命令出现异常，监听器都会收到一个事件。你可以简单的通过服务配置传递日志服务的方式来记录它。你的方法会收到一个 [ConsoleExceptionEvent](http://api.symfony.com/2.7/Symfony/Component/Console/Event/ConsoleExceptionEvent.html) 对象，这个对象有获得事件和异常信息的能力。  
 
-## 记录非 0 的退出状态 ##
+## 记录非 0 的退出状态
 
-控制台的日志记录功能可以通过记录非 0的 退出状态被进一步扩展。这样你就会知道一个命令是否有任何错误，即使没有异常出现。  
+控制台的日志记录功能可以通过记录非 0 的 退出状态被进一步扩展。这样你就会知道一个命令是否有任何错误，即使没有异常出现。  
 
 首先在服务容器中创建控制台终止事件监听器：  
+
+YAML:
 
 ```YAML
 # app/config/services.yml
@@ -161,6 +169,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: console.terminate }
 ```  
+
+XML:
 
 ```XML
 <!-- app/config/services.xml -->
@@ -177,6 +187,8 @@ services:
     </services>
 </container>
 ```  
+
+PHP:
 
 ```PHP
 // app/config/services.php
@@ -236,8 +248,4 @@ class ErrorLoggerListener
         ));
     }
 }
-```  
-
-
-
-
+```

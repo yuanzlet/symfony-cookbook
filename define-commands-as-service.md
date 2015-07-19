@@ -3,11 +3,13 @@
 默认情况下，Symfony 将会在每一个 bundle 的 **Command** 目录下进行检查并且自动登录你的命令。如果一个命令扩展 [ContainerAwareCommand](http://api.symfony.com/2.7/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.html)，Symfony 将会甚至注入这个容器。然而为了使得这个更容易，它有一些限制：  
 
 - 你的命令必须在 **Command** 目录下；
-- 基于你的环境或者依稀依赖性的可用性没有注册你的服务的条件；
+- 基于你的环境或者依赖性的可用性没有注册你的服务的条件；
 - 你不能使用 **configure()** 方法服务容器（因为 **setContainer** 还没有调用）；
 - 你不能使用同一个类创建很多命令（例如每一个都有不同的配置）。
 
-为了解决这个问题，你可以将你的命令注册为服务并且给他加上 **console.command** 的标签：  
+为了解决这个问题，你可以将你的命令注册为服务并且给它加上 **console.command** 的标签：  
+
+YAML:
 
 ```YAML
 # app/config/config.yml
@@ -17,6 +19,8 @@ services:
         tags:
             -  { name: console.command }
 ```  
+
+XML:
 
 ```XML
 <!-- app/config/config.xml -->
@@ -35,6 +39,8 @@ services:
 </container>
 ```  
 
+PHP:
+
 ```PHP
 // app/config/config.php
 $container
@@ -46,15 +52,15 @@ $container
 ;
 ```  
 
-## 使用依赖和参数设置默认选项的值 ##
+## 使用依赖和参数设置默认选项的值
 
-试想你想要给 **name** 选项一个默认值。你可以传递下面的一个作为 **addOption()** 的第五个变元：  
+试想你想要给 **name** 选项一个默认值。你可以传递下面的一个作为 **addOption()** 的第五个参数：  
 
 - 一个 hardcoded 字符串；
 - 一个容器参数(例如 **parameters.yml** 中的一些)；
-- 服务计算过的值（例如 一个仓库）。
+- 服务计算过的值（例如一个仓库）。
 
-通过扩展 **ContainerAwareCommand**，只有第一个是可能的，由于你不能在 **configure()** 方法中访问容器。作为替代，你需要向注入 constructor 任何参数或者服务。举例来说，假设你将默认值储存在一些 **%command.default_name%** 参数中：  
+通过扩展 **ContainerAwareCommand**，只有第一个是可能的，由于你不能在 **configure()** 方法中访问容器。作为替代，你需要注入 constructor 任何参数或者服务。举例来说，假设你将默认值储存在一些 **%command.default_name%** 参数中：  
 
 ```
 // src/AppBundle/Command/GreetCommand.php
@@ -104,7 +110,9 @@ class GreetCommand extends Command
 }
 ```  
 
-现在，仅仅像往常一样更新你的服务配置的变元来注入 **command.default_name** 参数：  
+现在，仅仅像往常一样更新你的服务配置的参数来注入 **command.default_name** 参数：  
+
+YAML:
 
 ```YAML
 # app/config/config.yml
@@ -118,6 +126,8 @@ services:
         tags:
             -  { name: console.command }
 ```  
+
+XML:
 
 ```XML
 <!-- app/config/config.xml -->
@@ -141,6 +151,8 @@ services:
 </container>
 ```  
 
+PHP:
+
 ```PHP
 // app/config/config.php
 $container->setParameter('command.default_name', 'Javier');
@@ -157,6 +169,4 @@ $container
 
 很好，你现在有了动态的默认值！  
 
->注意不要在 **configure** 中做任何工作（例如做出数据库请求），由于你的代码将会运行，即使你在使用控制台执行不同的命令。  
-
-
+> 注意不要在 **configure** 中做任何工作（例如做出数据库请求），由于你的代码将会运行，即使你在使用控制台执行不同的命令。

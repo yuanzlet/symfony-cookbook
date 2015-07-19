@@ -1,4 +1,4 @@
-# 如何在控制台生成 URL 和 发送邮件
+# 如何在控制台生成 URL 和发送邮件
 
 不幸的是，命令行环境不知道你的虚拟主机或者域的名称。这就意味着如果你使用控制台命令生成了绝对的 URL 你将可能像 **http://localhost/foo/bar** 一样结束而并没有什么用。  
 
@@ -6,11 +6,13 @@
 
 这里有两种设置请求环境的方法：在应用程序层面上以及每一个命令层面。  
 
-## 全局地设置请求环境 ##
+## 全局地设置请求环境
 
-为了设置被 URL 生成器所使用的请求环境，你可以将他所使用的参数定义成默认值来改变默认的 host （localhost）和策略（http）。你也可以设置基本路径如果 Symfony 不在根目录运行。  
+为了设置被 URL 生成器所使用的请求环境，你可以将它所使用的参数定义成默认值来改变默认的 host （localhost）和策略（http）。你也可以设置基本路径如果 Symfony 不在根目录运行。  
 
 记住这个不是通过简单的网页请求影响 URL 生成器，由于那些会重写默认值。  
+
+YAML:
 
 ```YAML
 # app/config/parameters.yml
@@ -18,7 +20,9 @@ parameters:
     router.request_context.host: example.org
     router.request_context.scheme: https
     router.request_context.base_url: my/path
-```  
+```
+
+XML:
 
 ```XML
 <!-- app/config/parameters.xml -->
@@ -33,7 +37,9 @@ parameters:
         <parameter key="router.request_context.base_url">my/path</parameter>
     </parameters>
 </container>
-```  
+```
+
+PHP:
 
 ```PHP
 // app/config/config_test.php
@@ -42,7 +48,7 @@ $container->setParameter('router.request_context.scheme', 'https');
 $container->setParameter('router.request_context.base_url', 'my/path');
 ```  
 
-## 为每个命令配置请求环境 ##
+## 为每个命令配置请求环境
 
 只在一个命令中改变你可以简单地将请求环境从 **router** 服务中取出然后重写它的设置：  
 
@@ -64,9 +70,9 @@ class DemoCommand extends ContainerAwareCommand
 }
 ```  
 
-## 使用内存假脱机 ##
+## 使用内存假脱机
 
->当使用 Symfony 2.3+ 和 SwiftmailerBundle 2.3.5+ 时，内存假脱机现在是在 CLI 中自动处理的，下列代码就不在需要了。  
+> 当使用 Symfony 2.3+ 和 SwiftmailerBundle 2.3.5+ 时，内存假脱机现在是在 CLI 中自动处理的，下列代码就不再需要了。  
 
 在控制台命令中发送邮件和[如何发送邮件](http://symfony.com/doc/current/cookbook/email/email.html)指导中描述的一样除了内存假脱机被占用。  
 
@@ -91,6 +97,4 @@ $spool->flushQueue($transport);
 
 另外的一个选项是创建一个只用于控制台命令的环境并且使用一种不同的假脱机方法。  
 
->只有当内存假脱机被使用时照顾假脱机。如果你使用文件假脱机（或者不完全假脱机），没必要手动在命令中清除队列。  
-
-
+> 只有当内存假脱机被使用时才考虑假脱机。如果你使用文件假脱机（或者不完全假脱机），没必要手动在命令中清除队列。
