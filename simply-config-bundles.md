@@ -1,12 +1,12 @@
 # 如何简化多个 Bundle 的配置
 
-当创建可重复利用以及可扩展的应用程序时，开发者经常面临一个选择：创建一个简单的大的 bundle 还是创建多个小的 bundle。创建一个简单的 bundle 的缺点就是不能让用户选择移除他们不需要的功能。创建多个 bundle 的缺点就是配置变得很繁杂无聊很多设置都需要对不同的 bundle 重复设置。  
+当创建可重复利用以及可扩展的应用程序时，开发者经常面临一个选择：创建一个简单的大的 bundle 还是创建多个小的 bundle。创建一个简单的 bundle 的缺点就是不能让用户选择移除他们不需要的功能。创建多个 bundle 的缺点就是配置会变得很繁杂无聊，很多设置都需要对不同的 bundle 重复设置。  
 
-使用下列方法，可以移除多个 bundle 的缺点通过一个简单的扩展来预先设置所有的 bundle。可以使用 **app/config/config.yml** 中定义的设置来预先设置就好像他们被用户在应用程序配置中明白地写一样。  
+使用下列方法，通过一个单一的扩展来预先设置所有的 bundle，可以移除多个 bundle 的缺点。可以使用 **app/config/config.yml** 中定义的设置来预先设置就好像它们被用户在应用程序配置中明确写出来。  
 
-举例来说，这个可以用来设置在多个 bundle 中应用的实体管理器的名称。或者他也可以用来启用依赖于另一个 bundle 加载的可选特征。  
+举例来说，这个可以用来设置在多个 bundle 中应用的实体管理器的名称。或者它也可以用来启用依赖于另一个 bundle 加载的可选特征。  
 
-为了给扩展能力来完成这个工作。你需要实施 [PrependExtensionInterface](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Extension/PrependExtensionInterface.html)：  
+为了有扩展能力来完成这个工作，你需要实现 [PrependExtensionInterface](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Extension/PrependExtensionInterface.html)：  
 
 ```
 // src/Acme/HelloBundle/DependencyInjection/AcmeHelloExtension.php
@@ -27,9 +27,9 @@ class AcmeHelloExtension extends Extension implements PrependExtensionInterface
 }
 ```  
 
-在 [prepend()](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Extension/PrependExtensionInterface.html#prepend()) 方法中，开发者可以在每个注册的 bundle 的扩展调用 [load()](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Extension/ExtensionInterface.html#load()) 方法之前完全访问 [ContainerBuilder](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/ContainerBuilder.html) 实例。为了预先设置 bundle 的扩展开发者可以在 [ContainerBuilder](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/ContainerBuilder.html) 实例上使用 [prependExtensionConfig()](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/ContainerBuilder.html#prependExtensionConfig()) 方法。由于这个方法仅仅预先设置，其他的在 **app/config/config.yml** 中的设置回重写这些以前的设置。  
+在 [prepend()](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Extension/PrependExtensionInterface.html#prepend()) 方法中，开发者可以在每个注册的 bundle 的扩展调用 [load()](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/Extension/ExtensionInterface.html#load()) 方法之前完全访问 [ContainerBuilder](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/ContainerBuilder.html) 实例。为了预先设置 bundle 的扩展开发者可以在 [ContainerBuilder](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/ContainerBuilder.html) 实例上使用 [prependExtensionConfig()](http://api.symfony.com/2.7/Symfony/Component/DependencyInjection/ContainerBuilder.html#prependExtensionConfig()) 方法。由于这个方法仅仅预先设置，其它的在 **app/config/config.yml** 中的设置会重写这些以前的设置。  
 
-下面的例子说明了如何在多个 bundle 中预先配置设置同时如何在一个特定的其他 bundle 没有被注册时禁用多个 bundle 的标志：  
+下面的例子说明了如何在多个 bundle 中预先配置，同时如何在一个特定的其它 bundle 没有被注册时禁用多个 bundle 的标志：  
 
 ```
 public function prepend(ContainerBuilder $container)
@@ -69,7 +69,9 @@ public function prepend(ContainerBuilder $container)
 }
 ```  
 
-上面所说的将会和在 AcmeGoodbyeBundle 没有被注册以及 **acme_hello** 的 **entity_manager_name** 设置设置成了 **non_default** 的情况下将以下代码写入 **app/config/config.yml** 等同：  
+上面所说的将会和在 AcmeGoodbyeBundle 没有被注册以及 **acme_hello** 的 **entity_manager_name** 设置成了 **non_default** 的情况下将以下代码写入 **app/config/config.yml** 等同：  
+
+YAML:
 
 ```YAML
 # app/config/config.yml
@@ -83,6 +85,8 @@ acme_other:
     use_acme_goodbye: false
 ```  
 
+XML:
+
 ```XML
 <!-- app/config/config.xml -->
 <acme-something:config use-acme-goodbye="false">
@@ -91,6 +95,8 @@ acme_other:
 
 <acme-other:config use-acme-goodbye="false" />
 ```  
+
+PHP:
 
 ```PHP
 // app/config/config.php
@@ -104,5 +110,3 @@ $container->loadFromExtension('acme_other', array(
     'use_acme_goodbye' => false,
 ));
 ```  
-
-

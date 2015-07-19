@@ -4,6 +4,8 @@ Assetic 的过滤器可以应用到独立的文件上，甚至一组文件，就
 
 主要的设置就是 **coffee, node** 和 **node_modules** 的路径。设置的例子如下所示：  
 
+YAML:
+
 ```YAML
 # app/config/config.yml
 assetic:
@@ -13,6 +15,8 @@ assetic:
             node:       /usr/bin/node
             node_paths: [/usr/lib/node_modules/]
 ```  
+
+XML:
 
 ```XML
 <!-- app/config/config.xml -->
@@ -25,6 +29,8 @@ assetic:
     </assetic:filter>
 </assetic:config>
 ```  
+
+PHP:
 
 ```PHP
 // app/config/config.php
@@ -39,15 +45,19 @@ $container->loadFromExtension('assetic', array(
 ));
 ```  
 
-## 过滤一个简单的文件 ##
+## 过滤一个简单的文件
 
-现在你可以建立一个简单的 CoffeeScript 作为  JavaScript 从你的模板中：  
+现在你可以从你的模板中建立一个简单的 CoffeeScript 作为 JavaScript：  
+
+Twig:
 
 ```Twig
 {% javascripts '@AppBundle/Resources/public/js/example.coffee' filter='coffee' %}
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 ```  
+
+PHP:
 
 ```PHP
 <?php foreach ($view['assetic']->javascripts(
@@ -60,9 +70,11 @@ $container->loadFromExtension('assetic', array(
 
 这些都需要编译 CoffeeScript 文件并且作为编译过的 JavaScript 提供。  
 
-## 过滤多个文件 ##
+## 过滤多个文件
 
 你也可以将多个 CoffeeScript 文件合并成一个单一的输出文件：  
+
+Twig:
 
 ```Twig
 {% javascripts '@AppBundle/Resources/public/js/example.coffee'
@@ -71,6 +83,8 @@ $container->loadFromExtension('assetic', array(
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 ```  
+
+PHP:
 
 ```PHP
 <?php foreach ($view['assetic']->javascripts(
@@ -84,13 +98,15 @@ $container->loadFromExtension('assetic', array(
 <?php endforeach ?>
 ```  
 
-两个文件现在都被合并成一个文件编译成普通的 JavaScript。  
+两个文件现在都被合并成一个文件并编译成普通的 JavaScript。  
 
-## 基于文件扩展名的过滤 ##
+## 基于文件扩展名的过滤
 
-使用 Assetic 来减少资产文件数量的一个优点就是降低了 HTTP 请求的数量。为了更好地应用这一点，将你的*所有的* JavaScript 和 CoffeeScript 文件合并在一起会更好，因为他们将会最终作为 JavaScript 提供。不幸的是仅仅将 JavaScript 添加到将被合并的文件中将不会像正常的一样 JavaScript 文件将不会和 CoffeeScript 编译。  
+使用 Assetic 来减少资产文件数量的一个优点就是降低了 HTTP 请求的数量。为了更好地应用这一点，将你的*所有的* JavaScript 和 CoffeeScript 文件合并在一起会更好，因为它们将会最终作为 JavaScript 提供。不幸的是仅仅将 JavaScript 添加到将被合并的文件中将不会像正常的一样 JavaScript 文件将不会和 CoffeeScript 编译。  
 
 这个问题可以通过使用 **apply_to** 选项避免，这个选项可以允许你确定哪一个过滤器应当总是被应用于特定的文件扩展名。这样你可以指定 **coffee** 过滤器是应用于所有的 **.coffee** 文件：  
+
+YAML:
 
 ```YAML
 # app/config/config.yml
@@ -103,6 +119,8 @@ assetic:
             apply_to:   "\.coffee$"
 ```  
 
+XML:
+
 ```XML
 <!-- app/config/config.xml -->
 <assetic:config>
@@ -114,6 +132,8 @@ assetic:
         <assetic:node-paths>/usr/lib/node_modules/</assetic:node-path>
 </assetic:config>
 ```  
+
+PHP:
 
 ```PHP
 // app/config/config.php
@@ -129,7 +149,9 @@ $container->loadFromExtension('assetic', array(
 ));
 ```  
 
-使用这个选项，你不在需要在模板中指定 **coffee** 过滤器。你也可以列出普通的 JavaScript 文件，所有这些都会被合并并且渲染成一个简单的 JavaScript 文件（伴随着 **.coffee** 文件仅仅通过 CoffeeScript 过滤器运行）：  
+使用这个选项，你不再需要在模板中指定 **coffee** 过滤器。你也可以列出普通的 JavaScript 文件，所有这些都会被合并并且渲染成一个简单的 JavaScript 文件（伴随着 **.coffee** 文件仅仅通过 CoffeeScript 过滤器运行）：  
+
+Twig:
 
 ```Twig
 {% javascripts '@AppBundle/Resources/public/js/example.coffee'
@@ -138,6 +160,8 @@ $container->loadFromExtension('assetic', array(
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 ```  
+
+PHP:
 
 ```PHP
 <?php foreach ($view['assetic']->javascripts(
@@ -149,5 +173,4 @@ $container->loadFromExtension('assetic', array(
 ) as $url): ?>
     <script src="<?php echo $view->escape($url) ?>"></script>
 <?php endforeach ?>
-```  
-
+```
