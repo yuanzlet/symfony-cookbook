@@ -79,12 +79,12 @@
    - [如何使用数据转换](data-transformers.md) -- 已校对
    - [如何利用表单事件动态修改表单](dynamic-form-modification.md) -- 已校对
    - [如何嵌入集合表单](form-collections.md) -- 已校对
-   - [如何创建一个自定义表单域类型](create-custom-field-type.md)
-   - [如何创建一个表单类型扩展](create-form-type-extension.md)
-   - [如何用 "inherit-data" 减少代码冗余](inherit-data-option.md)
-   - [如何对表单单元测试](unit-testing.md)
-   - [如何为表单类配置空数据](use-empty-data.md)
-   - [如何使用 submit() 函数处理表单提交](direct-submit.md)
+   - [如何创建一个自定义表单域类型](create-custom-field-type.md) -- 待校对
+   - [如何创建一个表单类型扩展](create-form-type-extension.md) -- 待校对
+   - [如何用 "inherit-data" 减少代码冗余](inherit-data-option.md) -- 待校对
+   - [如何对表单单元测试](unit-testing.md) -- 待校对
+   - [如何为表单类配置空数据](use-empty-data.md) -- 待校对
+   - [如何使用 submit() 函数处理表单提交](direct-submit.md) -- 待校对
    - **不翻译**[(validation)如何创建一个自定义验证限制](custom-constraint.md)
    - **不翻译**[(doctrine)如何使用 Doctrine 处理文件上传](file-upload-doctrine.md)
  - 前端  苗帅
@@ -129,7 +129,7 @@
    - [如何在应用中保护服务和方法](securing-services.md) -- 待校对
    - [如何创建自定义用户提供者](custom-provider.md) -- 待校对
    - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 待校对
-   - [如何使用 API 验证用户](api-key-authentication.md)
+   - [如何使用 API 验证用户](api-key-authentication.md)  -- 待校对
    - [如何创建自定义认证提供者](custom-authentication-provider.md)
    - [使用预认证安全防火墙](pre-authenticated.md)
    - [如何改变默认的目标路径行为](target-path.md)
@@ -147,8 +147,8 @@
    - [会话代理实例](proxy-examples.md)
    - [在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md) -- 待校对
    - [配置 Session 文件的保存目录](sessions-directory.md) -- 待校对
-   - [在遗留的应用上使用 Symfony Session](php-bridge.md)
-   - [限制 Session 元数据的写入](limit-metadata-writes.md)
+   - [在遗留的应用上使用 Symfony Session](php-bridge.md) -- 待校对
+   - [限制 Session 元数据的写入](limit-metadata-writes.md) -- 待校对
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
    - [避免匿名用户开始 Session 会话](avoid-session-start.md)
  - PSR-7   袁泽林
