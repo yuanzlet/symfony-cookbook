@@ -75,10 +75,10 @@
  - 表达式  赵洁
    - [如何在安全，路由，服务和验证中使用表达式](expressions.md)
  - 表单  苗帅
-   - [如何自定义表单渲染](form-customization.md)
-   - [如何使用数据转换](data-transformers.md)
-   - [如何利用表单事件动态修改表单](dynamic-form-modification.md)
-   - [如何嵌入集合表单](form-collections.md)
+   - [如何自定义表单渲染](form-customization.md) -- 待校对
+   - [如何使用数据转换](data-transformers.md) -- 待校对
+   - [如何利用表单事件动态修改表单](dynamic-form-modification.md) -- 待校对
+   - [如何嵌入集合表单](form-collections.md) -- 待校对
    - [如何创建一个自定义表单域类型](create-custom-field-type.md)
    - [如何创建一个表单类型扩展](create-form-type-extension.md)
    - [如何用 "inherit-data" 减少代码冗余](inherit-data-option.md)
@@ -114,7 +114,7 @@
    - [使用结尾反斜线重定向 URL](redirect-trailing-slash.md)
    - [如何从路由向控制器传输额外的信息](extra-information.md)
  - 安全  王运里
-   - [如何建立一个传统的登录表单](form-login-setup.md)
+   - [如何建立一个传统的登录表单](form-login-setup.md) -- 待校对
    - [如何从数据库(实体提供者)读取安全用户](entity-provider.md)
    - [如何添加 "记住我" 登录功能](remember-me.md)
    - [如何冒充一个用户](impersonating-user.md)
@@ -125,10 +125,10 @@
    - [如何对不同的 URL 强制使用 HTTPS 或者 HTTP](force-https.md)
    - [如何重定向防火墙至一个特殊的请求](firewall-restriction.md)
    - [如何重定向防火墙至一个特殊的主机](host-restriction.md)
-   - [如何自定义登录表单](form-login.md)
-   - [如何在应用中保护服务和方法](securing-services.md)
-   - [如何创建自定义用户提供者](custom-provider.md)
-   - [如何创建自定义表单密码验证器](custom-password-authenticator.md)
+   - [如何自定义登录表单](form-login.md) -- 待校对
+   - [如何在应用中保护服务和方法](securing-services.md) -- 待校对
+   - [如何创建自定义用户提供者](custom-provider.md) -- 待校对
+   - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 待校对
    - [如何使用 API 验证用户](api-key-authentication.md)
    - [如何创建自定义认证提供者](custom-authentication-provider.md)
    - [使用预认证安全防火墙](pre-authenticated.md)
@@ -137,16 +137,16 @@
    - [如何动态选择密码加密算法](named-encoders.md)
    - [安全访问控制是如何工作的](access-control.md)
    - [如何使用多用户提供者](multiple-user-providers.md)
- - 序列化  王运里
+ - 序列化  杨旋 -- 待校对
    - [如何使用序列化](serializer.md)
- - 服务容器  王运里
+ - 服务容器  杨旋 -- 待校对
    - [如何创建事件监听器](event-listener.md)
    - [如何使用作用域](scopes.md)
    - [如何在 Bundle 中使用 Compiler Passes](compiler-passes.md)
  - 会话  袁泽林
    - [会话代理实例](proxy-examples.md)
-   - [在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md)
-   - [配置 Session 文件的保存目录](sessions-directory.md)
+   - [在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md) -- 待校对
+   - [配置 Session 文件的保存目录](sessions-directory.md) -- 待校对
    - [在遗留的应用上使用 Symfony Session](php-bridge.md)
    - [限制 Session 元数据的写入](limit-metadata-writes.md)
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
