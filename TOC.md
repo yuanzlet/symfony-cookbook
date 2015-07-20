@@ -75,10 +75,10 @@
  - 表达式  赵洁
    - [如何在安全，路由，服务和验证中使用表达式](expressions.md)
  - 表单  苗帅
-   - [如何自定义表单渲染](form-customization.md) -- 待校对
-   - [如何使用数据转换](data-transformers.md) -- 待校对
-   - [如何利用表单事件动态修改表单](dynamic-form-modification.md) -- 待校对
-   - [如何嵌入集合表单](form-collections.md) -- 待校对
+   - [如何自定义表单渲染](form-customization.md) -- 已校对
+   - [如何使用数据转换](data-transformers.md) -- 已校对
+   - [如何利用表单事件动态修改表单](dynamic-form-modification.md) -- 已校对
+   - [如何嵌入集合表单](form-collections.md) -- 已校对
    - [如何创建一个自定义表单域类型](create-custom-field-type.md)
    - [如何创建一个表单类型扩展](create-form-type-extension.md)
    - [如何用 "inherit-data" 减少代码冗余](inherit-data-option.md)
