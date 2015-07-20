@@ -17,13 +17,13 @@ public function indexAction()
 }
 ```
 
-默认情况下，**empty_data** 设置为 **null**。或者，如果你为你的表单类指定了 **data_class** 选项，它将会默认一个新的实例的类。这个实例将会通过调用构造器创建并且没有变元。  
+默认情况下，**empty_data** 设置为 **null**。或者，如果你为你的表单类指定了 **data_class** 选项，它将会默认一个新的实例的类。这个实例将会通过调用构造函数创建并且没有参数。  
 
 如果你想要重写这个默认的行为，有两种方法可以用。  
 
 ## 选择 1：实例化一个新的类
 
-你可能使用这个方法的原因就是如果你想要使用具有变元的构造器的话。记住，默认的 **data_class** 选项调用构造器没有变元：  
+你可能使用这个方法的原因就是如果你想要使用具有参数的构造函数的话。记住，默认的 **data_class** 选项调用构造函数没有参数：  
 
 ```
 // src/AppBundle/Form/Type/BlogType.php
@@ -74,5 +74,3 @@ public function configureOptions(OptionsResolver $resolver)
     ));
 }
 ```
-
-

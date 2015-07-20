@@ -9,11 +9,11 @@
 1. 你想要**向几种类型中添加一般特征**（例如向每一个字段类型添加“帮助”文本）；  
 2. 你想要**向一种类型中添加特定特征**（例如向“文件”字段添加“下载”特征）。
 
-在这两种情况下，通过定制的表单渲染或者定制的表单字段类型可能能实现你的目标。但是使用表单类型扩展可以更加清楚（通过限制模板中的业务逻辑）并且更灵活（你可以向一个表单类型中添加几个类型扩展）。  
+在这两种情况下，通过定制的表单渲染或者定制的表单字段类型可能会实现你的目标。但是使用表单类型扩展可以更加清楚（通过限制模板中的业务逻辑）并且更灵活（你可以向一个表单类型中添加几个类型扩展）。  
 
-表单类型扩展能够完成大多是定制的字段类型能做的事情，但是代替自己成为字段类型，**他们插入到已经存在的类型中**。  
+表单类型扩展能够完成大多是定制的字段类型能做的事情，但是代替自己成为字段类型，**它们插入到已经存在的类型中**。  
 
-假设你管理一个**媒体**实体，并且每一个媒体都和一个文件相关联。你的**媒体**表单使用了文件类型，但是当编辑这个实体的时候，你就会看到它的挨着文件输入的图像自动渲染。  
+假设你管理一个**媒体**实体，并且每一个媒体都和一个文件相关联。你的**媒体**表单使用了文件类型，但是当编辑这个实体的时候，你就会看到它的临近文件输入的图像自动渲染。  
 
 你当然可以通过在模板中配置字段如何被渲染。但是字段类型扩展允许你以一种更加流行的方式。  
 
@@ -45,7 +45,7 @@ class ImageTypeExtension extends AbstractTypeExtension
 
 你必须使用的一个方法就是 **getExtendedType** 功能。它是用来被你的扩展所扩展的表单类型的名称的。  
 
->**getExtendedType** 方法返回的值和你希望扩展的表单类型类的 **getName** 方法所返回的值相一致。  
+> **getExtendedType** 方法返回的值和你希望扩展的表单类型类的 **getName** 方法所返回的值相一致。  
 
 处理 **getExtendedType** 方法，你可能还想重写下列的一个方法：  
 
@@ -60,6 +60,8 @@ class ImageTypeExtension extends AbstractTypeExtension
 
 接下来这一步就是使得 Symfony 知道你的扩展。你所需要做的就是使用 **form.type_extension** 标签将它声明为一个服务：  
 
+YAML:
+
 ```YAML
 services:
     acme_demo_bundle.image_type_extension:
@@ -68,6 +70,8 @@ services:
             - { name: form.type_extension, alias: file }
 ```
 
+XML:
+
 ```XML
 <service id="acme_demo_bundle.image_type_extension"
     class="Acme\DemoBundle\Form\Extension\ImageTypeExtension"
@@ -75,6 +79,8 @@ services:
     <tag name="form.type_extension" alias="file" />
 </service>
 ```
+
+PHP:
 
 ```PHP
 $container
@@ -200,6 +206,8 @@ class ImageTypeExtension extends AbstractTypeExtension
 
 在你的扩展类之中，你已经添加了一个新的变量（**image_url**），但是你依旧需要使用你的模板中的新的变量。特别的，你需要重写 **file_widget** 区域：  
 
+Twig:
+
 ```Twig
 {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
 {% extends 'form_div_layout.html.twig' %}
@@ -216,6 +224,8 @@ class ImageTypeExtension extends AbstractTypeExtension
 {% endblock %}
 ```
 
+PHP:
+
 ```PHP
 <!-- src/Acme/DemoBundle/Resources/views/Form/file_widget.html.php -->
 <?php echo $view['form']->widget($form) ?>
@@ -224,7 +234,7 @@ class ImageTypeExtension extends AbstractTypeExtension
 <?php endif ?>
 ```
 
->你需要改变你的配置文件或者明确指定你想要如何给你的表单加主题为了使 Symfony 使用你所重写的区域。更多信息详见[什么是表单主题？](http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-customization-form-themes)这篇文章。  
+> 你需要改变你的配置文件或者明确指定你想要如何给你的表单加主题为了使 Symfony 使用你所重写的区域。更多信息详见[什么是表单主题？](http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-customization-form-themes)这篇文章。  
 
 ## 使用表单类型扩展
 
@@ -253,6 +263,4 @@ class MediaType extends AbstractType
 }
 ```
 
-当展示表单的时候，如果基本的模型已经和图片关联，你就会看到它在文件输入旁边显示。  
-
-
+当展示表单的时候，如果基本的模型已经和图片关联，你就会看到它在文件输入旁边显示。
