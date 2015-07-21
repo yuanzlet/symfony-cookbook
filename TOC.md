@@ -114,7 +114,7 @@
    - [使用结尾反斜线重定向 URL](redirect-trailing-slash.md)
    - [如何从路由向控制器传输额外的信息](extra-information.md)
  - 安全  王运里
-   - [如何建立一个传统的登录表单](form-login-setup.md) -- 待校对
+   - [如何建立一个传统的登录表单](form-login-setup.md) -- 已校对
    - [如何从数据库(实体提供者)读取安全用户](entity-provider.md)
    - [如何添加 "记住我" 登录功能](remember-me.md)
    - [如何冒充一个用户](impersonating-user.md)
