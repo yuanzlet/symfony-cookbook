@@ -130,7 +130,7 @@
    - [如何创建自定义用户提供者](custom-provider.md) -- 已校对
    - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 已校对
    - [如何使用 API 验证用户](api-key-authentication.md)  -- 已校对
-   - [如何创建自定义认证提供者](custom-authentication-provider.md)
+   - [如何创建自定义认证提供者](custom-authentication-provider.md) -- 待校对
    - [使用预认证安全防火墙](pre-authenticated.md)
    - [如何改变默认的目标路径行为](target-path.md)
    - [在登录表单中使用 CSRF 保护](csrf-in-login-form.md)
@@ -151,7 +151,7 @@
    - [限制 Session 元数据的写入](limit-metadata-writes.md)
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
    - [避免匿名用户开始 Session 会话](avoid-session-start.md)
- - PSR-7   袁泽林
+ - PSR-7   袁泽林 -- 待校对
    - [The PSR-7 Bridge](psr7.md)
  - symfony1   袁泽林
    - [Symfony2 与 Symfony1 的区别](symfony1.md)
