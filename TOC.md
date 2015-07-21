@@ -126,10 +126,10 @@
    - [如何重定向防火墙至一个特殊的请求](firewall-restriction.md)
    - [如何重定向防火墙至一个特殊的主机](host-restriction.md)
    - [如何自定义登录表单](form-login.md) -- 待校对
-   - [如何在应用中保护服务和方法](securing-services.md) -- 待校对
-   - [如何创建自定义用户提供者](custom-provider.md) -- 待校对
-   - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 待校对
-   - [如何使用 API 验证用户](api-key-authentication.md)  -- 待校对
+   - [如何在应用中保护服务和方法](securing-services.md) -- 已校对
+   - [如何创建自定义用户提供者](custom-provider.md) -- 已校对
+   - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 已校对
+   - [如何使用 API 验证用户](api-key-authentication.md)  -- 已校对
    - [如何创建自定义认证提供者](custom-authentication-provider.md)
    - [使用预认证安全防火墙](pre-authenticated.md)
    - [如何改变默认的目标路径行为](target-path.md)
