@@ -40,14 +40,14 @@
    - [如何定制错误页](customize-error-pages.md)
    - [如何把 Controller 定义为服务](define-controller-as-service.md)
    - [如何上传文件](howto-upload-files.md)
- - 调试  赵洁
+ - 调试  赵洁 -- 待校对(HSQ)
    - [如何将你的开发环境优化为调试环境](optimize-for-debugging.md)
- - 部署  赵洁
+ - 部署  赵洁 -- 待校对(HSQ)
    - [如何部署一个 Symfony 应用](deploy-symfony-application.md)
    - [部署在 Microsoft Azure 云](deploy-azure-cloud.md)
    - [部署在 Heroku 云](deploy-heroku-cloud.md)
    - [部署在 Platform.sh](deploy-platform-sh.md)
- - Doctrine  赵洁
+ - Doctrine  赵洁 -- 待校对(HSQ)
    - [如何使用 Doctrine 上传文件](file-upload-doctrine.md)
    - [如何使用 Doctrine 扩展: Timestampable, Sluggable, Translatable, etc](use-doctrine-extension.md)
    - [如何注册事件监听器和订阅](register-event-listener.md)
@@ -60,19 +60,19 @@
    - [如何实现一个简单的注册表单](implement-simple-registration.md)
    - [控制台命令](console-commands.md)
    - **不翻译**[(configuration)如何在数据库中使用 PdoSessionHandler 存储 Sessions](pdosessionhandler-store-sessions.md)
- - 电子邮件  赵洁
+ - 电子邮件  赵洁 -- 待校对(HSQ)
    - [如何发送一封电子邮件](email.md)
    - [如何使用 Gmail 发送电子邮件](gmail.md)
    - [如何使用云服务发送电子邮件](cloud.md)
    - [如何在开发时使用电子邮件](dev-environment.md)
    - [如何缓存电子邮件](spool.md)
    - [如何在功能测试中测试电子邮件是否发送](testing.md)
- - 事件分发器  赵洁
+ - 事件分发器  赵洁 -- 待校对(HSQ)
    - [如何在过滤器的前后设置事件分发器](before-after-filters.md)
    - [如何以非继承方式扩展一个类](class-extension.md)
    - [如何以非继承方式自定义方法](method-behavior.md)
    - **不翻译**[(service container)如何创建事件监听器](event-listener.md)
- - 表达式  赵洁
+ - 表达式  赵洁 -- 待校对(HSQ)
    - [如何在安全，路由，服务和验证中使用表达式](expressions.md)
  - 表单  苗帅 -- 已校对
    - [如何自定义表单渲染](form-customization.md)
