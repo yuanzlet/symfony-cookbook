@@ -40,11 +40,11 @@
    - [如何定制错误页](customize-error-pages.md)
    - [如何把 Controller 定义为服务](define-controller-as-service.md)
    - [如何上传文件](howto-upload-files.md)
- - 调试  赵洁 -- 待校对(HSQ)
+ - 调试  赵洁 -- 已校对
    - [如何将你的开发环境优化为调试环境](optimize-for-debugging.md)
  - 部署  赵洁 -- 待校对(HSQ)
    - [如何部署一个 Symfony 应用](deploy-symfony-application.md)
-   - [部署在 Microsoft Azure 云](deploy-azure-cloud.md) -- 待校对
+   - [部署在 Microsoft Azure 云](deploy-azure-cloud.md)
    - [部署在 Heroku 云](deploy-heroku-cloud.md)
    - [部署在 Platform.sh](deploy-platform-sh.md)
  - Doctrine  赵洁 -- 待校对(HSQ)
