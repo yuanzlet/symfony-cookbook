@@ -1,6 +1,6 @@
 # 如何在应用中保护服务和方法
 
-在安全性一章中，您可以看到如何通过从服务容器请求 **security.authorization_checker** 并检查当前用户的角色来[保护一个控制器](http://symfony.com/doc/current/book/security.html#book-security-securing-controller "保护一个控制器")：
+在安全性一章中，您可以看到如何通过从服务容器请求 **security.authorization_checker** 并检查当前用户的角色来[保护一个控制器](http://symfony.com/doc/current/book/security.html#book-security-securing-controller)：
 
 ```
 // ...http://symfony.com/doc/current/book/security.html#book-security-securing-controller
@@ -14,7 +14,7 @@ public function helloAction($name)
 }
 ```
 
-您也可以通过向服务注入 **security.authorization_checker** 服务保护任何它。关于如何向服务注入依赖项的内容介绍请参阅本书的[服务容器](http://symfony.com/doc/current/book/service_container.html "服务容器")的章节。假如您现在有一个可以发送电子邮件的 **NewsletterManager** 类 ，但是您想把它的使用权限制为具有 ROLE_NEWSLETTER_ADMIN 角色的用户，在您添加安全性之前，这个类应该是下述代码描述的这样：
+您也可以通过向服务注入 **security.authorization_checker** 服务来保护。关于如何向服务注入依赖项的内容介绍请参阅本书的[服务容器](http://symfony.com/doc/current/book/service_container.html)的章节。假如您现在有一个可以发送电子邮件的 **NewsletterManager** 类 ，但是您想把它的使用权限制为具有 ROLE_NEWSLETTER_ADMIN 角色的用户，在您添加安全性之前，这个类应该是下述代码描述的这样：
 
 ```
 // src/AppBundle/Newsletter/NewsletterManager.php
@@ -121,9 +121,9 @@ class NewsletterManager
 
 ## 使用注释保护方法
 
-您也可以通过使用可选的 [JMSSecurityExtraBundle](https://github.com/schmittjoh/JMSSecurityExtraBundle "JMSSecurityExtraBundle") 包来保护带有注释的保护方法的调用。虽然在 Symfony 标准分布中不包括此包，但您可以去安装它。
+您也可以通过使用可选的 [JMSSecurityExtraBundle](https://github.com/schmittjoh/JMSSecurityExtraBundle) 包来保护带有注释的保护方法的调用。虽然在 Symfony 标准版本中不包括此包，但您可以去安装它。
 
-如果想要启用注释功能，可以使用 security.secure_service [标记](http://symfony.com/doc/current/book/service_container.html#book-service-container-tags "标记")来标记您想保护的服务（您还可以为所有服务自动启用此功能请参阅下面的[文本框]( http://symfony.com/doc/current/cookbook/security/securing_services.html#securing-services-annotations-sidebar"文本框")）:
+如果想要启用注释功能，可以使用 security.secure_service [标记](http://symfony.com/doc/current/book/service_container.html#book-service-container-tags)来标记您想保护的服务（您还可以为所有服务自动启用此功能请参阅下面的[文本框]( http://symfony.com/doc/current/cookbook/security/securing_services.html#securing-services-annotations-sidebar)）:
 
 XAML:
 
@@ -192,7 +192,7 @@ class NewsletterManager
 
 > 注释之所以可以有相同的效果是因为在程序中有一个代理类来帮您的类执行安全性检查。这也就是说，您只可以在公有和受保护的方法中使用注释，而不能在私有或者在带有 final 标记的方法中使用它们。
 
-JMSSecurityExtraBundle 还允许您保护方法的参数和返回的值。更多的信息，请参阅 [JMSSecurityExtraBundle](https://github.com/schmittjoh/JMSSecurityExtraBundle "JMSSecurityExtraBundle") 文档。
+JMSSecurityExtraBundle 还允许您保护方法的参数和返回的值。更多的信息，请参阅 [JMSSecurityExtraBundle](https://github.com/schmittjoh/JMSSecurityExtraBundle) 文档。
 
 ## 为所有服务激活注释功能
 

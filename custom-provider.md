@@ -4,7 +4,7 @@ Symfony 的标准身份验证过程的一部分取决于"用户服务提供者"�
 
 ## 创建一个用户类
 
-首先，无论您从哪里获得用户数据，您都需要创建一个表示该数据的用户类。用户可以看到任何您想要和包含的数据。唯一的要求是该类实现[用户接口](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html "用户接口")。因此如下接口中的方法应该定义在自定义用户类中: [getRoles()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getRoles()"getRoles()")、 [getPassword()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getPassword()"getPassword()")、 [getSalt()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getSalt()"getSalt()")、 [getUsername()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getRoles()"getUsername()")、 [eraseCredentials()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#eraseCredentials()"eraseCredentials()")。它也可能有助于实现 [EquatableInterface]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/EquatableInterface.html "EquatableInterface") 接口，在这个接口中定义了一个方法来检查用户是否等于当前用户。此接口需要包含 [isEqualTo()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/EquatableInterface.html#isEqualTo() "isEqualTo()") 方法。
+首先，无论您从哪里获得用户数据，您都需要创建一个表示该数据的用户类。用户可以看到任何您想要和包含的数据。唯一的要求是该类实现[用户接口](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html)。因此如下接口中的方法应该定义在自定义用户类中: [getRoles()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getRoles())、 [getPassword()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getPassword())、 [getSalt()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getSalt())、 [getUsername()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#getRoles())、 [eraseCredentials()]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserInterface.html#eraseCredentials())。它也可能有助于实现 [EquatableInterface]( http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/EquatableInterface.html) 接口，在这个接口中定义了一个方法来检查用户是否等于当前用户。此接口需要包含 [isEqualTo()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/EquatableInterface.html#isEqualTo()) 方法。
 
 您的 **WebserviceUser** 如下所示：
 
@@ -83,7 +83,7 @@ class WebserviceUser implements UserInterface, EquatableInterface
 
 现在，您有一个**用户类**，您将创建用户提供程序，该程序可以从一些网络服务中抓取用户的信息，创建一个 **WebserviceUser**  对象，并且给它填充上数据。
 
-用户提供程序只是一个需要实现 [UserProviderInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserProviderInterface.html "UserProviderInterface") 接口的普通 PHP 类，在该接口中需要定义的三种方法: **loadUserByUsername($username)**,**refreshUser (UserInterface $user)** 和 **supportsClass($class)**。有关更多详细信息，请参阅 [UserProviderInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserProviderInterface.html "UserProviderInterface")。
+用户提供程序只是一个需要实现 [UserProviderInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserProviderInterface.html) 接口的普通 PHP 类，在该接口中需要定义的三种方法: **loadUserByUsername($username)**,**refreshUser (UserInterface $user)** 和 **supportsClass($class)**。有关更多详细信息，请参阅 [UserProviderInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserProviderInterface.html)。
 
 该接口可以如同下面的代码描述一样：
 
@@ -169,13 +169,13 @@ $container->setDefinition(
 );
 ```
 
-> 真正的实现用户提供程序可能会需要有一些依赖关系或配置选项或是其他服务并且把它们在服务定义中设定为参数。
+> 真正的实现用户提供程序可能会需要有一些依赖关系或配置选项或是其它服务并且把它们在服务定义中设定为参数。
 
 > 如何确保该服务文件被导入，详情请参阅带有输入的[导入配置](http://symfony.com/doc/current/book/service_container.html#service-container-imports-directive)。
 
 ## 修改 security.yml
 
-在您的安全配置中包含了所有的属性。我们把用户提供程序添加到"安全"一节中的提供程序的列表中并且为用户提供程序 (例如"web 服务") 选择一个名称，然后记录下您刚刚定义的服务的id。
+在您的安全配置中包含了所有的属性。我们把用户提供程序添加到"安全"一节中的提供程序的列表中并且为用户提供程序 (例如"web 服务") 选择一个名称，然后记录下您刚刚定义的服务的 id。
 
 YAML:
 
@@ -240,7 +240,7 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-当创建您的用户的时候（不管这些用户是怎样创建的）不管您的密码最初是怎样被编码的，它的值都必须符合密码编码规则。当一个用户提交他的密码的时候，混淆值将被追加到密码上，然后用相应的算法对它进行编码，然再在和 getPassword() 方法返回的哈希值进行比较。此外，根据您的选项，密码可能有编码多次并且被编成 base64 进制码。
+当创建您的用户的时候（不管这些用户是怎样创建的）不管您的密码最初是怎样被编码的，它的值都必须符合密码编码规则。当一个用户提交他的密码的时候，混淆值将被追加到密码上，然后用相应的算法对它进行编码，然后再和 getPassword() 方法返回的哈希值进行比较。此外，根据您的选项，密码可能有编码多次并且被编成 base64 进制码。
 
 > ## 关于密码如何进行编码的细节信息
 
