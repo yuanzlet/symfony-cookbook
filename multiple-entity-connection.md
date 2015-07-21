@@ -2,7 +2,7 @@
 
 您可以在一个 Symfony 应用程序中使用多个 Doctrine 实体管理器或者连接。这是必要的，如果您使用的是不同的数据库，甚至是完全不同的实体的供应商。换句话说，连接到一个数据库的一个实体管理器处理一些实体的时候，连接到另一个数据库的另一个实体管理器将会处理剩余的实体。
 
-使用多个实体管理器相当简单，但是更为高级并且不是经常需要。在添加这复杂的层之前，确保您是真正需要多个实体管理器。
+使用多个实体管理器相当简单，但是却是更为高级并且不是经常所需要的。在添加这复杂的层之前，确保您真正需要多个实体管理器。
 
 以下的配置代码展示了如何配置两个实体管理器：
 
@@ -140,7 +140,7 @@ $container->loadFromExtension('doctrine', array(
 ));
 ```
 
-这种情况下，您已经定义了两个实体管理器，称之为 **default** 和 **customer**。**default** 管理器管理在 AppBundle 和 AcmeStoreBundle 中的实体，而 **customer** 实体管理器管理在 AcmeCustomerBundle 中的实体。您也定义了两个连接，用于每个实体管理器。
+这种情况下，您已经定义了两个实体管理器，称之为 **default** 和 **customer**。**default** 实体管理器管理在 AppBundle 和 AcmeStoreBundle 中的实体，而 **customer** 实体管理器管理在 AcmeCustomerBundle 中的实体。您也定义了两个连接，用于每个实体管理器。
 
 当使用多个连接和实体管理器的时候，您应该对您想要的配置很明确。如果您*的确*遗漏了连接或者实体管理器的名称，就使用默认情况（例如 **default**）。
 
@@ -183,7 +183,7 @@ class UserController extends Controller
 }
 ```
 
-现在您可以像之前那样使用 Doctrine了—使用 **default** 实体来保存和读取它所管理的实体，**customer** 实体管理器来保存和读取它的实体。
+现在您可以像之前那样使用 Doctrine 了—使用 **default** 实体来保存和读取它所管理的实体，**customer** 实体管理器来保存和读取它的实体。
 
 同样适用于存储库调用：
 
@@ -212,4 +212,3 @@ class UserController extends Controller
     }
 }
 ```
-
