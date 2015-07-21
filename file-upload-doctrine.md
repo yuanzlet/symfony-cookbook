@@ -1,6 +1,6 @@
 # 如何用 Doctrine 上传文件
 
-不是您自己上传文件，您或许考虑使用 [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) 社区 bundle。这个 bundle 提供了所有常见的操作（例如文件重命名、保存和删除），并且它紧密地与 Doctrine ORM、MongoDB ODM、PHPCR ODM 和 Propel 共为一个整体。
+除了您自己上传文件，您或许考虑使用 [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) 社区 bundle。这个 bundle 提供了所有常见的操作（例如文件重命名、保存和删除），并且它紧密地与 Doctrine ORM、MongoDB ODM、PHPCR ODM 和 Propel 组成为一个整体。
 
 用 Doctrine 实体上传文件与上传任何其他文件无区别。换句话说，您可以在提交表单之后自由移动您控件中的文件。为了举例如何做这个，参见[文件类型引用](http://symfony.com/doc/current/reference/forms/types/file.html)页面。
 
@@ -74,9 +74,11 @@ class Document
 
 **Document** 实体有一个名称并且与一个文件相关联。**path** 属性储存相关的路径到文件，并且保存到数据库中。
 
-**getAbsolutePath()** 是一个便捷方法可以将绝对路径返回到文件，而 **getWebPath()** 是一个便捷方法，可以将网页路径返回，可用于模板链接上传文件。
+**getAbsolutePath()** 是一个可以将绝对路径返回到文件的便捷方法，而 **getWebPath()** 是一个可以将网页路径返回，可用于模板链接上传文件的便捷方法。
 
-如果您还未做完，您应该首先阅读[文件](http://symfony.com/doc/current/reference/forms/types/file.html)类型文档来了解基本的上传进程是如何运行的。如果您正在使用标注来指定您的验证规则（正如例子所示），确保您已经用标注启动了验证（参见[验证配置](http://symfony.com/doc/current/book/validation.html#book-validation-configuration)）。
+如果您还未做完，您应该首先阅读[文件](http://symfony.com/doc/current/reference/forms/types/file.html)类型文档来了解基本的上传进程是如何运行的。  
+
+如果您正在使用标注来指定您的验证规则（正如例子所示），确保您已经用标注启动了验证（参见[验证配置](http://symfony.com/doc/current/book/validation.html#book-validation-configuration)）。
 
 如果您使用方法 **getUploadRootDir()**，注意这会保存根文件的内部文件，可以被所有人读取。要考虑把它放在根文件之外，并当您需要保护这些文件的时候添加自定义查看逻辑。
 
@@ -237,7 +239,7 @@ public function uploadAction(Request $request)
 
 之前的控件会用提交的名字自动保存 **Document** 实体，但是不会对文件做任何事情并且 **path** 属性为空白。
 
-上传文件的一个简单的方法是在实体保存之前移动文件，然后相应地设置 **path** 属性。首先调用一个新的 **upload()** 方法在 **Document** 类，立刻您就能上传文件：
+上传文件的一个简单的方法是在实体保存之前移动文件，然后相应地设置 **path** 属性。首先在 **Document** 类调用一个新的 **upload()** 方法，您就能立刻上传文件：
 
 ```
 if ($form->isValid()) {
@@ -282,11 +284,11 @@ public function upload()
 
 ## 使用生命周期回呼
 
-使用生命周期回呼是一个限制的技术，有一些缺陷。如果您想移除在 **Document::getUploadRootDir()** 方法内部的硬编码的 **__DIR__** 引用，最好的方法就是开始使用明确的 [doctrine 监听器](http://symfony.com/doc/current/cookbook/doctrine/event_listeners_subscribers.html)注入内核参数 **kernel.root_dir** 例如来构建绝对路径。
+使用生命周期回呼是一个限制的技术，有一些缺陷。如果您想移除在 **Document::getUploadRootDir()** 方法内部的硬编码的 **__DIR__** 引用，最好的方法就是开始使用明确的 [doctrine 监听器](http://symfony.com/doc/current/cookbook/doctrine/event_listeners_subscribers.html)注入内核参数，比如 **kernel.root_dir** 来构建绝对路径。
 
-尽管这个实施奏效，但是它有一个主要缺陷：如果实体保存的时候有问题怎么办？文件已经移动到了它的最终未知尽管实体的 **path** 属性未被正确保存。
+尽管这个实现奏效，但是它有一个主要缺陷：如果实体保存的时候有问题怎么办？文件已经移动到了它的最终位置尽管实体的 **path** 属性未被正确保存。
 
-为了避免这类问题，您应该改变实施从而使数据库操作和文件的移动变成原子：如果在保存实体时有问题或者文件不能被移动，那么*没有事情*会发生。
+为了避免这类问题，您应该改变实施从而使数据库操作和文件的移动具有原子性：如果在保存实体时有问题或者文件不能被移动，那么*没有事情*会发生。
 
 要做到这一点，您需要正确移动文件因为 Doctrine 保存实体到数据库。这个可以通过挂钩一个实体生命周期回呼完成。
 
@@ -382,7 +384,7 @@ class Document
 }
 ```
 
-**preUpdate()** 回呼必须通知 Doctrine 所完成的变化。关于 preUpadate 事件限制的所有引用，在 Doctrine 事件文档中参见 [preUpdate](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#preupdate)。
+如果对你实体的改变被一个 Doctrine 事件监听器或者事件订阅者所处理，**preUpdate()** 回呼必须通知 Doctrine 所完成的变化。关于 preUpadate 事件限制的所有引用，在 Doctrine 事件文档中参见 [preUpdate](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#preupdate)。
 
 类现在做一切您需要的事情：它会在保存之前产生一个独特的文件名，在保存之后移动文件，并且如果实体被删除的话就移除文件。
 
@@ -401,11 +403,11 @@ if ($form->isValid()) {
 
  **@ORM\PrePersist()** 和 **@ORM\PostPersist()** 事件回呼在实体保存到数据库前后被触发。在另一方面，当实体更新后，**@ORM\PreUpdate()** 和 **@ORM\PostUpdate()** 事件回呼被调用。
  
- 如果被保存的实体的字段其中之一有变化，**PreUpdate** 和 **PostUpdate** 回呼才会被激发。这意味着，默认情况下，如果您只调整 **$file** 属性，这些事件将不再被激发，因为属性本身不是直接通过 Doctrine 保存的。一个解决方案就是使用一个保存在 Doctrine 中的 **updated** 字段，然后当改变文件的时候手动调整。
+如果被保存的实体的字段其中之一有变化，**PreUpdate** 和 **PostUpdate** 回呼才会被激发。这意味着，默认情况下，如果您只调整 **$file** 属性，这些事件将不再被激发，因为属性本身不是直接通过 Doctrine 保存的。一个解决方案就是使用一个保存在 Doctrine 中的 **updated** 字段，然后当改变文件的时候手动调整。
  
- ### 使用 id 作为文件名称
+ ## 使用 id 作为文件名称
  
- 如果您想使用 **id** 作为文件的名称，操作和您需要在 **path** 属性下保存的扩展有轻微的不同，而不是实际的文件名称：
+ 如果您想使用 **id** 作为文件的名称，操作和您需要在 **path** 属性下保存的扩展有轻微的不同，并不是实际的文件名称：
  
  ```
  use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -503,5 +505,3 @@ class Document
 ```
 
 您将会注意到在这种情况下，您需要再做一些工作来移除文件。在移除之前，您必须存储文件路径（因为它取决于 id）。然后，一旦对象已被完全从数据库移除，您可以安全地删除文件（在 **PostRemove** 中）。
-
-
