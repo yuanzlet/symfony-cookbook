@@ -67,4 +67,3 @@ $container->loadFromExtension('doctrine', array(
     ),
 ));
 ```
-
