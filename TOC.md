@@ -151,7 +151,7 @@
    - [限制 Session 元数据的写入](limit-metadata-writes.md)
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
    - [避免匿名用户开始 Session 会话](avoid-session-start.md)
- - PSR-7   袁泽林 -- 待校对
+ - PSR-7   袁泽林 -- 已校对
    - [The PSR-7 Bridge](psr7.md)
  - symfony1   袁泽林
    - [Symfony2 与 Symfony1 的区别](symfony1.md)
