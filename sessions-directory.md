@@ -1,6 +1,8 @@
 # 配置 Session 文件的保存目录
 
-在默认情况下, Symfony Standard Edition 应用了 **php.ini** 这个全局值来为       **session.save_handler** 和 **session.save_path** 决定选择哪里来存储会话数据。这都是由于以下的配置。
+在默认情况下, Symfony Standard Edition 应用了 **php.ini** 这个全局值来为 **session.save_handler** 和 **session.save_path** 决定选择哪里来存储会话数据。这都是由于以下的配置。
+
+YAML:
 
 ```YAML
 # app/config/config.yml
@@ -9,6 +11,8 @@ framework:
         # handler_id set to null will use default session handler from php.ini
         handler_id: ~
 ```
+
+XML:
 
 ```XML
 <!-- app/config/config.xml -->
@@ -28,6 +32,8 @@ framework:
 </container>
 ```
 
+PHP:
+
 ```PHP
 // app/config/config.php
 $container->loadFromExtension('framework', array(
@@ -42,11 +48,15 @@ $container->loadFromExtension('framework', array(
 
 然而，如果您有以下的配置的话，Symfony 将把会话数据存储在 **%kernel.cache_dir%/sessions** 这个缓存目录的文件夹里。这意味着如果您清空缓存的话，所有的最近会话也将被删除。
 
+YAML:
+
 ```YAML
 # app/config/config.yml
 framework:
     session: ~
 ```
+
+XML:
 
 ```XML
 <!-- app/config/config.xml -->
@@ -65,6 +75,8 @@ framework:
 </container>
 ```
 
+PHP:
+
 ```PHP
 // app/config/config.php
 $container->loadFromExtension('framework', array(
@@ -78,6 +90,8 @@ $container->loadFromExtension('framework', array(
 
 如果您想要改变 Symfony 存储会话数据的目录的话，您只需要改变框架配置就可以了。在下面的例子中，会把会话目录改变到 **app/sessions**：
 
+YAML:
+
 ```YAML
 # app/config/config.yml
 framework:
@@ -85,6 +99,8 @@ framework:
         handler_id: session.handler.native_file
         save_path: "%kernel.root_dir%/sessions"
 ```
+
+XML:
 
 ```XML
 <!-- app/config/config.xml -->
@@ -104,6 +120,8 @@ framework:
     </framework:config>
 </container>
 ```
+
+PHP:
 
 ```PHP
 // app/config/config.php

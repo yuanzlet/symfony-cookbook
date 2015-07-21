@@ -6,12 +6,16 @@
 
 如果应用程序已设置它自己的 PHP 保存处理程序，您可以使 **handler_id** 指定为空：
 
+YAML:
+
 ```YAML
 framework:
     session:
         storage_id: session.storage.php_bridge
         handler_id: ~
 ```
+
+XML:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -26,6 +30,8 @@ framework:
 </container>
 ```
 
+PHP:
+
 ```PHP
 $container->loadFromExtension('framework', array(
     'session' => array(
@@ -36,6 +42,7 @@ $container->loadFromExtension('framework', array(
 
 否则，如果问题仅仅是您不能避免应用程序以 **session_start()** 启动会话，您仍可以通过指定保存处理程序来使用一个基于 Symfony 的会话保存处理程序，就像下面的例子那样：
 
+YAML:
 
 ```YAML
 framework:
@@ -43,6 +50,8 @@ framework:
         storage_id: session.storage.php_bridge
         handler_id: session.handler.native_file
 ```
+
+XML:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -57,6 +66,8 @@ framework:
 </container>
 ```
 
+PHP:
+
 ```PHP
 $container->loadFromExtension('framework', array(
     'session' => array(
@@ -65,6 +76,6 @@ $container->loadFromExtension('framework', array(
 ));
 ```
 
-> 如果遗留应用程序需要它自己的会话保存处理程序，请不要重写它。代替的是设置 **handler_id: ~**。请注意，在会话开始后，会话保存处理程序将不能更改。如果应用程序在 Symfony 初始化之前开始对话，会话保存程序会早已设置好。这种情况下，您需要 **handler_id: ~**。只有当您确认遗留应用程序可以无副作用的使用 Symfony 保存处理程序并且会话不在 Symfony 初始化之前启动的情况下重写保存程序。
+> 如果遗留应用程序需要它自己的会话保存处理程序，请不要重写它。代替的是设置 **handler_id: ~**。请注意，在会话开始后，会话保存处理程序将不能更改。如果应用程序在 Symfony 初始化之前开始会话，会话保存程序会早已设置好。这种情况下，您需要 **handler_id:**。只有当您确认遗留应用程序可以无副作用的使用 Symfony 保存处理程序并且会话不在 Symfony 初始化之前启动的情况下重写保存程序。
 
 从 [Integrating with Legacy Sessions](http://symfony.com/doc/current/components/http_foundation/session_php_bridge.html) 获取更多细节。

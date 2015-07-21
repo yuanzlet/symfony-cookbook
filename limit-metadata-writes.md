@@ -1,16 +1,20 @@
 # 限制 Session 元数据的写入
 
-PHP 会话的默认行为是不管会话有没有改变都保存会话。在 Symfony 中，每当会话被接入，可以用来确定会话的年龄（age）和空闲时间的元数据都会被记录（会话产生的/最后使用的）。
+PHP 会话的默认行为是不管会话有没有改变都保存会话。在 Symfony 中，每当会话被接入，可以用来确定会话的时效和空闲时间的元数据都会被记录（会话产生的/最后使用的）。
 
-如果出于性能原因您想要限制会话保存的频率，这个功能在使元数据保持相对精确的情况下，调整元数据更新的间隔和减少会话保存的频率。如果其他会话数据被更改，会话始终保存。
+如果出于性能原因您想要限制会话保存的频率，这个功能在使元数据保持相对精确的情况下，调整元数据更新的间隔和减少会话保存的频率。如果其它会话数据被更改，会话始终保存。
 
 您可以用设置 **framework.session.metadata_update_threshold** 一个大于 0 秒的值方法告诉 Symfony 不要更新元数据直到距“会话最后一次更新”时间过去了一段特定时间。
+
+YAML:
 
 ```YAML
 framework:
     session:
         metadata_update_threshold: 120
 ```
+
+XML:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -26,6 +30,8 @@ framework:
 
 </container>
 ```
+
+PHP:
 
 ```PHP
 $container->loadFromExtension('framework', array(

@@ -4,7 +4,9 @@
 
 ## 创建一个 LocaleListener
 
-为了模拟储存在一个会话中的本地设置，您需要创建并注册一个新的事件侦听器。为了模拟储存在一个会话中的本地设置，您需要创建并注册一个新的事件侦听器。侦听器是像这样的东西。通常情况下，**_locale** 被用作一个路由参数来表示本地设置，虽然它并不影响你如何确定一个请求所需的设置。
+为了模拟储存在一个会话中的本地设置，您需要创建并注册一个新的事件监听器。为了模拟储存在一个会话中的本地设置，您需要创建并注册一个新的事件监听器。监听器是像这样的东西。通常情况下，**_locale** 被用作一个路由参数来表示本地设置，虽然它并不影响你如何确定一个请求所需的设置。
+
+PHP:
 
 ```PHP
 // src/AppBundle/EventListener/LocaleListener.php
@@ -49,7 +51,9 @@ class LocaleListener implements EventSubscriberInterface
 }
 ```
 
-然后注册侦听器。
+然后注册监听器。
+
+YAML:
 
 ```YAML
 services:
@@ -59,6 +63,8 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 ```
+
+XML:
 
 ```XML
 <service id="app.locale_listener"
@@ -81,7 +87,9 @@ $container
 ;
 ```
 
-好了！现在通过改变用户设置并查看它在所有请求中都是粘性的（sticky）来庆祝一下。记住，想要得到用户设置，使用 **Request::getLocale** 这个方法。
+好了！现在通过改变用户设置并查看它在所有请求中都是粘性的（sticky）。记住，想要得到用户设置，使用 **Request::getLocale** 这个方法。
+
+PHP:
 
 ```PHP
 // from a controller...
@@ -95,11 +103,13 @@ public function indexAction(Request $request)
 
 ## 根据用户的喜好设置本地设置
 
-您可能希望进一步提高该技术，并且以已登录用户的用户实体为依据定义本地设置。然而，由于 **LocaleListener** 比负责处理身份验证和设置具有 **TokenStorage** 的用户的 **FirewallListener** 早调用，您无法访问已登陆用户。
+您可能希望进一步提高该技术，并且以已登录用户的用户实体为依据定义本地设置。然而，由于 **LocaleListener** 比负责处理身份验证和设置具有 **TokenStorage** 的用户的 **FirewallListener** 早调用，您无法访问已登录用户。
 
 假设您已经在 **User** 实体上定义了 **locale** 属性并且您想用此作为特定用户的本地设置。要做到这一点，您可以在登录过程和更新用户会话被重定向到它们的的第一个页面之前，用这个本地设置值将它们挂钩连接（hook into）。
 
-要做到这一点，您需要对 **security.interactive_login** 事件添加一个事件侦听器。
+要做到这一点，您需要对 **security.interactive_login** 事件添加一个事件监听器。
+
+PHP:
 
 ```PHP
 // src/AppBundle/EventListener/UserLocaleListener.php
@@ -138,7 +148,9 @@ class UserLocaleListener
 }
 ```
 
-然后注册侦听器。
+然后注册监听器。
+
+YAML:
 
 ```YAML
 # app/config/services.yml
@@ -149,6 +161,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
 ```
+
+XML:
 
 ```XML
 <!-- app/config/services.xml -->
@@ -171,6 +185,8 @@ services:
     </services>
 </container>
 ```
+
+PHP:
 
 ```PHP
 // app/config/services.php
