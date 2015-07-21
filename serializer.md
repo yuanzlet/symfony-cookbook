@@ -1,8 +1,8 @@
 # 如何使用序列化
 
-把一个对象序列化和反序列化成不同的格式（例如：JSON 或者 XML）是一个非常复杂的话题。在 Symfony 中有一个序列化程序组件 [Serializer Component ](http://symfony.com/doc/current/components/serializer.html "Serializer Component")  可以给您提供一些工具来帮您解决上述问题。
+把一个对象序列化和反序列化成不同的格式（例如：JSON 或者 XML）是一个非常复杂的话题。在 Symfony 中有一个序列化程序组件 [Serializer Component](http://symfony.com/doc/current/components/serializer.html) 可以给您提供一些工具来帮您解决上述问题。
 
-事实上，当您开始序列化和反序列化之前，您可以通过阅读[序列化组件](http://symfony.com/doc/current/components/serializer.html "序列化组件")来了解并熟悉序列化，正规化子组件和编码器。
+事实上，当您开始序列化和反序列化之前，您可以通过阅读[序列化组件](http://symfony.com/doc/current/components/serializer.html)来了解并熟悉序列化，规范化子组件和编码器。
 
 ## 激活序列化程序
 
@@ -63,13 +63,13 @@ class DefaultController extends Controller
 
 ## 添加正规化子组件和编码器
 
-> **2\.7** [ObjectNormalizer](http://api.symfony.com/2.7/Symfony/Component/Serializer/Normalizer/ObjectNormalizer.html "ObjectNormalizer") 是在 Symfony 2.7 中默认启用的。在以前的版本，您需要加载你自己的标准组件。
+> **2\.7** [ObjectNormalizer](http://api.symfony.com/2.7/Symfony/Component/Serializer/Normalizer/ObjectNormalizer.html) 是在 Symfony 2.7 中默认启用的。在以前的版本，您需要加载你自己的标准组件。
 
-您一旦启动上述组件，在容器中便可以使用序列化程序服务 **serializer**，并且还配备了两个[编码器](http://symfony.com/doc/current/components/serializer.html#component-serializer-encoders "编码器") ( [JsonEncoder](http://api.symfony.com/2.7/Symfony/Component/Serializer/Encoder/JsonEncoder.html "JsonEncoder")  和 [XmlEncoder](http://api.symfony.com/2.7/Symfony/Component/Serializer/Encoder/XmlEncoder.html "XmlEncoder")) 以及  [ObjectNormalizer 标准组件](http://symfony.com/doc/current/components/serializer.html#component-serializer-normalizers "ObjectNormalizer 标准组件"))。
+您一旦启动上述组件，在容器中便可以使用序列化程序服务 **serializer**，并且还配备了两个[编码器](http://symfony.com/doc/current/components/serializer.html#component-serializer-encoders) ( [JsonEncoder](http://api.symfony.com/2.7/Symfony/Component/Serializer/Encoder/JsonEncoder.html)  和 [XmlEncoder](http://api.symfony.com/2.7/Symfony/Component/Serializer/Encoder/XmlEncoder.html)) 以及 [ObjectNormalizer 标准组件](http://symfony.com/doc/current/components/serializer.html#component-serializer-normalizers))。
 
-您可以通过给正规化子组件和编码器添加上 [serializer.normalizer](http://symfony.com/doc/current/reference/dic_tags.html#reference-dic-tags-serializer-normalizer "serializer.normalizer") 和 [serializer.encoder](http://symfony.com/doc/current/reference/dic_tags.html#reference-dic-tags-serializer-encoder "serializer.encoder") 标记来加载他们。也可以通过设置标记的优先级顺序来决定匹配顺序。
+您可以通过给规范化子组件和编码器添加上 [serializer.normalizer](http://symfony.com/doc/current/reference/dic_tags.html#reference-dic-tags-serializer-normalizer) 和 [serializer.encoder](http://symfony.com/doc/current/reference/dic_tags.html#reference-dic-tags-serializer-encoder) 标记来加载它们，也可以通过设置标记的优先级顺序来决定匹配顺序。
 
-这里有一个描述如何去加载 [GetSetMethodNormalizer](http://api.symfony.com/2.7/Symfony/Component/Serializer/Normalizer/GetSetMethodNormalizer.html"GetSetMethodNormalizer") 的示例：
+这里有一个描述如何去加载 [GetSetMethodNormalizer](http://api.symfony.com/2.7/Symfony/Component/Serializer/Normalizer/GetSetMethodNormalizer.html) 的示例：
 
 YAML:
 
@@ -110,7 +110,7 @@ $container->setDefinition('get_set_method_normalizer', $definition);
 
 > **2\.7** 在 Symfony 2.7 节中，我们讲解了 Symfony 支持序列化组的应用。
 
-使用以下配置去启动[序列化组注释](http://symfony.com/doc/current/components/serializer.html#component-serializer-attributes-groups"序列化组注释")：
+使用以下配置去启动[序列化组注释](http://symfony.com/doc/current/components/serializer.html#component-serializer-attributes-groups)：
 
 YAML:
 
@@ -144,7 +144,7 @@ $container->loadFromExtension('framework', array(
 ));
 ```
 
-接下来,把  [@Groups annotations](http://symfony.com/doc/current/components/serializer.html#component-serializer-attributes-groups"@Groups annotations")  注释添加到您的类中，并且选择在序列化的时候将要使用哪个组：
+接下来,把 [@Groups annotations](http://symfony.com/doc/current/components/serializer.html#component-serializer-attributes-groups) 注释添加到您的类中，并且选择在序列化的时候将要使用哪个组：
 
 ```
 $serializer = $this->get('serializer');
@@ -196,7 +196,6 @@ $container->loadFromExtension('framework', array(
 
 ## 进一步使用序列化组件
 
-[DunglasApiBundle](https://github.com/dunglas/DunglasApiBundle "DunglasApiBundle") 体系提供了一个支持 [JSON-LD](http://json-ld.org/ "JSON-LD") 和 [Hydra Core Vocabulary](http://www.hydra-cg.com/ "Hydra Core Vocabulary")  等超媒体格式 的 API 系统。它是建立在 Symfony 框架和其序列化程序组件之上的。它提供了自定义子正规化、自定义编码器、 自定义元数据和缓存系统。
+[DunglasApiBundle](https://github.com/dunglas/DunglasApiBundle) 体系提供了一个支持 [JSON-LD](http://json-ld.org/) 和 [Hydra Core Vocabulary](http://www.hydra-cg.com/) 等超媒体格式的 API 系统。它是建立在 Symfony 框架和其序列化程序组件之上的。它提供了自定义规范化、自定义编码器、 自定义元数据和缓存系统。
 
 如果您想完全的利用 Symfony 的序列化程序组件，那么请看看它是怎样捆绑工作的。
-

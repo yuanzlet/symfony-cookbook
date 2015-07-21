@@ -137,7 +137,7 @@
    - [如何动态选择密码加密算法](named-encoders.md)
    - [安全访问控制是如何工作的](access-control.md)
    - [如何使用多用户提供者](multiple-user-providers.md)
- - 序列化  杨旋 -- 待校对
+ - 序列化  杨旋 -- 已校对
    - [如何使用序列化](serializer.md)
  - 服务容器  杨旋 -- 待校对
    - [如何创建事件监听器](event-listener.md)
