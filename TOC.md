@@ -143,14 +143,14 @@
    - [如何创建事件监听器](event-listener.md)
    - [如何使用作用域](scopes.md)
    - [如何在 Bundle 中使用 Compiler Passes](compiler-passes.md)
- - 会话  袁泽林
-   - [会话代理实例](proxy-examples.md) -- 已校对
-   - [在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md) -- 已校对
-   - [配置 Session 文件的保存目录](sessions-directory.md) -- 已校对
-   - [在遗留的应用上使用 Symfony Session](php-bridge.md) -- 已校对
-   - [限制 Session 元数据的写入](limit-metadata-writes.md) -- 已校对
+ - 会话  袁泽林 -- 已校对
+   - [会话代理实例](proxy-examples.md)
+   - [在用户的 Session 中使用局部 "Sticky"](locale-sticky-session.md) 
+   - [配置 Session 文件的保存目录](sessions-directory.md) 
+   - [在遗留的应用上使用 Symfony Session](php-bridge.md) 
+   - [限制 Session 元数据的写入](limit-metadata-writes.md)
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
-   - [避免匿名用户开始 Session 会话](avoid-session-start.md) -- 待校对
+   - [避免匿名用户开始 Session 会话](avoid-session-start.md)
  - PSR-7   袁泽林
    - [The PSR-7 Bridge](psr7.md)
  - symfony1   袁泽林
