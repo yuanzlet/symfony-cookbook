@@ -44,7 +44,7 @@
    - [如何将你的开发环境优化为调试环境](optimize-for-debugging.md)
  - 部署  赵洁 -- 待校对(HSQ)
    - [如何部署一个 Symfony 应用](deploy-symfony-application.md)
-   - [部署在 Microsoft Azure 云](deploy-azure-cloud.md)
+   - [部署在 Microsoft Azure 云](deploy-azure-cloud.md) -- 待校对
    - [部署在 Heroku 云](deploy-heroku-cloud.md)
    - [部署在 Platform.sh](deploy-platform-sh.md)
  - Doctrine  赵洁 -- 待校对(HSQ)
@@ -150,7 +150,7 @@
    - [在遗留的应用上使用 Symfony Session](php-bridge.md) -- 已校对
    - [限制 Session 元数据的写入](limit-metadata-writes.md) -- 已校对
    - **不翻译**[(configuration)如何使用 PdoSessionHandler 在数据库中存储 Session](pdo-session-storage.md)
-   - [避免匿名用户开始 Session 会话](avoid-session-start.md)
+   - [避免匿名用户开始 Session 会话](avoid-session-start.md) -- 待校对
  - PSR-7   袁泽林
    - [The PSR-7 Bridge](psr7.md)
  - symfony1   袁泽林
