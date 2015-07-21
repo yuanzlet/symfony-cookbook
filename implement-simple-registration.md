@@ -72,9 +72,9 @@ class User
 
 如果您想在安全系统中整合此用户，您需要实现安全组件的 [UserInterface](http://symfony.com/doc/current/book/security.html#book-security-user-entity)。
 
-## *为什么 4096 密码限制？*
+## *为什么有 4096 密码限制？*
 
-注意 **plainPassword** 字段有一个最长长度有4096个字符。出于安全目的（[CVE-2013-5750](https://symfony.com/blog/cve-2013-5750-security-issue-in-fosuserbundle-login-form)），Symfony 在编码的时候限制了明文密码的长度为4096个字符。
+注意 **plainPassword** 字段最长长度为 4096 个字符。出于安全目的（[CVE-2013-5750](https://symfony.com/blog/cve-2013-5750-security-issue-in-fosuserbundle-login-form)），Symfony 在编码的时候限制了明文密码的长度为 4096 个字符。
 
 ## 为模型创建一个表单
 
@@ -114,7 +114,7 @@ class UserType extends AbstractType
 }
 ```
 
-只有两种字段：**email** 和 **plainPassword**  （重复以确认输入的密码）。**data_class** 选择告知表单基础数据类的名称（例如，您的 **User** 实体）。
+只有两种字段：**email** 和 **plainPassword**（重复以确认输入的密码）。**data_class** 选择告知表单基础数据类的名称（例如，您的 **User** 实体）。
 
 想探索更多关于表单组件的事情，阅读 [Forms](http://symfony.com/doc/current/book/forms.html)。
 
@@ -328,6 +328,4 @@ return $collection;
 $ php app/console doctrine:schema:update --force
 ```
 
-就是这样！您的表单现在验证了，并且允许您保存 **User** 对象到数据库中。在 **Registration** 模型类上额外的 **terms** 复选框在验证过程中使用，但在保存 User 到数据库之后就不是真正地使用了。
-
-
+就是这样！您的表单现在已经验证了，并且允许您保存 **User** 对象到数据库中。在 **Registration** 模型类上额外的 **terms** 复选框在验证过程中使用，但在保存 User 到数据库之后就不是真正地使用了。
