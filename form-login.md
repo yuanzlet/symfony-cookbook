@@ -1,22 +1,22 @@
 # 如何自定义登录表单
 
-使用[表单登陆](http://symfony.com/doc/current/cookbook/security/form_login_setup.html "表单登陆")来处理 Symfony 的验证是一件非常常见并且灵活的方法。几乎表单登陆的每个方面都可以进行自定义，所有的默认配置都将在下一节中进行介绍。
+使用[表单登录](http://symfony.com/doc/current/cookbook/security/form_login_setup.html)来处理 Symfony 的验证是一件非常常见并且灵活的方法。几乎表单登录的每个方面都可以进行自定义，所有的默认配置都将在下一节中进行介绍。
 
-## 表单登陆参考配置
+## 表单登录参考配置
 
-如果想要查看完整表单登录参考配置，请参 [SecurityBundle]( http://symfony.com/doc/current/reference/configuration/security.html"SecurityBundle") 配置 ("安全")。如下列举了一些更有趣的解释选项：
+如果想要查看完整表单登录参考配置，请参 [SecurityBundle]( http://symfony.com/doc/current/reference/configuration/security.html) 配置 ("安全")。如下列举了一些更有趣的解释选项：
 
-## 成功登陆后的重定向
+## 成功登录后的重定向
 
-当使用不同的配置选项登陆成功以后，您就可以改变重定向的登陆表单。在默认的情况下，表单会重定向到用户请求的 URL(即触发显示登录窗体的 URL)。比如，如果用户请求 **http://www.example.com/admin/post/18/edit**，当用户成功的登陆以后，页面最终会重定向到 **http://www.example.com/admin/post/18**。这是通过把用户请求的页面存储到 session 实现的。如果 session 中没有存储一个 URL（比如用户直接访问的登陆页），那么当用户成功登陆以后，系统就会给用户展示默认页。你可以通过很多种方式来改变这种模式。
+当使用不同的配置选项登录成功以后，您就可以改变重定向的登录表单。在默认的情况下，表单会重定向到用户请求的 URL(即触发显示登录窗体的 URL)。比如，如果用户请求 **http://www.example.com/admin/post/18/edit**，当用户成功的登录以后，页面最终会重定向到 **http://www.example.com/admin/post/18**。这是通过把用户请求的页面存储到 session 实现的。如果 session 中没有存储一个 URL（比如用户直接访问的登录页），那么当用户成功登录以后，系统就会给用户展示默认页。你可以通过很多种方式来改变这种模式。
 
-就像前面提到的，在默认情况下，显示的页面将会被重定向到用户最初请求的页面。有时候，也会出现一些问题，就像后台的 Ajax 请求”看起来“像是最后访问的 URL，导致用户访问的页面被重定向到这里，有关控制此行为的信息，请参阅[如何更改默认目标路径](http://symfony.com/doc/current/cookbook/security/target_path.html"如何更改默认目标路径")。
+就像前面提到的，在默认情况下，显示的页面将会被重定向到用户最初请求的页面。有时候，也会出现一些问题，就像后台的 Ajax 请求”看起来“像是最后访问的 URL，导致用户访问的页面被重定向到这里，有关控制此行为的信息，请参阅[如何更改默认目标路径](http://symfony.com/doc/current/cookbook/security/target_path.html)。
 
 ## 更改默认页面
 
-首先，默认页是可以设置的(即如果没有在 session 中存储以前的页面路径，就会将页面重定向到默认的页面)。请使用以下配置来设置  **default_security_target**（默认安全目标） 路径:
+首先，默认页是可以设置的(即如果没有在 session 中存储以前的页面路径，就会将页面重定向到默认的页面)。请使用以下配置来设置 **default_security_target**（默认安全目标） 路径:
 
-XAML:
+YAML:
 
 ```
 # app/config/security.yml
@@ -59,13 +59,13 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-现在，当 session 中没有存储 URL ，用户所浏览的页面将会转到 **default_security_target** 中的路径。
+现在，当 session 中没有存储 URL，用户所浏览的页面将会转到 **default_security_target** 中的路径。
 
 ## 总是重定向到默认页
 
 您可以通过设置 always_use_default_target_path 选项的值设定为真，这样的话，不管用户请求了什么 URL ，其访问的页面最终都会被重定向到默认页。
 
-XAML:
+YAML:
 
 ```
 # app/config/security.yml
@@ -112,7 +112,7 @@ $container->loadFromExtension('security', array(
 
 为了防止以前的 URL 没有被存储在 session 中，您不妨试试改用 HTTP_REFERER 属性，因为这往往会达到相同的效果。您可以通过把 **setting use_referer** 属性的值改为 true（默认是false）：
 
-XAML:
+YAML:
 
 ```
 # app/config/security.yml
@@ -203,7 +203,7 @@ PHP:
 
 现在，用户访问页面将会被重定向到隐藏表单字段的值。这个值的属性可以是相对路径，也可以是绝对的 URL 路径，也可以是路由的名称。您甚至可以通过把 **target_path_parameter** 选项的值改为另一个值来更改隐藏表单字段的名称.
 
-XAML:
+YAML:
 
 ```
 # app/config/security.yml
@@ -242,11 +242,11 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-## 登陆失败后的重定向
+## 登录失败后的重定向
 
-除了可以将用户成功登录后的页面进行重定向，您可也可以设置当用户登录失败后的重定向页面(例如用户提交了无效的用户名或密码) 。在默认情况下，用户访问的页面会重定向到登录表单页面，您也可以通过修改下面的属性来进行改变路径：
+除了可以将用户成功登录后的页面进行重定向，您也可以设置当用户登录失败后的重定向页面(例如用户提交了无效的用户名或密码) 。在默认情况下，用户访问的页面会重定向到登录表单页面，您也可以通过修改下面的属性来进行改变路径：
 
-XAML:
+YAML:
 
 ```
 # app/config/security.yml
@@ -261,13 +261,6 @@ security:
 XML:
 
 ```
-
-3
-4
-5
-6
-7
-8
 <!-- app/config/security.xml -->
 <config>
     <firewall>

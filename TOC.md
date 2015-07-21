@@ -125,7 +125,7 @@
    - [如何对不同的 URL 强制使用 HTTPS 或者 HTTP](force-https.md)
    - [如何重定向防火墙至一个特殊的请求](firewall-restriction.md)
    - [如何重定向防火墙至一个特殊的主机](host-restriction.md)
-   - [如何自定义登录表单](form-login.md) -- 待校对
+   - [如何自定义登录表单](form-login.md) -- 已校对
    - [如何在应用中保护服务和方法](securing-services.md) -- 已校对
    - [如何创建自定义用户提供者](custom-provider.md) -- 已校对
    - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 已校对

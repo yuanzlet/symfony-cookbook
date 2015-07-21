@@ -54,7 +54,7 @@ class NewsletterManager
 
 然后在您的服务配置中，您可以注入服务:
 
-XAML:
+YAML:
 
 ```
 # app/config/services.yml
@@ -125,7 +125,7 @@ class NewsletterManager
 
 如果想要启用注释功能，可以使用 security.secure_service [标记](http://symfony.com/doc/current/book/service_container.html#book-service-container-tags)来标记您想保护的服务（您还可以为所有服务自动启用此功能请参阅下面的[文本框]( http://symfony.com/doc/current/cookbook/security/securing_services.html#securing-services-annotations-sidebar)）:
 
-XAML:
+YAML:
 
 ```
 # app/services.yml
@@ -198,7 +198,7 @@ JMSSecurityExtraBundle 还允许您保护方法的参数和返回的值。更多
 
 当您在保护一个服务的方法时（如上面所述），您可以单独的标记每个服务，也可以一次性激活所有的服务的功能。如果想要这样做，可以把 **secure_all_services** 配置将选项设置为 true:
 
-XAML:
+YAML:
 
 ```
 # app/config/config.yml
