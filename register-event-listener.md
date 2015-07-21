@@ -1,6 +1,6 @@
 # 如何注册事件监听器和订阅
 
-Doctrine 包括一个丰富的事件系统可以在任何事情在系统内部发生的时候激发事件。对于您来说，这意味着您可以创建任意的[服务](http://symfony.com/doc/current/book/service_container.html)并且让 Doctrine在任何时候，一个特定的动作（例如：**prePersist**）在 Doctrine 内部发生时，通知那些对象。这可以是有用的，例如，在任何时候您的数据库保存一个对象就创建一个独立的搜索表单。
+Doctrine 包括一个丰富的事件系统可以在任何事情在系统内部发生的时候激发事件。对于您来说，这意味着您可以创建任意的[服务](http://symfony.com/doc/current/book/service_container.html)并且让 Doctrine 在任何时候，一个特定的动作（例如：**prePersist**）在 Doctrine 内部发生时，通知那些对象。这可以是有用的，例如，在任何时候您的数据库保存一个对象就创建一个独立的搜索表单。
 
 Doctrine 定义了两种类型的对象，可以监听 Doctrine 事件：监听器和订阅。它们都很相似，但是监听器更为直接。更多的，可以参见 Doctrine 网站上的[事件系统](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html)。
 
@@ -107,8 +107,8 @@ $container
 
 在之前的例子中，服务 **my.listener** 被配置为 **postPersist** 事件中的 Doctrine 监听器。服务后的类必须有 **postPersist** 方法，当事件被发送时，此方法被调用。
 
-  ```
-  // src/Acme/SearchBundle/EventListener/SearchIndexer.php
+```
+// src/Acme/SearchBundle/EventListener/SearchIndexer.php
 namespace Acme\SearchBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -133,7 +133,7 @@ class SearchIndexer
 
 一个需要注意的重要的事情是监听器将会监听到应用程序中*所有的*实例。所以，如果您只是对实例具体的一个类型感兴趣（例如：**Product** 实例而不是 **BlogPost** 实例），您应该在您的方法中检查实例类型（如上面所示）。
 
-在 Doctrine2.4 中，将要介绍一个特征叫做实体监听器。这是用于实例的一个生命周期监听器类。您可以在 [Doctrine 文档](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#entity-listeners)中阅读有关信息。
+在 Doctrine2.4 中，将要介绍一个功能叫做实体监听器。这是用于实例的一个生命周期监听器类。您可以在 [Doctrine 文档](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#entity-listeners)中阅读有关信息。
 
 ## 创建订阅类
 
@@ -181,6 +181,6 @@ class SearchIndexerSubscriber implements EventSubscriber
 }
 ```
 
-Doctrine 事件订阅不可以返回到一系列灵活的方法像 [Symfony 事件订阅](http://symfony.com/doc/current/components/event_dispatcher/introduction.html#event-dispatcher-using-event-subscribers)那样调用事件。Doctrine 事件订阅可以返回到一系列简单的它们所订阅的事件的名称。Doctrine 认为订阅上的方法同每一个订阅的事件有相同的名称，就是正当使用一个监听器的时候。
+Doctrine 事件订阅不可以像 [Symfony 事件订阅](http://symfony.com/doc/current/components/event_dispatcher/introduction.html#event-dispatcher-using-event-subscribers)那样返回一系列灵活的方法来调用事件。Doctrine 事件订阅可以返回一系列简单的它们所订阅的事件的名称。Doctrine 期待当使用一个监听器的时，订阅上的方法同每一个订阅的事件有相同的名称。
 
 想要完整的参考，参考 Doctrine 文档中的章节：[事件系统](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html)。
