@@ -2,7 +2,7 @@
 
 Bundles 的目标之一是创建一个不具有多个（如果有的话）依赖关系的谨慎的功能 bundles，允许您在其他应用程序中使用该功能，而不包括不必要的项目。
 
-Doctrine2.2 包括一个新的实用工具，称为 **ResolveTargetEntityListener**，通过截取 Doctrine 内部一定的调用并且在运行时重写您元数据映射的 **targetEntity** 参数。这意思是在您的 bundle 里，您可以在您的映射中使用一个接口或者虚拟类，并期望在运行时正确映射到一个具体的实体。
+Doctrine2.2 包括一个新的实用工具，称为 **ResolveTargetEntityListener**，通过截取 Doctrine 内部一定的调用并且在运行时重写您元数据映射的 **targetEntity** 参数作用。这意思是在您的 bundle 里，您可以在您的映射中使用一个接口或者虚拟类，并期望在运行时正确映射到一个具体的实体。
 
 这个功能允许您在定义不同实体间的关系，而不让它们很难依赖。
 
@@ -90,7 +90,7 @@ interface InvoiceSubjectInterface
 }
 ```
 
-接下来，您需要配置监听器，告知DoctrineBundle 关于配置的事情：
+接下来，您需要配置监听器，告知 DoctrineBundle 关于替代的事情：
 
 YAML
 
@@ -140,4 +140,3 @@ $container->loadFromExtension('doctrine', array(
 ## 结语
 
 有了 **ResolveTargetEntityListener**，您可以分离您的 bundles，让它们自己保持合用的状态，但是仍能够定义不同对象之间的关系。通过使用这种方法，您的 bundles 会更容易保持独立。
-
