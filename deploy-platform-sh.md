@@ -1,6 +1,6 @@
 # 部署在 Platform.sh
 
-此按部就班的指导书描述如何将 Symfony 网页应用程序部署到 [Platform.sh](https://platform.sh/)。你可以在官方的 [Platform.sh 文件](https://docs.platform.sh/)中阅读更多关于在Platform.sh上使用 Symfony 的说明。
+此按部就班的指导书描述如何将 Symfony 网页应用程序部署到 [Platform.sh](https://platform.sh/)。你可以在官方的 [Platform.sh 文件](https://docs.platform.sh/)中阅读更多关于在 Platform.sh 上使用 Symfony 的说明。
 
 ## 部署已存在的网站
 
@@ -12,7 +12,7 @@
 
 ### 准备应用程序
 
-若要在 Platform.sh 上部署 Symfony 应用程序，您只需在 Git 存储库的根目录里添加一个 **platform.app.yamlat**，存储库会使 Platform.sh 部署您的应用程序 (阅读更多关于 [Platform.sh 配置文件](https://docs.platform.sh/))
+若要在 Platform.sh 上部署 Symfony 应用程序，您只需在 Git 存储库的根目录里添加一个 **platform.app.yamlat**，存储库会使 Platform.sh 部署您的应用程序 (阅读更多关于 [Platform.sh 配置文件](https://docs.platform.sh/))。
 
 ```
 # .platform.app.yaml
@@ -57,7 +57,7 @@ hooks:
       app/console --env=prod cache:clear
 ```
 
-最佳的做法是，您应该在 Git 存储库的根目录下面添加一个包含 **.platform** 文件的 文件夹：
+最佳的做法是，您应该在 Git 存储库的根目录下面添加一个包含以下文件的 **.platform** 文件夹：
 
 ```
 # .platform/routes.yaml
@@ -65,15 +65,16 @@ hooks:
     type: upstream
     # the first part should be your project name
     upstream: "myphpproject:php"
+```
 
+```
 # .platform/services.yaml
 mysql:
     type: mysql
     disk: 2048
-
 ```
 
-您可以在 [GitHub](https://github.com/platformsh/platformsh-examples) 上找到此类配置的示例。 Platform.sh 文件中包含有[可用服务](https://docs.platform.sh/#configure-services)列表：
+您可以在 [GitHub](https://github.com/platformsh/platformsh-examples) 上找到此类配置的示例。Platform.sh 文件中包含有[可用服务](https://docs.platform.sh/#configure-services)列表：
 
 ### 配置数据库入口
 
@@ -107,7 +108,7 @@ foreach ($relationships['database'] as $endpoint) {
 ini_set('session.save_path', '/tmp/sessions');
 ```
 
-请确保您输入了下列文件：
+请确保此文件列于您的 *Imports* 中：
 
 ```
 # app/config/config.yml
@@ -129,7 +130,9 @@ $ git remote add platform [PROJECT-ID]@git.[CLUSTER].platform.sh:[PROJECT-ID].gi
 
 **CLUSTER**
 
-部署您项目所在的服务器位置。它可以是 **eu** 或 **us**。执行前一节中创建的 Platform.sh 特定文件：
+部署您项目所在的服务器位置。它可以是 **eu** 或 **us**。  
+
+执行前一节中创建的 Platform.sh 特定文件：
 
 ```
 $ git add .platform.app.yaml .platform/*
@@ -145,7 +148,6 @@ $ git push platform master
 
 就是这样！您的应用程序正在被部署到 Platform.sh 上，您很快就能够在您的浏览器中访问它了。
 
-redeploy your environment on Platform.sh.
 从现在起，您做出的每一个代码变更都将会推送到 Git，以便重新调配您的 Platform.sh 环境。
 
 有关[迁移数据库和文件](https://docs.platform.sh/)的详细信息可在 Platform.sh 文件中查看。
@@ -154,9 +156,6 @@ redeploy your environment on Platform.sh.
 
 您可以开始一个新的 [Platform.sh 项目](https://marketplace.commerceguys.com/platform/buy-now)。选择发展计划并完成校验过程。
 
-一旦您的项目准备就绪，为其命名并选择:：**Create a new site**。选择*Symfonystack* 和一个类似 *Standard* 的起始点。
+一旦您的项目准备就绪，为其命名并选择:：**Create a new site**。选择 *Symfonystack* 和一个类似 *Standard* 的起始点。
 
 就是这样！您的 Symfony 应用程序将自主运行并进行配置。您很快就能够在您的浏览器中看到它。
-
-
-
