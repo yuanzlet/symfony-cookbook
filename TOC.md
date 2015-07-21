@@ -139,7 +139,7 @@
    - [如何使用多用户提供者](multiple-user-providers.md)
  - 序列化  杨旋 -- 已校对
    - [如何使用序列化](serializer.md)
- - 服务容器  杨旋 -- 待校对
+ - 服务容器  杨旋 -- 已校对
    - [如何创建事件监听器](event-listener.md)
    - [如何使用作用域](scopes.md)
    - [如何在 Bundle 中使用 Compiler Passes](compiler-passes.md)

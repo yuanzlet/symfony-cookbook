@@ -1,6 +1,6 @@
 # 如何创建事件监听器
 
-Symfony 具有很多能触发您应用中的自定义行为的事件和钩子（hooks）。这些事件可以在 [KernelEvents ](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/KernelEvents.html "KernelEvents") 类中查看并且是由 HttpKernel 组件引发。
+Symfony 具有很多能触发您应用中的自定义行为的事件和钩子（hooks）。这些事件可以在 [KernelEvents ](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/KernelEvents.html) 类中查看并且是由 HttpKernel 组件引发。
 
 如果您想要挂钩到事件并添加您自己的自定义逻辑，您必须创建一种在这个事件中作为事件监听者的服务。在此条目中，您将创建一个作为异常监听器的服务，允许您修改您的应用程序异常的显示方式。**KernelEvents::EXCEPTION** 事件是核心内核事件之一:
 
@@ -43,7 +43,7 @@ class AcmeExceptionListener
 } 
 ```
 
-> 每个事件接受的 **$event** 对象略有不同。对 **kernel.exception** 事件来说，它是[GetResponseForExceptionEvent ](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/Event/GetResponseForExceptionEvent.html"GetResponseForExceptionEvent")。如果想了解每个事件监听接受的对象是什么类型的，请参阅：[KernelEvents ](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/KernelEvents.html "KernelEvents")。
+> 每个事件接受的 **$event** 对象略有不同。对 **kernel.exception** 事件来说，它是[GetResponseForExceptionEvent ](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/Event/GetResponseForExceptionEvent.html)。如果想了解每个事件监听接受的对象是什么类型的，请参阅：[KernelEvents ](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/KernelEvents.html)。
 
 > 当给 **kernel.request**, **kernel.view** 或者 **kernel.exception** 事件设置响应的时候。事件的传播是停止的，所以优先级较低的监听器并没有被调用。
 
@@ -106,7 +106,7 @@ class AcmeRequestListener
 }
 ```
 
-> 两种可用的 [HttpKernelInterface](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/HttpKernelInterface.html "HttpKernelInterface") 接口里的请求分别是：**HttpKernelInterface::MASTER_REQUEST** 和 **HttpKernelInterface::SUB_REQUEST**。
+> 两种可用的 [HttpKernelInterface](http://api.symfony.com/2.7/Symfony/Component/HttpKernel/HttpKernelInterface.html) 接口里的请求分别是：**HttpKernelInterface::MASTER_REQUEST** 和 **HttpKernelInterface::SUB_REQUEST**。
 
 ## 调试事件监听器
 
@@ -123,4 +123,3 @@ $ php app/console debug:event-dispatcher
 ```
 $ php app/console debug:event-dispatcher kernel.exception
 ```
-
