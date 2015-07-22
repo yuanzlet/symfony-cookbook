@@ -2,7 +2,7 @@
 
 ## 在方法调用前后做一些事情
 
-如果您想在调用一个方法之前后之后做一些事情，您可以在方法开始或结尾分别派遣一个事件：
+如果您想在调用一个方法之前后之后做一些事情，您可以在方法开始或结尾分别调度一个事件：
 
 ```
 class Foo
@@ -44,5 +44,3 @@ public function onFooPostSend(FilterSendReturnValue $event)
     $event->setReturnValue($ret);
 }
 ```
-
-
