@@ -8,7 +8,7 @@
 
 一开始，配置数据库连接参数：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -22,7 +22,7 @@ doctrine:
         server_version: 5.6
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -39,7 +39,7 @@ XML
 </doctrine:config>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -76,7 +76,7 @@ class UserController extends Controller
 
 你可以通过 Symfony 配置来注册自定义映射类型。它们将会被添加到所有的配置连接中。想知道更多关于自定义映射类型的信息，阅读它们文档的 Doctrine [自定义映射类型](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#custom-mapping-types)部分。
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -87,7 +87,7 @@ doctrine:
             custom_second: AppBundle\Type\CustomSecond
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -106,7 +106,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -126,7 +126,7 @@ SchemaTool 被用于检测数据库来比较模式。为了完成这个任务，
 
 现在，将 ENUM 类型（默认情况下不由 DBAL 支持）映射到 **string** 映射类型：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -136,7 +136,7 @@ doctrine:
           enum: string
 ```
 
-XML
+XML:
 
 ```
 
@@ -155,7 +155,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
