@@ -20,7 +20,7 @@
 
 现在，在你能够采取行动之前，你需要做一些引导指令。首先，你需要安装你要实用的 ACL 系统的连接。
 
-YAML
+YAML:
 
 ```
 # app/config/security.yml
@@ -29,7 +29,7 @@ security:
         connection: default
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -38,7 +38,7 @@ XML
 </acl>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
