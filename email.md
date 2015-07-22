@@ -10,7 +10,7 @@
 
 在一个标准的 Symfony 安装中，一些 **swfitmailer** 配置已经包含在内了：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -21,7 +21,7 @@ swiftmailer:
     password:  "%mailer_password%"
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -38,7 +38,7 @@ XML
     password="%mailer_password%" />
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -70,9 +70,9 @@ $container->loadFromExtension('swiftmailer', array(
 
 •	**spool**
 
-    o	**type** （如何排列消息，支持 **file** 或者 **memory**，参见[如何缓存电子邮件](http://symfony.com/doc/current/cookbook/email/spool.html)）
+- **type** （如何排列消息，支持 **file** 或者 **memory**，参见[如何缓存电子邮件](http://symfony.com/doc/current/cookbook/email/spool.html)）
 
-    o	**path**（存储消息的地方）
+- **path**（存储消息的地方）
 
 •	**delivery_address**（一个可以发送所有电子邮件的地址）
 
@@ -133,8 +133,8 @@ Thanks!
 
 > 其他可用的有关 Symfony 发送电子邮件的教程文章：
 
-•	[如何使用 Gmail 发送电子邮件](http://symfony.com/doc/current/cookbook/email/gmail.html)
+> •	[如何使用 Gmail 发送电子邮件](http://symfony.com/doc/current/cookbook/email/gmail.html)
 
-•	[如何在开发过程中使用电子邮件](http://symfony.com/doc/current/cookbook/email/dev_environment.html)
+> •	[如何在开发过程中使用电子邮件](http://symfony.com/doc/current/cookbook/email/dev_environment.html)
 
-•	[如何缓存电子邮件](http://symfony.com/doc/current/cookbook/email/spool.html)
+> •	[如何缓存电子邮件](http://symfony.com/doc/current/cookbook/email/spool.html)
