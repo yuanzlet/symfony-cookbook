@@ -4,19 +4,19 @@
 
 ## 表单登录参考配置
 
-如果想要查看完整表单登录参考配置，请参 [SecurityBundle]( http://symfony.com/doc/current/reference/configuration/security.html) 配置 ("安全")。如下列举了一些更有趣的解释选项：
+如果想要查看完整表单登录参考配置，请参考 [SecurityBundle 配置 ("安全")]( http://symfony.com/doc/current/reference/configuration/security.html)。如下列举了一些更有趣的解释选项。
 
 ## 成功登录后的重定向
 
 当使用不同的配置选项登录成功以后，您就可以改变重定向的登录表单。在默认的情况下，表单会重定向到用户请求的 URL(即触发显示登录窗体的 URL)。比如，如果用户请求 **http://www.example.com/admin/post/18/edit**，当用户成功的登录以后，页面最终会重定向到 **http://www.example.com/admin/post/18**。这是通过把用户请求的页面存储到 session 实现的。如果 session 中没有存储一个 URL（比如用户直接访问的登录页），那么当用户成功登录以后，系统就会给用户展示默认页。你可以通过很多种方式来改变这种模式。
 
-就像前面提到的，在默认情况下，显示的页面将会被重定向到用户最初请求的页面。有时候，也会出现一些问题，就像后台的 Ajax 请求”看起来“像是最后访问的 URL，导致用户访问的页面被重定向到这里，有关控制此行为的信息，请参阅[如何更改默认目标路径](http://symfony.com/doc/current/cookbook/security/target_path.html)。
+> 就像前面提到的，在默认情况下，显示的页面将会被重定向到用户最初请求的页面。有时候，也会出现一些问题，就像后台的 Ajax 请求“看起来”像是最后访问的 URL，导致用户访问的页面被重定向到这里，有关控制此行为的信息，请参阅[如何更改默认目标路径](http://symfony.com/doc/current/cookbook/security/target_path.html)。
 
 ## 更改默认页面
 
 首先，默认页是可以设置的(即如果没有在 session 中存储以前的页面路径，就会将页面重定向到默认的页面)。请使用以下配置来设置 **default_security_target**（默认安全目标） 路径:
 
-YAML:
+YAML：
 
 ```
 # app/config/security.yml
@@ -28,7 +28,7 @@ security:
                 default_target_path: default_security_target
 ```
 
-XML:
+XML：
 
 ```
 <!-- app/config/security.xml -->
@@ -41,7 +41,7 @@ XML:
 </config>
 ```
 
-PHP:
+PHP：
 
 ```
 // app/config/security.php
@@ -155,7 +155,7 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-## 控制重定向表单内的URL
+## 控制重定向表单内的 URL
 
 您还可以通过包含一个名叫 **_target_path** 的隐藏字段来重写用户通过表单本身重定向的 URL。例如，可以通过以下的程序来重定向到一些**账户**路由定义的 URL：
 
@@ -201,7 +201,7 @@ PHP:
 </form>
 ```
 
-现在，用户访问页面将会被重定向到隐藏表单字段的值。这个值的属性可以是相对路径，也可以是绝对的 URL 路径，也可以是路由的名称。您甚至可以通过把 **target_path_parameter** 选项的值改为另一个值来更改隐藏表单字段的名称.
+现在，用户访问页面将会被重定向到隐藏表单字段的值。这个值的属性可以是相对路径，也可以是绝对的 URL 路径，也可以是路由的名称。您甚至可以通过把 **target_path_parameter** 选项的值改为另一个值来更改隐藏表单字段的名称。
 
 YAML:
 
