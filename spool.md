@@ -6,7 +6,7 @@
 
 当您使用缓存来存储电子邮件到内存时，它们会在内核终止前立即发送。这意味着如果整个请求在没有任何异常情况或错误下执行的话，电子邮件才会被发送。要用内存选项配置 swiftmailer，使用以下配置：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -15,7 +15,7 @@ swiftmailer:
     spool: { type: memory }
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -31,7 +31,7 @@ XML
 </swiftmailer:config>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -43,7 +43,7 @@ $container->loadFromExtension('swiftmailer', array(
 
 ## 使用文件缓存
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -54,7 +54,7 @@ swiftmailer:
         path: /path/to/spool
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -72,7 +72,7 @@ XML
 </swiftmailer:config>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
