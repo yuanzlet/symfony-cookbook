@@ -14,15 +14,14 @@ $ php app/console help doctrine:database:create
 
 一些值得注意并有趣的任务包括：
 
-•	**doctrine:ensure-production-settings**—检查看当前环境是否为生产有效的配置了。这应该总是在 **prod** 环境中运行的：
+•	**doctrine:ensure-production-settings** — 检查看当前环境是否为生产有效地配置了。这应该总是在 **prod** 环境中运行的：
 
 ```
 $ php app/console doctrine:ensure-production-settings --env=prod
 ```
 
-•	**doctrine:mapping:import** —允许 Doctrine 来内省一个已存在的数据库并创建映射信息。想知道更多信息，参见[如何在一个已有的数据库生成实体](http://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html)。
+•	**doctrine:mapping:import** — 允许 Doctrine 来内省一个已存在的数据库并创建映射信息。想知道更多信息，参见[如何在一个已有的数据库生成实体](http://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html)。
 
-•	**doctrine:mapping:info**— 告诉您 Doctrine 意识到的所有实体，以及映射中是否有基础错误。
+•	**doctrine:mapping:info** — 告诉您 Doctrine 所了解到的所有实体，以及映射中是否有基础错误。
 
-•	**doctrine:query:dql** 和 **doctrine:query:sql**—允许您在命令行中直接执行 DQL 或者 SQL 问询。a
-
+•	**doctrine:query:dql** 和 **doctrine:query:sql**—允许您在命令行中直接执行 DQL 或者 SQL 问询。
