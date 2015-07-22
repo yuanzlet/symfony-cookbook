@@ -6,7 +6,7 @@
 
 您可以禁用发送电子邮件通过设置 **disable_delivery** 选项为 **true**。这是标准分配中 **test** 环境中的默认值。如果您在 **test** 具体配置中做这个，那么当您运行测试的时候邮件不会被发送，但是在 **prod** 和 **dev** 环境下就会继续被发送。
 
-YAML
+YAML:
 
 ```
 # app/config/config_test.yml
@@ -14,7 +14,7 @@ swiftmailer:
     disable_delivery:  true
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config_test.xml -->
@@ -28,7 +28,7 @@ XML
     disable-delivery="true" />
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config_test.php
@@ -43,7 +43,7 @@ $container->loadFromExtension('swiftmailer', array(
 
 您也可以选择将所有的电子邮件发送到一个具体地址，而不是当发送消息时实际指定的地址。这可以通过选项 **delivery_address** 完成：
 
-YAML
+YAML:
 
 ```
 # app/config/config_dev.yml
@@ -51,7 +51,7 @@ swiftmailer:
     delivery_address: dev@example.com
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config_dev.xml -->
@@ -64,7 +64,7 @@ XML
 <swiftmailer:config delivery-address="dev@example.com" />
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config_dev.php
@@ -103,7 +103,7 @@ public function indexAction($name)
 
 假设您想将所有的电子邮件重新发送到一个指定的地址，（像上面的到 **dev@example.com**）。但是您毕竟可能想查阅一些发送到指定地址的电子邮件，并且没有被重新发送（即使它在 dev 环境中）。这可以通过添加选项 **delivery_whitelist** 完成：
 
-YAML
+YAML:
 
 ```
 # app/config/config_dev.yml
@@ -119,7 +119,7 @@ swiftmailer:
        - "/^admin@mydomain.com$/"
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config_dev.xml -->
@@ -137,7 +137,7 @@ XML
 </swiftmailer:config>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config_dev.php
@@ -165,7 +165,7 @@ $container->loadFromExtension('swiftmailer', array(
 
 反而，您可以在 **config_dev.yml** 文件中设置选项 **intercept_redirects** 为 **true**，将会导致重新转到停止并允许您打开发送电子邮件的细节的报告。
 
-YAML
+YAML:
 
 ```
 # app/config/config_dev.yml
@@ -173,7 +173,7 @@ web_profiler:
     intercept_redirects: true
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config_dev.xml -->
@@ -189,7 +189,7 @@ XML
 />
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config_dev.php
