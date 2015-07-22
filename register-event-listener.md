@@ -10,7 +10,7 @@ Doctrine 网站也解释了所有可以被监听的现存事件。
 
 注册一个服务充当一个事件监听器或者订阅，您只需要用过适当的名字[标记](http://symfony.com/doc/current/book/service_container.html#book-service-container-tags)它即可。取决于您的使用实例，您可以钩挂一个监听器到每一个 DBAL 连接和 ORM 实体管理器或者只是进入一个具体的 DBAL 连接和所有使用这个连接的实体管理器。
 
-YAML
+YAML:
 
 ```
 doctrine:
@@ -36,7 +36,7 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
 ```
 
-XML
+XML:
 
 ```
 <?xml version="1.0" ?>
@@ -63,7 +63,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 use Symfony\Component\DependencyInjection\Definition;
