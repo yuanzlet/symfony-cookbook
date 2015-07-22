@@ -4,7 +4,7 @@ Doctrine 允许您指定自定义 DQL 函数。要想知道关于这个话题的
 
 在 Symfony 中，您可以按照如下注册自定义 DQL 函数：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -21,7 +21,7 @@ doctrine:
                 test_datetime: AppBundle\DQL\DatetimeFunction
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -45,7 +45,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
