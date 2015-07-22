@@ -92,15 +92,15 @@ class PostVoter extends AbstractVoter
 
 [getSupportedClasses()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Authorization/Voter/AbstractVoter.html#getSupportedClasses())
 
-    它告知 Symfony，每当一个被给定类的对象传递给 **isGranted()** 方法时，你的 voter 就应该被调用。比如说，如果你返回了 **array('AppBundle\Model\Product')**, 当一个 **Product** 对象传递给 **isGranted()** 方法时，Symfony 就可以调用 voter。
+   它告知 Symfony，每当一个被给定类的对象传递给 **isGranted()** 方法时，你的 voter 就应该被调用。比如说，如果你返回了 **array('AppBundle\Model\Product')**, 当一个 **Product** 对象传递给 **isGranted()** 方法时，Symfony 就可以调用 voter。
 
 [getSupportedAttributes()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Authorization/Voter/AbstractVoter.html#getSupportedAttributes())
 
-    它告知 Symfony，每当一些给定字符串作为第一个参数传递给 **isGranted()** 方法时，应当调用 voter。比如，如果你返回了 **array('CREATE','READ')**,当它们中的一个被发送到 **isGranted()** 时，Symfony 就会调用 voter。
+   它告知 Symfony，每当一些给定字符串作为第一个参数传递给 **isGranted()** 方法时，应当调用 voter。比如，如果你返回了 **array('CREATE','READ')**,当它们中的一个被发送到 **isGranted()** 时，Symfony 就会调用 voter。
 
 [isGranted()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Authorization/Voter/AbstractVoter.html#isGranted())
 
-    这个方法采用了商业逻辑，来核实是否允许未被给定的用户访问给定对象的给定属性（例如，**create** 或 **read**），这个方法必须返回 boolean 类型的值。
+   这个方法采用了商业逻辑，来核实是否允许未被给定的用户访问给定对象的给定属性（例如，**create** 或 **read**），这个方法必须返回 boolean 类型的值。
 
 > 目前，使用 **AbstractVoter** 基类，您必须创建一个总是传递给 **isGranted()** 的 voter 的对象。
 
@@ -108,7 +108,7 @@ class PostVoter extends AbstractVoter
 
 将 voter 归入安全层，你就必须把它声明为一项服务，然后贴上 **security.voter:** 的标签：
 
-YAML
+YAML:
 
 ```
 # src/AppBundle/Resources/config/services.yml
@@ -120,7 +120,7 @@ services:
            - { name: security.voter }
 ```
 
-XML
+XML:
 
 ```
 <!-- src/AppBundle/Resources/config/services.xml -->
@@ -138,7 +138,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // src/AppBundle/Resources/config/services.php
@@ -193,19 +193,19 @@ class PostController extends Controller
 
 **affirmative**（default）
 
-    给予授权当一个 voter 允许授权的时候；
+   给予授权当一个 voter 允许授权的时候；
 
 **consensus**
 
-    当有很多 voter 允许授权而不是被拒绝的时候给予授权；
+   当有很多 voter 允许授权而不是被拒绝的时候给予授权；
 
 **unanimous**
 
-    只有所有 voters 都允许授权的时候给予授权。
+   只有所有 voters 都允许授权的时候给予授权。
 
 在上述情形下，所有的 voters 都应该允许访问以便授予用户读取 post 的访问权限。在这种情况下，默认策略可能会不再有效，而且 **unanimous** 应当被取代。你可以在安全配置里设置这些参数。
 
-YAML
+YAML:
 
 ```
 # app/config/security.yml
@@ -214,7 +214,7 @@ security:
         strategy: unanimous
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -233,7 +233,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
