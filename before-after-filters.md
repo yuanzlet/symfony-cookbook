@@ -10,13 +10,13 @@
 
 所以，在执行您的控制器动作之前，您需要检查动作是否限制。如果是限制的话，您需要验证所提供的标识。
 
-请记住本教程为了简洁，标识将被在配置中定义，并且不管是数据库设置还是认证，没有通过安全组件的都不会被使用。
+> 请记住本教程为了简洁，标识将被在配置中定义，并且不管是数据库设置还是认证，没有通过安全组件的都不会被使用。
 
 ## kernel.controller 事件隔离器之前
 
-首先，使用 **config.yml** 存储一些基本的标识配置，还有参数秘钥：
+首先，使用 **config.yml** 存储一些基本的标识配置，还有参数密钥：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -26,7 +26,7 @@ parameters:
         client2: pass2
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -38,7 +38,7 @@ XML
 </parameters>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -129,7 +129,7 @@ class TokenListener
 
 最后，作为服务器注册您的监听器，并且标记为事件监听器。通过在 **kernel.controller** 上监听，您就可以告知 Symfony 您想要在任何控制器执行前调用监听器。
 
-YAML
+YAML:
 
 ```
 # app/config/services.yml
@@ -141,7 +141,7 @@ services:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/services.xml -->
@@ -151,7 +151,7 @@ XML
 </service>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/services.php
@@ -169,9 +169,9 @@ $container->setDefinition('app.tokens.action_listener', $listener);
 
 ## kernel.response 事件隔离器之后
 
-除了在您的控制器*之前*有一个执行的“挂钩”，您也可以添加一个挂钩在您的控制器*之后*执行。这个例子，想象您想添加一个 sha1 散列（使用那个标识的盐）到所有已通此标识验证的响应。
+除了在您的控制器*之前*有一个执行的“挂钩”，您也可以添加一个挂钩在您的控制器*之后*执行。这个例子，想象您想添加一个 sha1 散列（使用那个标识的盐值）到所有已通此标识验证的响应。
 
-另一个核心 Symfony 事件—叫做 **kernel.response**— 在每一项请求都提醒，但是实在控制器返回到响应对象之后。创建一个“后”监听器如同创建一个监听器类一样简单，并且在此事件上注册。
+另一个核心 Symfony 事件 — 叫做 **kernel.response** — 在每一项请求都提醒，但是实在控制器返回到响应对象之后。创建一个“后”监听器如同创建一个监听器类一样简单，并且在此事件上注册。
 
 例如，从之前的例子中拿出 **TokenListener**，首先在请求属性中记录验证标识。这将作为一个基本标志，即此请求进行了标识验证。
 
@@ -192,7 +192,7 @@ public function onKernelController(FilterControllerEvent $event)
 }
 ```
 
-现在，在此类添加另一个方法—**onKernelResponse**—寻找在此请求对象上的标志并如果找到的话，就在响应上设置一个自定义标题：
+现在，在此类添加另一个方法 — **onKernelResponse** — 寻找在此请求对象上的标志而且如果找到的话，就在响应上设置一个自定义标题：
 
 ```
 // add the new use statement at the top of your file
@@ -215,7 +215,7 @@ public function onKernelResponse(FilterResponseEvent $event)
 
 最终，第二个“标签”也需要在服务定义中来通知 Symfony **onKernelResponse** 事件应该为 **kernel.response** 通知：
 
-YAML
+YAML:
 
 ```
 # app/config/services.yml
@@ -228,7 +228,7 @@ services:
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/services.xml -->
@@ -239,7 +239,7 @@ XML
 </service>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/services.php
@@ -257,11 +257,4 @@ $listener->addTag('kernel.event_listener', array(
 $container->setDefinition('app.tokens.action_listener', $listener);
 ```
 
-就这样！**TokenListener** 现在在每一个控件执行前都被通知（**onKernelController**）并且在每个控件之后返回一个响应（**onKernelResponse**）。通过让具体的控件实现 **TokenAuthenticatedController** 接口，您的监听器知道哪个控件是该采取行动的。并且通过在请求“属性”包里存储一个值，**onKernelResponse** 方法知道添加额外的标题。
-
-玩得开心！
-
-
-
-
-
+就这样！**TokenListener** 现在在每一个控件执行前都被通知（**onKernelController**）并且在每个控件之后返回一个响应（**onKernelResponse**）。通过让具体的控件实现 **TokenAuthenticatedController** 接口，您的监听器知道哪个控件是该采取行动的。并且通过在请求“属性”包里存储一个值，**onKernelResponse** 方法知道添加额外的标题。玩得开心！
