@@ -8,7 +8,7 @@
 
 > - 如果要通过 OAuth 来使用第三方平台的服务，如谷歌、 Facebook 或者 Twitter 进行身份验证，那么请尝试使用 [HWIOAuthBundle](https://github.com/hwi/HWIOAuthBundle) 集群包。
 
-如果您读过关于[安全](http://symfony.com/doc/current/book/security.html)的那一章，那么您已经了解了在实现安全性的过程中 Symfony 对身份处理和授权的不同处理方式 。本章将讨论在身份验证过程中所涉及的核心类以及如何实现一个自定义的身份验证提供程序。因为身份验证和授权是单独的概念，此扩展将会成为未知的用户提供程序，并将与您的应用程序中的用户提供程序一同运行，并且它们可能建立在内存，数据库，或任何其它您选择来存储它们的地方的基础上。
+如果您读过关于[安全](http://symfony.com/doc/current/book/security.html)的那一章，那么您已经了解了在实现安全性的过程中 Symfony 对身份处理和授权的不同处理方式。本章将讨论在身份验证过程中所涉及的核心类以及如何实现一个自定义的身份验证提供程序。因为身份验证和授权是单独的概念，此扩展将会成为未知的用户提供程序，并将与您的应用程序中的用户提供程序一同运行，并且它们可能建立在内存，数据库，或任何其它您选择来存储它们的地方的基础上。
 
 ## 满足 WSSE
 
@@ -22,13 +22,13 @@
 
 用 WSSE 来保护 SOAP 或 REST 架构的 web 服务非常有效 。
 
-目前有很多关于 [WSSE](http://www.xml.com/pub/a/2003/12/17/dive.html) 的文档，本文不会重点讲解安全协议，而是讲解但如何把一个自定义的协议添加到您的 Symfony 应用程序中。WSSE 的基础是:使用请求标头来检查加密凭据，使用时间戳和[随机数](https://en.wikipedia.org/wiki/Cryptographic_nonce)来进行验证，使用密码摘要来为发出请求的用户进行身份验证。
+目前有很多关于 [WSSE](http://www.xml.com/pub/a/2003/12/17/dive.html) 的文档，本文不会重点讲解安全协议，而是讲解如何把一个自定义的协议添加到您的 Symfony 应用程序中。WSSE 的基础是:使用请求标头来检查加密凭据，使用时间戳和[随机数](https://en.wikipedia.org/wiki/Cryptographic_nonce)来进行验证，使用密码摘要来为发出请求的用户进行身份验证。
 
-> WSSE 还支持应用程序秘钥验证，这对 web 服务非常有用，但是该内容超出了本章的介绍范围。
+> WSSE 还支持应用程序密钥验证，这对 web 服务非常有用，但是该内容超出了本章的介绍范围。
 
 ## 令牌
 
-令牌在 Symfony 安全环境中扮演了一个重要的角色。令牌表示当前请求中的用户身份验证数据。一旦请求通过了身份验证，令牌保留用户数据，并且通过安全环境传送该数据。首先，创建您的令牌类。这将允许您给您的身份验证提供程序传递所有的相关信息 。
+令牌在 Symfony 安全环境中扮演了一个重要的角色。令牌表示当前请求中的用户身份验证数据。一旦请求通过了身份验证，令牌保留用户数据，并且通过安全环境传送该数据。首先，创建您的令牌类。这将允许您给您的身份验证提供程序传递所有的相关信息。
 
 ```
 // src/AppBundle/Security/Authentication/Token/WsseUserToken.php
@@ -129,13 +129,13 @@ class WsseListener implements ListenerInterface
 
 这个监听器的作用是为预期的 X-WSSE 头部进行检查，为预期的 WSSE 信息匹配返回值，然后使用这个信息来创建一个令牌，接着在身份验证管理器中传递这个令牌。如果没有提供正确的信息，或身份验证管理器抛出 [AuthenticationException](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Exception/AuthenticationException.html) 异常，那么将会返回 403 页面。
 
-> 在上面的过程中没有使用到 [AbstractAuthenticationListener](http://api.symfony.com/2.7/Symfony/Component/Security/Http/Firewall/AbstractAuthenticationListener.html) 类，它是一个非常有用并且为安全性扩展插件提供了常用功能的基类。其中包括在 session 中维持令牌功能，提供成功 / 失败的处理程序、 登录表单的 URL，以及更多的功能。因为 WSSE 不需要在 session中 保持身份验证或登录表单，所以在本实例中没有用到它。
+> 在上面的过程中没有使用到 [AbstractAuthenticationListener](http://api.symfony.com/2.7/Symfony/Component/Security/Http/Firewall/AbstractAuthenticationListener.html) 类，它是一个非常有用并且为安全性扩展插件提供了常用功能的基类。其中包括在 session 中维持令牌功能，提供成功 / 失败的处理程序、 登录表单的 URL，以及更多的功能。因为 WSSE 不需要在 session 中 保持身份验证或登录表单，所以在本实例中没有用到它。
 
->只有当您想把身份验证程序串接起来的时候，提前的从监听器返回一个值才是有价值的，如果您想要禁止匿名用户访问，并且能够较好的展示 403 错误，则应在返回结果之前设置响应的状态码。
+> 只有当您想把身份验证程序串接起来的时候，提前的从监听器返回一个值才是有价值的，如果您想要禁止匿名用户访问，并且能够较好地展示 403 错误，则应在返回结果之前设置响应的状态码。
 
 ## 身份验证提供程序
 
-身份验证提供程序将会为 **WsseUserToken** 进行验证。即,提供程序将会在 5 分钟之内验证**已经创建好的**标头值是否有效。**Nonce** 是唯一一个能在5分钟之内检查出结果的标头值，并且 **PasswordDigest** 标头值与该用户的密码相匹配。
+身份验证提供程序将会为 **WsseUserToken** 进行验证。即,提供程序将会在 5 分钟之内验证**已经创建好的**标头值是否有效。**Nonce** 是唯一一个能在 5 分钟之内检查出结果的标头值，并且 **PasswordDigest** 标头值与该用户的密码相匹配。
 
 ```
 // src/AppBundle/Security/Authentication/Provider/WsseProvider.php
@@ -269,22 +269,26 @@ class WsseFactory implements SecurityFactoryInterface
 [SecurityFactoryInterface](http://api.symfony.com/2.7/Symfony/Bundle/SecurityBundle/DependencyInjection/Security/Factory/SecurityFactoryInterface.html) 需要下列方法:
 
 **create** 方法  
+
 这个方法为适当的安全环境把监听器和身份验证提供程序添加到 DI 容器中。
 
 **getPosition** 方法  
-这必须是类型 **pre_auth**、**表单**、**http**，**remember_me** 类型和定义在已经被调用的提供程序中的方法。
+
+这必须是 **pre_auth**、**表单**、**http**，**remember_me** 类型和定义在已经被调用的提供程序中的方法。
 
 **getKey** 方法  
-该方法定义了用来引用防火墙配置中的提供程序的配置秘钥。
+
+该方法定义了用来引用防火墙配置中的提供程序的配置密钥。
 
 **addConfiguration** 方法  
-该方法用于定义您安全配置中的配置秘钥下的配置选项。在后面将要介绍设置配置选项。
+
+该方法用于定义您安全配置中的配置密钥下的配置选项。在后面将要介绍设置配置选项。
 
 > 在这个示例中，我们没有用到 [AbstractFactory](http://api.symfony.com/2.7/Symfony/Bundle/SecurityBundle/DependencyInjection/Security/Factory/AbstractFactory.html) 类，它是一个非常有用的基类，并且它为安全工厂提供了常用的功能。当定义不同类型的身份验证提供程序的时候，它可能会比较有用。
 
-现在，您已经创建了一个工厂类，在您的安全配置中 wsse 秘钥可以当成防火墙来使用。
+既然您已经创建了一个工厂类，在您的安全配置中 wsse 密钥可以当成防火墙来使用。
 
-> 您可能会想知道，"您为什么需要特殊的工厂类，将监听器和提供程序添加到依赖注入容器"。这是一个非常好的问题。原因是，您可以多次使用您的防火墙，来保护您的应用程序的各个部分。正因为如此，每次使用您的防火墙时，在 DI 容器中便会创建一项新的服务 。工厂的作用就是创造这些新的服务。
+> 您可能会想知道，"您为什么需要特殊的工厂类，将监听器和提供程序添加到依赖注入容器？"这是一个非常好的问题。原因是，您可以多次使用您的防火墙，来保护您的应用程序的各个部分。正因为如此，每次使用您的防火墙时，在 DI 容器中便会创建一项新的服务 。工厂的作用就是创造这些新的服务。
 
 ## 配置
 
@@ -422,7 +426,7 @@ $container->loadFromExtension('security', array(
 
 ### 配置
 
-您可以在您的安全配置中的 **wsse** 秘钥下添加自定义选项。例如，默认情况下，在终止**已经创建的**标题项之前有5分钟的时间。可以通过配置来实现让不同的防火墙有不同的超时限额。
+您可以在您的安全配置中的 **wsse** 密钥下添加自定义选项。例如，默认情况下，在终止**已经创建的**标题项之前有 5 分钟的时间。可以通过配置来实现让不同的防火墙有不同的超时限额。
 
 首先，您需要编辑 **WsseFactory** 并且在 **addConfiguration** 方法中定义新的选项。
 
@@ -461,7 +465,7 @@ class WsseFactory implements SecurityFactoryInterface
 }
 ```
 
-> 您还需要为 **wsse.security.authentication.provider** 服务配置添加第三个参数，它可以是空白的，但必须在工厂的生存期内填充。**WsseProvider** 类现在还需要接受第三个构造函数参数-生存期-而它需要使用并不是硬编码的 300 秒。在这里没有展示这两个步骤。
+> 您还需要为 **wsse.security.authentication.provider** 服务配置添加第三个参数，它可以是空白的，但必须在工厂的生存期内填充。**WsseProvider** 类现在还需要接受第三个构造函数参数 - 生存期 - 而它需要使用并不是硬编码的 300 秒。在这里没有展示这两个步骤。
 
 每个 WSSE 请求的生存期现在都是是可配置的，并可以为每个防火墙设置任何可取的值。
 
