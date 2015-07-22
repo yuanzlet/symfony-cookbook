@@ -60,11 +60,11 @@ Microsoft Azure 门户同样为 Azure Website 提供了一个完整的控制面�
 
 在视窗下方点击 **Save** 按钮来保存您的变化，然后重启网页服务器。
 
-选择一个较新一点的 PHP 版本可以极大地提高运行时性能。PHP 5.5 装载了一个新植入的 PHP 加速器称作 OPCache，替代了 APC。在 Azure Website 上，OPCache 已经被启动并且无需再安装和建立 APC 了。
+> 选择一个较新一点的 PHP 版本可以极大地提高运行时性能。PHP 5.5 装载了一个新植入的 PHP 加速器称作 OPCache，替代了 APC。在 Azure Website 上，OPCache 已经被启动并且无需再安装和建立 APC 了。
 
-以下的截屏显示了在 Azure Website 上运行的 [phpinfo](http://php.net/manual/en/function.phpinfo.php) 脚本的输出，来验证 PHP 5.5 是在启动了 OPCache 的情况下运行的。
+> 以下的截屏显示了在 Azure Website 上运行的 [phpinfo](http://php.net/manual/en/function.phpinfo.php) 脚本的输出，来验证 PHP 5.5 是在启动了 OPCache 的情况下运行的。
 
-![image](images/step-09.png)
+> ![image](images/step-09.png)
 
 ### 对 php.ini 配置设置微调 
 
@@ -81,13 +81,13 @@ upload_max_filesize = 10M
 
 您也可以在您的 Azure Website 服务器上手动创建此文件，在 **site/wwwroot** 目录下或者用 Git 部署。您可以从 Azure Website Control 面板上获取您的 FTP 服务器证书，它在右侧侧边栏的 **Dashboard** 标记下。如果您想使用 Git，仅需要把您的 **.user.ini** 文件放置在您本地存储库的根目录下，然后在您的 Azure Website 库中启动提交。
 
-本教程有一个部分专门解释如何配置您的 Azure Website Git 存储库以及如何启动部署提交。参见 [Deploying from Git](http://symfony.com/doc/current/cookbook/deployment/azure-website.html#deploying-from-git)。 您也可以在官方网页 [PHP MSDN documentation](http://blogs.msdn.com/b/silverlining/archive/2012/07/10/configuring-php-in-windows-azure-websites-with-user-ini-files.aspx) 获取更多关于配置 PHP 内部设置的信息。
+> 本教程有一个部分专门解释如何配置您的 Azure Website Git 存储库以及如何启动部署提交。参见 [Deploying from Git](http://symfony.com/doc/current/cookbook/deployment/azure-website.html#deploying-from-git)。 您也可以在官方网页 [PHP MSDN documentation](http://blogs.msdn.com/b/silverlining/archive/2012/07/10/configuring-php-in-windows-azure-websites-with-user-ini-files.aspx) 获取更多关于配置 PHP 内部设置的信息。
 
 ### 启动 PHP intl 扩展
 
 这是教程中很有趣的部分！在写这本教程的时候，Microsoft Azure Website 提供了 **intl** 扩展，但不是在默认情况下被启动。要启动 **intl** 扩展的话，无需加载任何 DLL 文件因为 **php_intl.dll** 文件已存在于 Azure 中。实际上，此文件只需要被移动至自定义网站的扩展目录。
 
-Microsoft Azure 团队如今致力于在默认情况下启动 **intl** PHP 扩展。在不久的将来，接下来的步骤架构不再是必要的了。
+> Microsoft Azure 团队如今致力于在默认情况下启动 **intl** PHP 扩展。在不久的将来，接下来的步骤架构不再是必要的了。
 
 为了在 **site/wwwroot** 目录中获取 **php_intl.dll** 文件，只需要浏览以下网址就可以连接到在线 **Kudu** 工具：
 
@@ -133,7 +133,7 @@ $ copy "D:\Program Files (x86)\PHP\v5.5\ext\php_intl.dll" ext
 $ git --version
 ```
 
-从 [git-scm.com](http://git-scm.com/download) 网站中获取您的 Git，并且按照指示在您本地机器上安装配置。
+> 从 [git-scm.com](http://git-scm.com/download) 网站中获取您的 Git，并且按照指示在您本地机器上安装配置。
 
 在 Azure Website Control 面板上，浏览 **Deployment** 标记来获取 Git 存储库 URL，即您应该启动代码的地方。
 
@@ -192,7 +192,7 @@ $ php -d extension=php_intl.dll composer.phar install
 
 这样可能会花费一些时间，取决于您配置在 **composer.json** 文件中第三方依赖的数量。
 
-**-d** 开关允许您快速地重置或添加任何 **php.ini** 设置。在这个命令中，我们强制 PHP 使用 **intl** 扩展，因为此时此刻不是在 Azure Website 默认情况下启动的。不久，将不再需要 **-d** 选项因为 Microsoft 会在默认情况下启动 **intl** 扩展。
+> **-d** 开关允许您快速地重置或添加任何 **php.ini** 设置。在这个命令中，我们强制 PHP 使用 **intl** 扩展，因为此时此刻不是在 Azure Website 默认情况下启动的。不久，将不再需要 **-d** 选项因为 Microsoft 会在默认情况下启动 **intl** 扩展。
 
 在 **composer install** 命令的结尾，系统将提示您填写一些 Symfony 设置的值，比如说数据库证书，区域设置，邮件程序证书，CSRF 保护盾牌等等。这些参数来自 **app/config/parameters.yml.dist** 文件。
 
