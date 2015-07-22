@@ -142,7 +142,7 @@ public function registerBundles()
 
 在 Symfony1 中，**routing.yml** 和 **app.yml** 配置文件会自动加载在任何插件中。在 Symfony2 中，一个包中的路由和应用配置必须手动包含（include）。举个例子，要从一个名为 AcmeDemoBundle 的包里包括一个路由资源，您可以按照下面例子做：
 
-YAML
+YAML:
 
 ```
 # app/config/routing.yml
@@ -150,7 +150,7 @@ _hello:
     resource: "@AcmeDemoBundle/Resources/config/routing.yml"
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/routing.yml -->
@@ -164,7 +164,7 @@ XML
 </routes>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/routing.php
@@ -180,7 +180,7 @@ return $collection;
 
 您可以用同样的策略从一个包中带入设置:
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -189,7 +189,7 @@ imports:
 
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -198,7 +198,7 @@ XML
 </imports>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -216,14 +216,14 @@ all:
 
 在 Symfony2 中，您也可以在 **parameters** 键（parameters key）下创建任意条目（entries）：
 
-YAML
+YAML:
 
 ```
 parameters:
     email.from_address: foo.bar@example.com
 ```
 
-XML
+XML:
 
 ```
 <parameters>
@@ -231,7 +231,7 @@ XML
 </parameters>
 ```
 
-PHP
+PHP:
 
 ```
 $container->setParameter('email.from_address', 'foo.bar@example.com');
@@ -239,11 +239,11 @@ $container->setParameter('email.from_address', 'foo.bar@example.com');
 
 现在您可以用一个控件来获得它，例如：
 
-```PHP
+```
 public function helloAction($name)
 {
     $fromAddress = $this->container->getParameter('email.from_address');
 }
 ```
 
-现实中，Symfony2 的配置更为强大，主要用于配置您可以使用的对象。更多信息参见“[Service Container](http://symfony.com/doc/current/book/service_container.html)”章节。
+现实中，Symfony2 的配置更为强大，主要用于配置您可以使用的对象。更多信息参见 ["Service Container"](http://symfony.com/doc/current/book/service_container.html) 章节。
