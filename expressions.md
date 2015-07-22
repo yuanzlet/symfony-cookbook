@@ -40,49 +40,49 @@ public function indexAction()
 
 **user**
 
-    用户对象（或者您未验证的时候字符串 **anon**）
+   用户对象（或者您未验证的时候字符串 **anon**）
 
 **roles**
 
-    用户所有的一组角色，包括来自[角色等级](http://symfony.com/doc/current/book/security.html#security-role-hierarchy)但不包括 **IS_AUTHENTICATED_*/** 属性（见以下的功能）。
+   用户所有的一组角色，包括来自[角色等级](http://symfony.com/doc/current/book/security.html#security-role-hierarchy)但不包括 **IS_AUTHENTICATED_*/** 属性（见以下的功能）。
 
 **object**
 
-    对象（若任何）作为第二个参数传递给 **isGranted**。
+   对象（若任何）作为第二个参数传递给 **isGranted**。
 
 **token**
 
-    标识对象。
+   标识对象。
 
 **trust_resolver**
 
-    [AuthenticationTrustResolverInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Authentication/AuthenticationTrustResolverInterface.html) 对象：您可能使用会使用 **is_*/** 的功能。
+   [AuthenticationTrustResolverInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Authentication/AuthenticationTrustResolverInterface.html) 对象：您可能使用会使用 **is_*** 的功能。
 
 另外，您可以访问表达式里很多的功能：
 
 **is_authenticated**
 
-    返回 **true** 如果用户通过“记住我”或者“完全”验证—例如，返回 true 如果用户“注册”。
+   返回 **true** 如果用户通过“记住我”或者“完全”验证—例如，返回 true 如果用户“注册”。
 
 **is_anonymous**
 
-    等同于使用 **IS_AUTHENTICATED_ANONYMOUSLY** 的 **isGranted** 功能。
+   等同于使用 **IS_AUTHENTICATED_ANONYMOUSLY** 的 **isGranted** 功能。
 
 **is_remember_me**
 
-    相似但不等同于 **IS_AUTHENTICATED_REMEMBERED**，见下。
+   相似但不等同于 **IS_AUTHENTICATED_REMEMBERED**，见下。
 
 **is_fully_authenticated**
 
-    相似但不等同于 **IS_AUTHENTICATED_FULLY**，见下。
+   相似但不等同于 **IS_AUTHENTICATED_FULLY**，见下。
 
 **has_role**
 
-    检查看是否用户有了所给的角色—等同于表达式 **'ROLE_ADMIN' in roles**。
+   检查看是否用户有了所给的角色—等同于表达式 **'ROLE_ADMIN' in roles**。
 
-### 比起检查 *IS_AUTHENTICATED_REMEMBERED*，*is_remember_me* 是不同的。
+> ### 比起检查 *IS_AUTHENTICATED_REMEMBERED*，*is_remember_me* 是不同的。
 
-**is_remember_me** 和 **is_authenticated_fully** 功能对于使用 **IS_AUTHENTICATED_REMEMBERED** 和 **IS_AUTHENTICATED_FULLY**  的 **isGranted** 功能是相似的—但是它们**不**一样。以下体现了区别：
+> **is_remember_me** 和 **is_authenticated_fully** 功能对于使用 **IS_AUTHENTICATED_REMEMBERED** 和 **IS_AUTHENTICATED_FULLY**  的 **isGranted** 功能是相似的—但是它们**不**一样。以下体现了区别：
 
 ```
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -96,4 +96,4 @@ $access2 = $ac->isGranted(new Expression(
 ));
 ```
 
-这里，**$access1** 和 **$access2** 将会有相同的值。不像 **IS_AUTHENTICATED_REMEMBERED** 和 **IS_AUTHENTICATED_FULLY** 的行为，如果用户通过 cookie 验证，**is_remember_me** 的功能*只是*返回 true 并且如果用户在这个部分确实注册了（例如，完备的），**is_fully_authenticated** *只是*返回 true。
+> 这里，**$access1** 和 **$access2** 将会有相同的值。不像 **IS_AUTHENTICATED_REMEMBERED** 和 **IS_AUTHENTICATED_FULLY** 的行为，如果用户通过 cookie 验证，**is_remember_me** 的功能*只是*返回 true 并且如果用户在这个部分确实注册了（例如，完备的），**is_fully_authenticated** *只是*返回 true。
