@@ -8,7 +8,7 @@
 
 这也是默认的限定方式，并且仅当请求 URL 与限定配置**模式串**相匹配时，才初始化有限定的防火墙。
  
-YAML
+YAML:
 
 ```
 # app/config/security.yml  
@@ -20,7 +20,7 @@ security:
             # ...
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -40,7 +40,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
@@ -62,7 +62,7 @@ $container->loadFromExtension('security', array(
 
 如果仅通过**模式**匹配限定不可满足要求，也可使用请求与主机匹配的方法。当配置选项主机确立后，可以限定防火墙，使它在仅当来自某请求的主机能匹配上配置时，才开始初始化。
 
-YAML
+YAML:
 
 ```
 # app/config/security.yml  
@@ -75,7 +75,7 @@ security:
             # ...
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -95,7 +95,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
@@ -117,7 +117,7 @@ $container->loadFromExtension('security', array(
 
 该配置选项策略会把防火墙允许通过的 HTTP 方法限定在指令的方法里。
 
-YAML
+YAML:
 
 ```
 # app/config/security.yml
@@ -130,7 +130,7 @@ security:
             # ...
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -150,7 +150,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
