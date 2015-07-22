@@ -57,9 +57,9 @@ Git remote heroku added
 
 默认情况下，Heroku 会开启一个 Apache 网页服务器和 PHP 一并来服务应用程序。然而，有两个特殊情况适用于 Symfony 应用程序：
 
-1.	文件根是在 **web/** 目录中，而不是在用应用程序的根目录中。  
+1.文件根是在 **web/** 目录中，而不是在用应用程序的根目录中。  
 
-2.	Composer **bin-dir**，即供应商的二进制文件（Heroku 自身的引导脚本）放置的地方，是 **bin/**，不是默认的 **vendor/bin**。
+2.Composer **bin-dir**，即供应商的二进制文件（Heroku 自身的引导脚本）放置的地方，是 **bin/**，不是默认的 **vendor/bin**。
 
 供应商的二进制文件一般由 Composer 安装在 **vendor/bin**，但是有些时候（例如：当运行一个 Symfony 标准版本项目！），定位是不同的。如果有疑问的话，您可以运行 **composer config bin-dir** 来找出正确的位置。
 
