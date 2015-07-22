@@ -6,7 +6,7 @@
 
 以下的配置代码展示了如何配置两个实体管理器：
 
-YAML
+YAML:
 
 ```
 doctrine:
@@ -44,7 +44,7 @@ doctrine:
                     AcmeCustomerBundle: ~
 ```
 
-XML
+XML:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -91,7 +91,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 $container->loadFromExtension('doctrine', array(
