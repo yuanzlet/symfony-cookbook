@@ -1,6 +1,6 @@
 # 如何缓存电子邮件
 
-当您正在使用 SwiftmailerBundle 从 Symfony 应用程序中发送一封电子邮件，默认情况下会立刻发送该邮件。然而您可能想避免 Swift Mailer 与电子邮件传送之间的性能击中，可能导致用户在邮件发送的过程中等待下一页面加载。这可以通过选择“缓存”电子邮件而不是直接发送来避免、这意味着 Swift Mailer 并不试图发送一封电子邮件，而是将邮件保存在某处，如一个文件。另一个进程可以在缓存中读取并且在缓存中处理发送电子邮件。现在 Swift Mailer 只支持缓存到文件或者内存中。
+当您正在从 Symfony 应用程序中使用 SwiftmailerBundle 发送一封电子邮件，默认情况下会立刻发送该邮件。然而您可能想避免 Swift Mailer 与电子邮件传送之间的性能影响，可能导致用户在邮件发送的过程中等待下一页面加载。这可以通过选择“缓存”电子邮件而不是直接发送来避免、这意味着 Swift Mailer 并不试图发送一封电子邮件，而是将邮件保存在某处，如一个文件。另一个进程可以在缓存中读取并且在缓存中处理发送电子邮件。现在 Swift Mailer 只支持缓存到文件或者内存中。
 
 ## 使用内存缓存
 
@@ -44,6 +44,7 @@ $container->loadFromExtension('swiftmailer', array(
 ## 使用文件缓存
 
 YAML
+
 ```
 # app/config/config.yml
 swiftmailer:
@@ -85,13 +86,13 @@ $container->loadFromExtension('swiftmailer', array(
 ));
 ```
 
-如果您想用项目目录缓存到某个地方，记住您可以使用 **%kernel.root_dir%** 参数来引用项目的根：
+> 如果您想用项目目录缓存到某个地方，记住您可以使用 **%kernel.root_dir%** 参数来引用项目的根：
 
 ```
 path: "%kernel.root_dir%/spool"
 ```
 
-现在，当您的应用程序发送一封电子邮件的时候，它不会实际被发送，而是添加到缓存。从缓存中发送消息时分开完成的。在缓存中有一个控制台命令来发送消息：
+现在，当您的应用程序发送一封电子邮件的时候，它不会实际被发送，而是添加到缓存。从缓存中发送消息是分开完成的。在缓存中有一个控制台命令来发送消息：
 
 ```
 $ php app/console swiftmailer:spool:send --env=prod
@@ -110,4 +111,3 @@ $ php app/console swiftmailer:spool:send --time-limit=10 --env=prod
 ```
 
 当然您在现实中不想手动运行这个。相反，控制台命令应该由一个 cron 作业或计划任务激发并且在固定的间隔运行。
-
