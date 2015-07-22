@@ -1,6 +1,6 @@
 # 如何以非继承方式扩展一个类
 
-允许多个类向另一个类添加方法，您可以在您想要扩展的类中定义你的魔法 **__call()**，像这样：
+允许多个类向另一个类添加方法，您可以在您想要扩展的类中定义神奇的 **__call()** 方法，像这样：
 
 ```
 class Foo
@@ -81,7 +81,7 @@ class HandleUndefinedMethodEvent extends Event
 }
 ```
 
-接下来，创建一个类，将会听取 **foo.method_is_not_found** 事件并且*添加*方法 **bar()**：
+接下来，创建一个类，将会监听 **foo.method_is_not_found** 事件并且*添加*方法 **bar()**：
 
 ```
 class Bar
