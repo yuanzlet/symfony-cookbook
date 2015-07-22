@@ -1,6 +1,6 @@
 # 如何部署一个 Symfony 应用
 
-部署的过程是一个复杂且多样的任务，它依靠于您应用的设置及需求的任务。本文不是按部就班的指导，而是一个关于部署大部分的需求和想法的大概的列表。
+> 部署的过程是一个复杂且多样的任务，它依靠于您应用的设置及需求的任务。本文不是按部就班的指导，而是一个关于部署大部分的需求和想法的大概的列表。
 
 ## Symfony 部署基础
 
@@ -104,9 +104,9 @@ $ composer install --no-dev --optimize-autoloader
 
 ```
 
-**--optimize-autoloader** 标记通过创建一个“类映射”显著地提高了 Composer 的自动装载机性能。**--no-dev** 标记确保开发软件包不安装在生产环境中。
+> **--optimize-autoloader** 标记通过创建一个“类映射”显著地提高了 Composer 的自动装载机性能。**--no-dev** 标记确保开发软件包不安装在生产环境中。
 
-如果您在此步骤中得到“未找到类”错误，您可能就需要在运行此命令前运行 **export SYMFONY_ENV=prod** 从而使 **post-install-cmd** 脚本在 **prod** 环境中运行。
+> 如果您在此步骤中得到“未找到类”错误，您可能就需要在运行此命令前运行 **export SYMFONY_ENV=prod** 从而使 **post-install-cmd** 脚本在 **prod** 环境中运行。
 
 ### D) 清除您的 Symfony 缓存
 
