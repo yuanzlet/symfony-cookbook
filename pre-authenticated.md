@@ -4,7 +4,7 @@
 
 ## X.509 客户端证书身份验证
 
-当使用客户端证书时，您的网络服务器会进行所有的身份验证过程。举个例子，在 Apache 服务器下您可以使用 **SSLVerifyClient**   需求指令。
+当使用客户端证书时，您的网络服务器会进行所有的身份验证过程。举个例子，在 Apache 服务器下您可以使用 **SSLVerifyClient** 需求指令。
 
 为安全配置中的特定防火墙的启用 x 509 身份验证:
 
@@ -56,9 +56,9 @@ $container->loadFromExtension('security', array(
 
 > 身份验证提供程序只会通知用户提供程序已经做出请求的用户名。您将需要创建 (或使用) **提供程序**配置参数引用的  的"用户提供程序"(如配置示例中的 **your_user_provider**)。此提供程序将会把该用户名变成您选择的一个用户对象。有关创建或配置用户提供程序的详细信息，请参阅:
 
-- [如何创建一个自定义用户提供程序](http://symfony.com/doc/current/cookbook/security/custom_provider.html)
+> - [如何创建一个自定义用户提供程序](http://symfony.com/doc/current/cookbook/security/custom_provider.html)
 
-- [如何从数据库 (实体提供程序) 加载安全用户](http://symfony.com/doc/current/cookbook/security/entity_provider.html)
+> - [如何从数据库 (实体提供程序) 加载安全用户](http://symfony.com/doc/current/cookbook/security/entity_provider.html)
 
 ## 基于验证的 REMOTE_USER
 
@@ -114,4 +114,4 @@ $container->loadFromExtension('security', array(
 
 防火墙将给您的您用户的提供程序提供 **REMOTE_USER** 环境变量。您可以通过设置 **remote_user**  防火墙配置中的用户密钥来改变变量名称。
 
-> 就像 X 509 身份验证，您需要配置"用户提供程序"。请参阅[以前的注意栏目](http://symfony.com/doc/current/cookbook/security/pre_authenticated.html#cookbook-security-pre-authenticated-user-provider-note)来获得更多的信息。
+> 就像 X509 身份验证，您需要配置"用户提供程序"。请参阅[以前的注意栏目](http://symfony.com/doc/current/cookbook/security/pre_authenticated.html#cookbook-security-pre-authenticated-user-provider-note)来获得更多的信息。
