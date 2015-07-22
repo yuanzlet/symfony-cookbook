@@ -153,7 +153,7 @@ class Document
 }
 ```
 
-YAML
+YAML:
 
 ```
 # src/AppBundle/Resources/config/validation.yml
@@ -164,7 +164,7 @@ AppBundle\Entity\Document:
                 maxSize: 6000000
 ```
 
-XML
+XML:
 
 ```
 <!-- src/AppBundle/Resources/config/validation.xml -->
@@ -177,7 +177,7 @@ XML
 </class>
 ```
 
-PHP
+PHP:
 
 ```
 // src/AppBundle/Entity/Document.php
