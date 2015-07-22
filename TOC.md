@@ -116,27 +116,27 @@
  - 安全  王运里
    - [如何建立一个传统的登录表单](form-login-setup.md) -- 已校对
    - [如何从数据库(实体提供者)读取安全用户](entity-provider.md)
-   - [如何添加 "记住我" 登录功能](remember-me.md)
-   - [如何冒充一个用户](impersonating-user.md)
+   - [如何添加 "记住我" 登录功能](remember-me.md) -- 待校对
+   - [如何冒充一个用户](impersonating-user.md) -- 待校对
    - [如何实现你自己的 Voter 来将 IP 地址加入黑名单](voters.md)
    - [如何使用 Voter 检查用户权限](voters-data-permission.md)
    - [如何使用访问控制列表(ACLs)](acl.md)
    - [如何使用高级的访问控制列表](acl-advanced.md)
    - [如何对不同的 URL 强制使用 HTTPS 或者 HTTP](force-https.md)
-   - [如何重定向防火墙至一个特殊的请求](firewall-restriction.md)
-   - [如何重定向防火墙至一个特殊的主机](host-restriction.md)
+   - [如何重定向防火墙至一个特殊的请求](firewall-restriction.md) -- 待校对
+   - [如何重定向防火墙至一个特殊的主机](host-restriction.md) -- 待校对
    - [如何自定义登录表单](form-login.md) -- 已校对
    - [如何在应用中保护服务和方法](securing-services.md) -- 已校对
    - [如何创建自定义用户提供者](custom-provider.md) -- 已校对
    - [如何创建自定义表单密码验证器](custom-password-authenticator.md) -- 已校对
    - [如何使用 API 验证用户](api-key-authentication.md)  -- 已校对
    - [如何创建自定义认证提供者](custom-authentication-provider.md) -- 待校对
-   - [使用预认证安全防火墙](pre-authenticated.md)
-   - [如何改变默认的目标路径行为](target-path.md)
-   - [在登录表单中使用 CSRF 保护](csrf-in-login-form.md)
-   - [如何动态选择密码加密算法](named-encoders.md)
-   - [安全访问控制是如何工作的](access-control.md)
-   - [如何使用多用户提供者](multiple-user-providers.md)
+   - [使用预认证安全防火墙](pre-authenticated.md) -- 待校对
+   - [如何改变默认的目标路径行为](target-path.md) -- 待校对
+   - [在登录表单中使用 CSRF 保护](csrf-in-login-form.md) -- 待校对
+   - [如何动态选择密码加密算法](named-encoders.md) -- 待校对
+   - [安全访问控制是如何工作的](access-control.md) -- 待校对
+   - [如何使用多用户提供者](multiple-user-providers.md) -- 待校对
  - 序列化  杨旋 -- 已校对
    - [如何使用序列化](serializer.md)
  - 服务容器  杨旋 -- 已校对
@@ -154,7 +154,7 @@
  - PSR-7   袁泽林 -- 已校对
    - [The PSR-7 Bridge](psr7.md)
  - symfony1   袁泽林
-   - [Symfony2 与 Symfony1 的区别](symfony1.md)
+   - [Symfony2 与 Symfony1 的区别](symfony1.md) -- 待校对
  - 模板  袁泽林
    - [如何注入变量到所有的模板(如全局变量)](global-variables.md)
    - [如何使用和注册命名空间路径](namespaced-paths.md)
@@ -172,7 +172,7 @@
    - **不翻译**[(email)如何在功能测试中测试一封电子邮件被发送](testing.md)
    - **不翻译**[(form)如何对表单单元测试](unit-testing.md)
  - 升级  袁泽林
-   - [升级一个补丁版本](patch-version.md)
+   - [升级一个补丁版本](patch-version.md) -- 待校对
    - [升级一个副版本](minor-version.md)
    - [升级一个主版本](major-version.md)
    - ["XXX is deprecated" E-USER-DEPRECATED 的警告是什么意思?](deprecation-warnings.md)
