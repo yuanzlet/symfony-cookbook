@@ -92,7 +92,7 @@ interface InvoiceSubjectInterface
 
 接下来，您需要配置监听器，告知 DoctrineBundle 关于替代的事情：
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -104,7 +104,7 @@ doctrine:
             Acme\InvoiceBundle\Model\InvoiceSubjectInterface: Acme\AppBundle\Entity\Customer
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -123,7 +123,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
