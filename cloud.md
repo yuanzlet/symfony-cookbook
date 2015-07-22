@@ -8,7 +8,7 @@
 
 在 Symfony 配置中，根据 [SES 控制台](https://console.aws.amazon.com/ses/)提供的消息改变 Swift Mailer 的设置 **transport**, **host**, **port** 和 **encryption**。在 SES 控制台中创建您个人的 SMTP 证书并借助所提供的 **username** 和 **password** 完成任务。
 
-YAML
+YAML:
 
 ```
 # app/config/config.yml
@@ -21,7 +21,7 @@ swiftmailer:
     password:   AWS_SECRET_KEY  # to be created in the SES console
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config.xml -->
@@ -46,7 +46,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config.php
@@ -80,10 +80,10 @@ parameters:
 
 > 如果您更倾向于使用 Amazon SES，请注意以下几点：
 
-•	您需要注册 [Amazon 网页服务(AWS)](http://aws.amazon.com/cn/)；
+> •	您需要注册 [Amazon 网页服务(AWS)](http://aws.amazon.com/cn/)；
 
-•	每一个在 **From** 或 **Return-Path**（返回地址）使用的发送者地址需要由主控者验证。您也可以验证整个域；
+> •	每一个在 **From** 或 **Return-Path**（返回地址）使用的发送者地址需要由主控者验证。您也可以验证整个域；
 
-•	最初你是在一个受限制的模式。在被允许发送给任意收件人之前，您需要请求访问许可；
+> •	最初你是在一个受限制的模式。在被允许发送给任意收件人之前，您需要请求访问许可；
 
-•	SES 可能受到指控。
+> •	SES 可能受到指控。
