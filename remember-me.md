@@ -73,43 +73,43 @@ $container->loadFromExtension('security', array(
 
 **key** (**必需**)
 
-    用于加密 cookie 值的内容。通常使用的**秘密**值定义在**app/config/parameters.yml** 文件中。　　
+   用于加密 cookie 值的内容。通常使用的**秘密**值定义在**app/config/parameters.yml** 文件中。　　
 
 **name** (默认值:**REMEMBERME**)
 
-    cookie 的名称用来保持用户登录。如果你在同一应用程序的多个防火墙启用 **remember_me** 功能,确保为每个防火墙的 cookie 选择一个不同的名称。否则,你将面临很多安全相关问题。
+   cookie 的名称用来保持用户登录。如果你在同一应用程序的多个防火墙启用 **remember_me** 功能,确保为每个防火墙的 cookie 选择一个不同的名称。否则,你将面临很多安全相关问题。
 
 **Lifetime** (默认值:**31536000**)
 
-    用户将持续登录状态的秒数。默认用户登录一年。
+   用户将持续登录状态的秒数。默认用户登录一年。
 
 **path** (默认值:**/**)
 
-    与这种特性相关联的 cookie 的路径将被使用。默认情况下 cookie 将适用于整个网站，但你也可以将它限制到一个特定的部分(例如 **/forum**，**/admin**)。
+   与这种特性相关联的 cookie 的路径将被使用。默认情况下 cookie 将适用于整个网站，但你也可以将它限制到一个特定的部分(例如 **/forum**，**/admin**)。
 
 **domain** (默认值:**null**)
 
-    使用与此特性相关的 **cookie** 的域。默认情况下 cookies 使用的当前域是从 **$ _SERVER** 获得。
+   使用与此特性相关的 **cookie** 的域。默认情况下 cookies 使用的当前域是从 **$ _SERVER** 获得。
    
 **secure** (默认值:**false**)
  
-    如果该值为**真**,与此功能相关的 cookie 将被通过 HTTPS 安全连接发送给用户。
+   如果该值为**真**,与此功能相关的 cookie 将被通过 HTTPS 安全连接发送给用户。
 
 **hhttponly** (默认值:**true**)
  
-    如果该值为**真**,这个特性相关的 cookie 只能通过 HTTP 协议。这意味着 cookie 不会访问脚本语言,比如 JavaScript。　
+   如果该值为**真**,这个特性相关的 cookie 只能通过 HTTP 协议。这意味着 cookie 不会访问脚本语言,比如 JavaScript。　
    
 **remember_me_parameter** (默认值:**_remember_me**)
    
-    表单字段的名称检查决定是否应该启用“记住我”功能。继续阅读这篇文章，你将知道如何附有条件地启用这个特性。　
+   表单字段的名称检查决定是否应该启用“记住我”功能。继续阅读这篇文章，你将知道如何附有条件地启用这个特性。　
    
 **always_remember_me**(默认值:**false**) 
 
-    如果该值为**真**,**remember_me_parameter** 的值将被忽略,“记住我”功能总是启用,不管最终用户的需求。　　
+   如果该值为**真**,**remember_me_parameter** 的值将被忽略,“记住我”功能总是启用,不管最终用户的需求。　　
    
 **token_provider** (默认值:**null**)
 
-    定义一个 token provider 的服务的 id 以供使用。默认情况下,令牌存储在一个 cookie 中。例如,您可能想要令牌存储在一个数据库中,但在 cookie 中没有一个(散列的)版本的密码。
+   定义一个 token provider 的服务的 id 以供使用。默认情况下,令牌存储在一个 cookie 中。例如,您可能想要令牌存储在一个数据库中,但在 cookie 中没有一个(散列的)版本的密码。
 
 DoctrineBridge 附带一个 **Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider**,您可以使用。
 
@@ -174,15 +174,15 @@ PHP:
 
 **IS_AUTHENTICATED_ANONYMOUSLY**
   
-    自动分配给在防火墙下受部分站点保护但实际上没有登录的用户。这是匿名访问的唯一方式。
+   自动分配给在防火墙下受部分站点保护但实际上没有登录的用户。这是匿名访问的唯一方式。
 
 **IS_AUTHENTICATED_REMEMBERED**
 
-    自动分配给通过 remember me cookie 验证的用户。　
+   自动分配给通过 remember me cookie 验证的用户。　
 
 **IS_AUTHENTICATED_FULLY**
 
-    自动分配给在当前会话中提供了他们的登录细节的用户。
+   自动分配给在当前会话中提供了他们的登录细节的用户。
 
 除了显式分配角色，您可以使用这些来进行访问控制。
 
