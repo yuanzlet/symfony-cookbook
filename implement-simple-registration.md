@@ -70,11 +70,13 @@ class User
 
 此 **User** 实体包含三个字段，其中两个（**email** 和 **plainPassword**）应该在表单中显示。电子邮件属性在数据库中必须是独立的，这是通过在类的顶部添加此验证执行的。
 
-如果您想在安全系统中整合此用户，您需要实现安全组件的 [UserInterface](http://symfony.com/doc/current/book/security.html#book-security-user-entity)。
+> 如果您想在安全系统中整合此用户，您需要实现安全组件的 [UserInterface](http://symfony.com/doc/current/book/security.html#book-security-user-entity)。
 
-## *为什么有 4096 密码限制？*
+> ## *为什么有 4096 密码限制？*
 
-注意 **plainPassword** 字段最长长度为 4096 个字符。出于安全目的（[CVE-2013-5750](https://symfony.com/blog/cve-2013-5750-security-issue-in-fosuserbundle-login-form)），Symfony 在编码的时候限制了明文密码的长度为 4096 个字符。
+> 注意 **plainPassword** 字段最长长度为 4096 个字符。出于安全目的（[CVE-2013-5750](https://symfony.com/blog/cve-2013-5750-security-issue-in-fosuserbundle-login-form)），Symfony 在编码的时候限制了明文密码的长度为 4096 个字符。添加这个限制确保了您的表单将在任何人尝试一个非常长的密码时给出一个验证错误。  
+
+> 您将需要在您的应用程序的任何用户提交一段明文密码的位置添加这个限制（比如，改变密码表单）。唯一您不需要担心的地方是你的登录表单，因为 Symfony 的安全组件为你解决这些。
 
 ## 为模型创建一个表单
 
@@ -116,7 +118,7 @@ class UserType extends AbstractType
 
 只有两种字段：**email** 和 **plainPassword**（重复以确认输入的密码）。**data_class** 选择告知表单基础数据类的名称（例如，您的 **User** 实体）。
 
-想探索更多关于表单组件的事情，阅读 [Forms](http://symfony.com/doc/current/book/forms.html)。
+> 想探索更多关于表单组件的事情，阅读 [Forms](http://symfony.com/doc/current/book/forms.html)。
 
 ## 在注册表单中嵌入用户表单
 
@@ -270,7 +272,7 @@ public function createAction(Request $request)
 
 接下来，更新您的路由。如果您将路由放置于您包的内部（如下所示），不要忘记确保路由文件正在被[导入](http://symfony.com/doc/current/book/routing.html#routing-include-external-resources)。
 
-YAML
+YAML:
 
 ```
 # src/Acme/AccountBundle/Resources/config/routing.yml
@@ -283,7 +285,7 @@ account_create:
     defaults: { _controller: AcmeAccountBundle:Account:create }
 ```
 
-XML
+XML:
 
 ```
 <!-- src/Acme/AccountBundle/Resources/config/routing.xml -->
@@ -302,7 +304,7 @@ XML
 </routes>
 ```
 
-PHP
+PHP:
 
 ```
 // src/Acme/AccountBundle/Resources/config/routing.php
