@@ -1,6 +1,6 @@
 # The PSR-7 Bridge
 
-> The PSR-7 bridge 将 [HttpFoundation](http://symfony.com/doc/current/components/http_foundation/index.html) 对象转换到实现 HTTP message 接口的对象，定义在 [PSR-7](http://www.php-fig.org/psr/psr-7/)。
+> *The PSR-7 bridge 将 [HttpFoundation](http://symfony.com/doc/current/components/http_foundation/index.html) 对象转换到实现 HTTP message 接口的对象，定义在 [PSR-7](http://www.php-fig.org/psr/psr-7/)。*
 
 ## 安装
 
@@ -19,9 +19,7 @@ Bridge 提供一个名为 [HttpMessageFactoryInterface](http://api.symfony.com/2
 
 下面的代码片段说明了如何将一个 [Request](http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Request.html) 转换成一个 Zend Diactoros [ServerRequest](http://api.symfony.com/2.7/Zend/Diactoros/ServerRequest.html) 实现 [ServerRequestInterface](http://api.symfony.com/2.7/Psr/Http/Message/ServerRequestInterface.html) 接口：
 
-PHP:
-
-```PHP
+```
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,9 +32,7 @@ $psrRequest = $psr7Factory->createRequest($symfonyRequest);
 
 现在从一个 [Response](http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Response.html) 到一个实现 [ResponseInterface](http://api.symfony.com/2.7/Psr/Http/Message/ResponseInterface.html) 接口的 Zend Diactoros [Response](http://api.symfony.com/2.7/Zend/Diactoros/Response.html)：
 
-PHP:
-
-```PHP
+```
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,9 +48,7 @@ $psrResponse = $psr7Factory->createResponse($symfonyResponse);
 
 下一段代码解释如何将一个实现 [ServerRequestInterface](http://api.symfony.com/2.7/Psr/Http/Message/ServerRequestInterface.html) 接口的对象转变为一个 [Request](http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Request.html) 实例。
 
-PHP:
-
-```PHP
+```
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 
 // $psrRequest is an instance of Psr\Http\Message\ServerRequestInterface
@@ -65,9 +59,7 @@ $symfonyRequest = $httpFoundationFactory->createRequest($psrRequest);
 
 从一个实现 [ResponseInterface](http://api.symfony.com/2.7/Psr/Http/Message/ResponseInterface.html) 的对象到一个 [Response](http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Response.html) 实例：
 
-PHP:
-
-```PHP
+```
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 
 // $psrResponse is an instance of Psr\Http\Message\ResponseInterface
