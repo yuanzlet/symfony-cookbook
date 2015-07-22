@@ -6,7 +6,7 @@
 
 在开发配置文件中，改变 **transport** 设置到 **gmail** 并设置 **username** 和 **password** 到 Google 证书上：
 
-YAML
+YAML:
 
 ```
 # app/config/config_dev.yml
@@ -16,7 +16,7 @@ swiftmailer:
     password:  your_gmail_password
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/config_dev.xml -->
@@ -38,7 +38,7 @@ XML
 </container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/config_dev.php
