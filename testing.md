@@ -22,7 +22,7 @@ public function sendEmailAction($name)
 }
 ```
 
-不要忘记按照在[如何在功能测试中使用编译器](http://symfony.com/doc/current/cookbook/testing/profiling.html)解释的那样启动分析器。
+> 不要忘记按照在[如何在功能测试中使用编译器](http://symfony.com/doc/current/cookbook/testing/profiling.html)解释的那样启动分析器。
 
 在您的功能测试中，在分析器中使用 **swiftmailer** 收集器来获取关于发送在之前请求上的消息的信息：
 
