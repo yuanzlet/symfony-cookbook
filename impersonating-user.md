@@ -2,7 +2,7 @@
 
 有时,无需登出和登入就能切换账户是很有用的（例如，当你调试或尝试理解别的用户的一个你无法复制的错误时）。这可以通过激活 **switch_user** 防火墙监听器来很容易地做到：
 
-YAML
+YAML:
 
 ```
 # app/config/security.yml
@@ -13,7 +13,7 @@ security:
             switch_user: true
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -32,7 +32,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
@@ -60,7 +60,7 @@ http://example.com/somewhere?_switch_user=_exit
 
 在仿冒中，为用户提供一个特殊的角色，被称为 **ROLE_PREVIOUS_ADMIN**。在一个模板中，例如，这个角色可以用来显示退出仿冒的链接：
 
-TWIG
+TWIG:
 
 ```
 {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
@@ -68,7 +68,7 @@ TWIG
 {% endif %}
 ```
 
-PHP
+PHP:
 
 ```
 <?php if ($view['security']->isGranted('ROLE_PREVIOUS_ADMIN')): ?>
@@ -102,7 +102,7 @@ if ($authChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
 
 当然，这个功能需要向一个小的用户群提供。默认情况下，有 **ROLE_ALLOWED_TO_SWITCH** 角色的用户的访问是被限制的。这个角色的名字可以通过**角色**设置进行修改。对于额外的安全性，您还可以通过**参数**设置更改查询参数名称：
 
-YAML
+YAML:
 
 ```
 # app/config/security.yml
@@ -113,7 +113,7 @@ security:
             switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/security.xml -->
@@ -132,7 +132,7 @@ XML
 </srv:container>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/security.php
@@ -155,7 +155,7 @@ $container->loadFromExtension('security', array(
 
 当你仿冒用户时关于 [Making the Locale "Sticky" during a User's Session](http://symfony.com/doc/current/cookbook/session/locale_sticky_session.html) 的清单文本在本地不进行修正。下面的代码示例将显示如何更改粘滞区域设置：
 
-YAML
+YAML:
 
 ```
 # app/config/services.yml
@@ -166,7 +166,7 @@ services:
             - { name: kernel.event_listener, event: security.switch_user, method: onSwitchUser }
 ```
 
-XML
+XML:
 
 ```
 <!-- app/config/services.xml -->
@@ -175,7 +175,7 @@ XML
 </service>
 ```
 
-PHP
+PHP:
 
 ```
 // app/config/services.php
