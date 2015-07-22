@@ -1,6 +1,6 @@
 # 如何用 Doctrine 上传文件
 
-除了您自己上传文件，您或许考虑使用 [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) 社区 bundle。这个 bundle 提供了所有常见的操作（例如文件重命名、保存和删除），并且它紧密地与 Doctrine ORM、MongoDB ODM、PHPCR ODM 和 Propel 组成为一个整体。
+> 除了您自己上传文件，您或许考虑使用 [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) 社区 bundle。这个 bundle 提供了所有常见的操作（例如文件重命名、保存和删除），并且它紧密地与 Doctrine ORM、MongoDB ODM、PHPCR ODM 和 Propel 组成为一个整体。
 
 用 Doctrine 实体上传文件与上传任何其他文件无区别。换句话说，您可以在提交表单之后自由移动您控件中的文件。为了举例如何做这个，参见[文件类型引用](http://symfony.com/doc/current/reference/forms/types/file.html)页面。
 
@@ -76,11 +76,11 @@ class Document
 
 **getAbsolutePath()** 是一个可以将绝对路径返回到文件的便捷方法，而 **getWebPath()** 是一个可以将网页路径返回，可用于模板链接上传文件的便捷方法。
 
-如果您还未做完，您应该首先阅读[文件](http://symfony.com/doc/current/reference/forms/types/file.html)类型文档来了解基本的上传进程是如何运行的。  
+> 如果您还未做完，您应该首先阅读[文件](http://symfony.com/doc/current/reference/forms/types/file.html)类型文档来了解基本的上传进程是如何运行的。  
 
-如果您正在使用标注来指定您的验证规则（正如例子所示），确保您已经用标注启动了验证（参见[验证配置](http://symfony.com/doc/current/book/validation.html#book-validation-configuration)）。
+> 如果您正在使用标注来指定您的验证规则（正如例子所示），确保您已经用标注启动了验证（参见[验证配置](http://symfony.com/doc/current/book/validation.html#book-validation-configuration)）。
 
-如果您使用方法 **getUploadRootDir()**，注意这会保存根文件的内部文件，可以被所有人读取。要考虑把它放在根文件之外，并当您需要保护这些文件的时候添加自定义查看逻辑。
+> 如果您使用方法 **getUploadRootDir()**，注意这会保存根文件的内部文件，可以被所有人读取。要考虑把它放在根文件之外，并当您需要保护这些文件的时候添加自定义查看逻辑。
 
 要上传表单中的实际文件，使用一个“虚拟” **file** 域。例如，如果您正在一个控件里直接构建您的表单，它看起来会像这样：
 
@@ -200,7 +200,7 @@ class Document
 }
 ```
 
-当您正在使用 **File** 约束，Symfony 会自动猜测表单域是文件上传输入。这就是您为什么在创建上面的表单时（**->add('file')**）不需要做显示设置的原因。
+> 当您正在使用 **File** 约束，Symfony 会自动猜测表单域是文件上传输入。这就是您为什么在创建上面的表单时（**->add('file')**）不需要做显示设置的原因。
 
 以下控件展示了如何处理整个进程：
 
@@ -284,7 +284,7 @@ public function upload()
 
 ## 使用生命周期回呼
 
-使用生命周期回呼是一个限制的技术，有一些缺陷。如果您想移除在 **Document::getUploadRootDir()** 方法内部的硬编码的 **__DIR__** 引用，最好的方法就是开始使用明确的 [doctrine 监听器](http://symfony.com/doc/current/cookbook/doctrine/event_listeners_subscribers.html)注入内核参数，比如 **kernel.root_dir** 来构建绝对路径。
+> 使用生命周期回呼是一个限制的技术，有一些缺陷。如果您想移除在 **Document::getUploadRootDir()** 方法内部的硬编码的 **__DIR__** 引用，最好的方法就是开始使用明确的 [doctrine 监听器](http://symfony.com/doc/current/cookbook/doctrine/event_listeners_subscribers.html)注入内核参数，比如 **kernel.root_dir** 来构建绝对路径。
 
 尽管这个实现奏效，但是它有一个主要缺陷：如果实体保存的时候有问题怎么办？文件已经移动到了它的最终位置尽管实体的 **path** 属性未被正确保存。
 
@@ -384,7 +384,7 @@ class Document
 }
 ```
 
-如果对你实体的改变被一个 Doctrine 事件监听器或者事件订阅者所处理，**preUpdate()** 回呼必须通知 Doctrine 所完成的变化。关于 preUpadate 事件限制的所有引用，在 Doctrine 事件文档中参见 [preUpdate](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#preupdate)。
+> 如果对你实体的改变被一个 Doctrine 事件监听器或者事件订阅者所处理，**preUpdate()** 回呼必须通知 Doctrine 所完成的变化。关于 preUpadate 事件限制的所有引用，在 Doctrine 事件文档中参见 [preUpdate](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#preupdate)。
 
 类现在做一切您需要的事情：它会在保存之前产生一个独特的文件名，在保存之后移动文件，并且如果实体被删除的话就移除文件。
 
@@ -401,9 +401,9 @@ if ($form->isValid()) {
 }
 ```
 
- **@ORM\PrePersist()** 和 **@ORM\PostPersist()** 事件回呼在实体保存到数据库前后被触发。在另一方面，当实体更新后，**@ORM\PreUpdate()** 和 **@ORM\PostUpdate()** 事件回呼被调用。
+> **@ORM\PrePersist()** 和 **@ORM\PostPersist()** 事件回呼在实体保存到数据库前后被触发。在另一方面，当实体更新后，**@ORM\PreUpdate()** 和 **@ORM\PostUpdate()** 事件回呼被调用。
  
-如果被保存的实体的字段其中之一有变化，**PreUpdate** 和 **PostUpdate** 回呼才会被激发。这意味着，默认情况下，如果您只调整 **$file** 属性，这些事件将不再被激发，因为属性本身不是直接通过 Doctrine 保存的。一个解决方案就是使用一个保存在 Doctrine 中的 **updated** 字段，然后当改变文件的时候手动调整。
+> 如果被保存的实体的字段其中之一有变化，**PreUpdate** 和 **PostUpdate** 回呼才会被激发。这意味着，默认情况下，如果您只调整 **$file** 属性，这些事件将不再被激发，因为属性本身不是直接通过 Doctrine 保存的。一个解决方案就是使用一个保存在 Doctrine 中的 **updated** 字段，然后当改变文件的时候手动调整。
  
  ## 使用 id 作为文件名称
  
