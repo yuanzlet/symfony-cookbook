@@ -61,7 +61,7 @@ Git remote heroku added
 
 2.Composer **bin-dir**，即供应商的二进制文件（Heroku 自身的引导脚本）放置的地方，是 **bin/**，不是默认的 **vendor/bin**。
 
-供应商的二进制文件一般由 Composer 安装在 **vendor/bin**，但是有些时候（例如：当运行一个 Symfony 标准版本项目！），定位是不同的。如果有疑问的话，您可以运行 **composer config bin-dir** 来找出正确的位置。
+> 供应商的二进制文件一般由 Composer 安装在 **vendor/bin**，但是有些时候（例如：当运行一个 Symfony 标准版本项目！），定位是不同的。如果有疑问的话，您可以运行 **composer config bin-dir** 来找出正确的位置。
 
 在应用程序的根目录创建一个新的文件叫做 **Procfile**（没有任何扩展），并且仅添加以下内容：
 
@@ -69,7 +69,7 @@ Git remote heroku added
 b: bin/heroku-php-apache2 web/
 ```
 
-如果您更喜欢使用 Nginx，在 Heroku 同样是可以使用的，您可以创建一个配置文件或者按照在 [Heroku documentation](https://devcenter.heroku.com/articles/custom-php-settings#nginx) 描述的那样从 Procfile 指向它：
+> 如果您更喜欢使用 Nginx，在 Heroku 同样是可以使用的，您可以创建一个配置文件或者按照在 [Heroku documentation](https://devcenter.heroku.com/articles/custom-php-settings#nginx) 描述的那样从 Procfile 指向它：
 
 ```
 web: bin/heroku-php-nginx -C nginx_app.conf web/
@@ -97,7 +97,7 @@ $ git commit -m "Procfile for Apache and PHP"
 $ heroku config:set SYMFONY_ENV=prod
 ```
 
-注意在 **require-dev** 区段 **composer.json** 列出的依赖在 Heroku 中部署的过程中从不被安装。如果您的 Symfony 环境依赖这些包的话可能会引发问题。解决方案就是从 **require-dev** 移除这些包到 **require** 区段。
+> 注意在 **require-dev** 区段 **composer.json** 列出的依赖在 Heroku 中部署的过程中从不被安装。如果您的 Symfony 环境依赖这些包的话可能会引发问题。解决方案就是从 **require-dev** 移除这些包到 **require** 区段。
 
 ### 3)启动 Heroku 的代码
 
@@ -170,7 +170,7 @@ Opening mighty-hamlet-1981... done
 
 您应该在您的浏览器中看到 Symfony 应用程序。
 
-如果您第一步在 Heroku 上安装全新的 Symfony 标准版本，您或许会遇到一个 404 页面没有找到错误。这是因为 / 的路径是由 AcmeDemoBundle 定义的，但是 AcmeDemoBundle 只在 dev 环境中加载（查看您的 **AppKernel** 类）。尝试从 AppBundle 打开 **/app/example**。
+> 如果您第一步在 Heroku 上安装全新的 Symfony 标准版本，您或许会遇到一个 404 页面没有找到错误。这是因为 / 的路径是由 AcmeDemoBundle 定义的，但是 AcmeDemoBundle 只在 dev 环境中加载（查看您的 **AppKernel** 类）。尝试从 AppBundle 打开 **/app/example**。
 
 ### 自定义编译步骤
 
@@ -198,9 +198,9 @@ Opening mighty-hamlet-1981... done
 }
 ```
 
-### *Node.js 依赖*
+> ### *Node.js 依赖*
 
-构建资产可能取决于节点包，例如 **uglifyjs** 或 **uglifycss** 资产缩小。在部署过程中安装节点包需要节点的安装。但是现在，Heroku 使用 PHP 构建包编译您的应用程序，是由 **composer.json** 文件的存在而自动侦测，不包括节点安装。因为 Node.js 构建包比 PHP 构建包（参见 [Heroku 构建包](https://devcenter.heroku.com/articles/buildpacks)）更优先，添加 **package.json** 列出您的节点依赖从而使 Heroku 选择 Node.js 构建包：
+> 构建资产可能取决于节点包，例如 **uglifyjs** 或 **uglifycss** 资产缩小。在部署过程中安装节点包需要节点的安装。但是现在，Heroku 使用 PHP 构建包编译您的应用程序，是由 **composer.json** 文件的存在而自动侦测，不包括节点安装。因为 Node.js 构建包比 PHP 构建包（参见 [Heroku 构建包](https://devcenter.heroku.com/articles/buildpacks)）更优先，添加 **package.json** 列出您的节点依赖从而使 Heroku 选择 Node.js 构建包：
 
 ```
 {
@@ -215,17 +215,17 @@ Opening mighty-hamlet-1981... done
 }
 ```
 
-根据下一次部署，Heroku 使用 Node.js 构建包来编译应用程序并且安装您的 npm 包。另一方面，**composer.json** 现在被忽略。用两个构建包,Node.js *和* PHP 编译您的应用程序的话，您可以使用一个特殊的[多样构建](https://github.com/ddollar/heroku-buildpack-multi)。为了覆盖构建包自动侦测，您需要明确地设置构建包 URL：
+> 根据下一次部署，Heroku 使用 Node.js 构建包来编译应用程序并且安装您的 npm 包。另一方面，**composer.json** 现在被忽略。用两个构建包,Node.js *和* PHP 编译您的应用程序的话，您可以使用一个特殊的[多样构建](https://github.com/ddollar/heroku-buildpack-multi)。为了覆盖构建包自动侦测，您需要明确地设置构建包 URL：
 
 ```
 $ heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git
 ```
 
-接下来，添加 **.buildpacks** 文件到您的项目中，列出您所需要的构建包：
+> 接下来，添加 **.buildpacks** 文件到您的项目中，列出您所需要的构建包：
 
 ```
 ttps://github.com/heroku/heroku-buildpack-nodejs.git
 https://github.com/heroku/heroku-buildpack-php.git
 ```
 
-有了下一次部署，您可以从两个构建包获益。此设置也启动您的 Heroku 环境，充分使用像 [Grunt](http://gruntjs.com/) 或者 [gulp](http://gulpjs.com/) 这些基于自动构建工具的结点。
+> 有了下一次部署，您可以从两个构建包获益。此设置也启动您的 Heroku 环境，充分使用像 [Grunt](http://gruntjs.com/) 或者 [gulp](http://gulpjs.com/) 这些基于自动构建工具的结点。
