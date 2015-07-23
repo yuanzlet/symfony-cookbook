@@ -77,7 +77,7 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-现在，所有的身份验证机制都将使用 **chain_provider**（串联提供程序），因为它是第一次被指定的。**Chain_provider** 将依次尝试从 **in_memory**（内存） 和 **user_db**（数据库用户表）提供程序中加载用户。
+现在，所有的身份验证机制都将使用 **chain_provider**（串联提供程序），因为它是第一次被指定的。**Chain_provider** 将依次尝试从 **in_memory**（内存）和 **user_db**（数据库用户表）提供程序中加载用户。
 
 您还可以通过配置防火墙或个人的身份验证机制来使用一个特定的提供程序。再次申明，除非显式指定提供程序，则始终会使用第一个提供程序：
 
@@ -140,4 +140,4 @@ $container->loadFromExtension('security', array(
 
 在此示例中，如果用户试图通过 HTTP 身份验证登录，身份验证系统将使用 **in_memory** 用户提供程序。但如果用户尝试通过表单登录，将使用 **user_db** 提供程序(因为默认它是作为一个整体防火墙)。
 
-有关用户提供程序和防火墙配置的详细信息，请参阅[SecurityBundle 配置 ("安全")](http://symfony.com/doc/current/reference/configuration/security.html)。
+有关用户提供程序和防火墙配置的详细信息，请参阅 [SecurityBundle 配置 ("安全")](http://symfony.com/doc/current/reference/configuration/security.html)。
