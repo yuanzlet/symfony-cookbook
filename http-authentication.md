@@ -20,7 +20,9 @@ $client->request('DELETE', '/post/12', array(), array(), array(
 
 当您的应用程序使用 **form_login** 时，您可以通过允许您的测试配置使用 HTTP 认证来简化您的测试。您可以使用以上的代码来在测试中进行认证，但是仍然使您的用户通过通常的 **form_login** 登陆。诀窍是在您的防火墙添加 **http_basic** 键（http_basic key），连同 **form_login** 键一起：
 
-```YAML
+YAML:
+
+```
 # app/config/config_test.yml
 security:
     firewalls:
@@ -28,7 +30,9 @@ security:
             http_basic: ~
 ```
 
-```XML
+XML:
+
+```
 <!-- app/config/config_test.xml -->
 <security:config>
     <security:firewall name="your_firewall_name">
@@ -37,7 +41,9 @@ security:
 </security:config>
 ```
 
-```PHP
+PHP:
+
+```
 // app/config/config_test.php
 $container->loadFromExtension('security', array(
     'firewalls' => array(
