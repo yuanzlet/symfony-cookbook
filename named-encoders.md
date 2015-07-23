@@ -98,7 +98,7 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-在这里我们将创建名为 **harsh** 的编码器。为了使**用户**实例可以使用它，该类必须实现 [EncoderAwareInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Encoder/EncoderAwareInterface.html) 接口。该接口应该具有一个-**getEncoderName**-方法，该方法应返回编码器的名称:
+在这里我们将创建名为 **harsh** 的编码器。为了使**用户**实例可以使用它，该类必须实现 [EncoderAwareInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/Encoder/EncoderAwareInterface.html) 接口。该接口应该具有一个 - **getEncoderName** - 方法，该方法应返回编码器的名称:
 
 ```
 // src/Acme/UserBundle/Entity/User.php
