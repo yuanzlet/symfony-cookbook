@@ -1,7 +1,5 @@
 # &quot;XXX is deprecated&quot; E-USER-DEPRECATED 的警告是什么意思?
 
-
-
 从 Symfony 2.7 开始，如果您使用一个过时的类、功能或选项，Symfony 就会触发 **E_USER_DEPRECATED** 错误。在内部，它看起来是像这样的东西：
 
 ```
