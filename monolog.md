@@ -21,13 +21,13 @@ public function indexAction()
 
 ## Handlers 和 Channels：在不同位置记录日志
 
-Monolog 中每一个日志都定义了日志频道，这个将你的日志信息组织成不同的“目录”。然后，每一个频道都有一堆 handlers 来写日志（handlers 可以共享）。  
+Monolog 中每一个日志都定义了日志信道，这个将你的日志信息组织成不同的“目录”。然后，每一个频道都有一堆 handlers 来写日志（handlers 可以共享）。  
 
->当在服务中注入日志编写器时你可以[使用定制的频道](http://symfony.com/doc/current/reference/dic_tags.html#dic-tags-monolog)控件这个定义了日志编写器的“频道”。  
+> 当在服务中注入日志编写器时你可以[使用定制的频道](http://symfony.com/doc/current/reference/dic_tags.html#dic-tags-monolog)控件这个定义了日志编写器的“频道”。  
 
-基本的 handler 是 **StreamHandler** 这个在流中记录日志（默认情况下 prod 环境下的 **app/logs/prod.log** 以及 dev 环境下的 **app/logs/dev.log**）。  
+基本的 handler 是 **StreamHandler**，它在流中记录日志（默认情况下 prod 环境下的 **app/logs/prod.log** 以及 dev 环境下的 **app/logs/dev.log**）。  
 
-Monolog 也有一个强力的内建 handler 来在 prod 环境下记录日志：**FingersCrossedHandler**。它允许你在缓冲区储存消息并且只有当消息到达行为层才记录他们（这个在 Symfony 的标准版本提供的配置中是**错误**的）通过将消息传递到另一个 handler 的方式。  
+Monolog 也有一个强力的内建 handler 来在 prod 环境下记录日志：**FingersCrossedHandler**。它允许你在缓冲区储存消息并且只有当消息到达行为层次才记录它们（这个在 Symfony 的标准版本提供的配置中是**错误**的）通过将消息传递到另一个 handler 的方式。  
 
 ### 使用几个 Handlers
 
@@ -124,15 +124,15 @@ $container->loadFromExtension('monolog', array(
 ));
 ```
 
-上述配置定义了一堆 handlers 这些 handlers 将会以他们被定义的顺序被调用。  
+上述配置定义了一堆 handlers 这些 handlers 将会以它们被定义的顺序被调用。  
 
->handler 命名的“文件”不会包含在它自己中因为他被用作是 **fingers_crossed** handler 的嵌套的 handler。  
+> handler 命名的“文件”不会包含在它自己中因为它被用作是 **fingers_crossed** handler 的嵌套的 handler。  
 
->如果你想要在另外的配置文件中改变 MonologBundle 的配置你需要重新定义整个堆栈，它不能被合并因为顺序很重要因为合并不能控制顺序。  
+> 如果你想要在另外的配置文件中改变 MonologBundle 的配置你需要重新定义整个堆栈，它不能被合并因为顺序很重要而且合并不能控制顺序。  
 
 ### 改变格式
 
-handler 使用 **Formatter** 来在记录日志之前格式化它。所有的 Monolog handlers 默认使用 **Monolog\Formatter\LineFormatter** 的实例但是你可以很容易的替换它，你的格式器必须实施 **Monolog\Formatter\FormatterInterface**。  
+handler 使用 **Formatter** 来在记录日志之前格式化它。所有的 Monolog handlers 默认使用 **Monolog\Formatter\LineFormatter** 的实例但是你可以很容易的替换它，你的格式器必须实现 **Monolog\Formatter\FormatterInterface**。  
 
 YAML:  
 
@@ -257,7 +257,7 @@ $container->loadFromExtension('monolog', array(
 
 ## 在日志信息中添加一些额外数据
 
-Monolog 允许你编辑记录在它被记录之前添加一些额外数据。processor  可以应用到整个 handler 堆栈也可以对一个特定的 handler 应用。  
+Monolog 允许你编辑记录在它被记录之前添加一些额外数据。processor 可以应用到整个 handler 堆栈也可以对一个特定的 handler 应用。  
 
 processor 就是一个可调用的接收记录为它的第一变元。Processors 使用 **monolog.processor** DIC tag 进行设置。详见[关于它的指导](http://symfony.com/doc/current/reference/dic_tags.html#dic-tags-monolog-processor)。  
 
@@ -393,7 +393,7 @@ $container->loadFromExtension('monolog', array(
 ));
 ```
 
->如果你使用几个 handler，你也可以在 handler 层注册一个 processor 或者在频道层而不是全局注册（详见下面一节）。  
+> 如果你使用几个 handler，你也可以在 handler 层注册一个 processor 或者在频道层而不是全局注册（详见下面一节）。  
 
 ## 每个 Handler 注册 Processors
 
@@ -500,5 +500,3 @@ $container
     ->addArgument(new Reference('session'))
     ->addTag('monolog.processor', array('method' => 'processRecord', 'channel' => 'main'));
 ```
-
-
