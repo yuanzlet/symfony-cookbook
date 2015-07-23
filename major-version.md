@@ -18,7 +18,7 @@
 
 为了帮助您完成这个，最后一个发布的副版本将会触发过期提醒。例如，2.7 和 2.8 版本触发过期提醒。当在浏览器的[开发环境](http://symfony.com/doc/current/cookbook/configuration/environments.html)上访问您的应用程序时，这些提醒会在 web 开发工具栏显示:
 
-![image](http://symfony.com/doc/current/_images/deprecations-in-profiler.png)
+![1](images/deprecations-in-profiler.png)
 
 ### PHPUnit 中的过时部分
 
@@ -73,7 +73,7 @@ $ composer update symfony/symfony
 
 如果您得到了一个依赖的错误，它可能只是意味着您需要升级其他 Symfony 的依赖。在这种情况下，尝试以下命令：
 
-> $ composer update symfony/symfony --with-dependencies
+> *$ composer update symfony/symfony --with-dependencies*
 
 这个命令升级 **symfony/symfony** 和它依赖的所有包（packages），其中包含一些其他的包。通过使用 **composer.json** 里的严格版本限制（tight version constraints），您可以控制每个库升级到哪个版本。
 
