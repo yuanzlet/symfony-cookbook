@@ -13,7 +13,7 @@ Symfony 的安全系统可以通过活动目录或开放授权服务器像数据
 
 之后，您可以了解更多关于[禁止非活动用户](http://symfony.com/doc/current/cookbook/security/entity_provider.html#security-advanced-user-interface)，[使用自定义查询](http://symfony.com/doc/current/cookbook/security/entity_provider.html#authenticating-someone-with-a-custom-entity-provider)和[序列化会话用户](http://symfony.com/doc/current/cookbook/security/entity_provider.html#cookbook-security-serialize-equatable)的相关信息。
 
-## 1） 创建您的用户对象
+## 1） 创建您的用户实体
 
 此项，假设您在一个**应用程序包**内已经有一个**用户**对象包含下列字段：**id**，**username**，**password**，**email** 和 **isActive**。
 
@@ -118,13 +118,13 @@ class User implements UserInterface, \Serializable
 
 为了让代码简短，一些 getter 和 setter 方法没有显示。但你可以通过运行生成这些：
 
-```PHP
+```
 $ php app/console doctrine:generate:entities AppBundle/Entity/User
 ```
 
 接下来，确保[创建数据库表](http://symfony.com/doc/current/book/doctrine.html#book-doctrine-creating-the-database-tables-schema)：
 
-```PHP
+```
 $ php app/console doctrine:schema:update --force
 ```
 
@@ -142,7 +142,7 @@ $ php app/console doctrine:schema:update --force
 
 ### 序列化和反序列化方法做什么？
 
-在每个请求末，用户对象是序列化会话的。对下一个请求，它是非序列化的。要帮助PHP正确做到这一点，您需要实现**可序列化**。但你不必序列化任何东西：你只需要几个字段（上面所示的那些加上一些额外的字段，如果你决定实现 [AdvancedUserInterface](http://symfony.com/doc/current/cookbook/security/entity_provider.html#security-advanced-user-interface) 的话）。对于每个请求，**id** 用于从数据库中查询一个新的**用户**对象。
+在每个请求末，用户对象是序列化会话的。对下一个请求，它是非序列化的。要帮助 PHP 正确做到这一点，您需要实现**可序列化**。但你不必序列化任何东西：你只需要几个字段（上面所示的那些加上一些额外的字段，如果你决定实现 [AdvancedUserInterface](http://symfony.com/doc/current/cookbook/security/entity_provider.html#security-advanced-user-interface) 的话）。对于每个请求，**id** 用于从数据库中查询一个新的**用户**对象。
 
 想要了解更多吗？详见[理解序列化和用户如何在会话中进行保存](http://symfony.com/doc/current/cookbook/security/entity_provider.html#cookbook-security-serialize-equatable)。
 
@@ -150,10 +150,11 @@ $ php app/console doctrine:schema:update --force
 
 现在，您已经有了一个实现了**用户接口**的**用户**对象，你只需要在 **security.yml** 中把这些告诉 Symfony 的安全系统。
 
-In this example, the user will enter their username and password via HTTP basic authentication. Symfony will query for a User entity matching the username and then check the password (more on passwords in a moment):
 在这个例子中，用户将通过 HTTP 基本身份验证输入用户名和密码。Symfony 会查询一个和用户名匹配的用户对象，然后检查密码(通常检查密码的用时较短)：
 
-```YAML
+YAML:
+
+```
 # app/config/security.yml
 security:
     encoders:
@@ -179,7 +180,9 @@ security:
     # ...
 ```
 
-```XML
+XML:
+
+```
 <!-- app/config/security.xml -->
 <config>
     <encoder class="AppBundle\Entity\User"
@@ -200,7 +203,9 @@ security:
 </config>
 ```
 
-```PHP
+PHP:
+
+```
 // app/config/security.php
 $container->loadFromExtension('security', array(
     'encoders' => array(
@@ -228,10 +233,10 @@ $container->loadFromExtension('security', array(
 ));
 ```
 
-首先，**encoder** 部分告诉 Symfony 期望使用 **bcrypt** 对数据库中的密码进行编码。第二，**providers** 部分创建一个叫 **our\_db\_provider** 的"user provider"，它知道通过 **username** 属性在您的 **AppBundle:User** 对象中查询。其中，**our\_db\_provider** 这个名字并不重要：它只需要在你的防火墙下匹配 **provider** 的密钥的值。或者，如果您没有在防火墙下设置 **provider** 密钥，第一个“user provider”会被自动使用。
+首先，**encoder** 部分告诉 Symfony 期望使用 **bcrypt** 对数据库中的密码进行编码。第二，**providers** 部分创建一个叫 **our\_db\_provider** 的 "user provider"，它知道通过 **username** 属性在您的 **AppBundle:User** 对象中查询。其中，**our\_db\_provider** 这个名字并不重要：它只需要在你的防火墙下匹配 **provider** 的密钥的值。或者，如果您没有在防火墙下设置 **provider** 密钥，第一个 “user provider” 会被自动使用。
 
 > If you're using PHP 5.4 or lower, you'll need to install the ircmaxell/password-compat library via Composer in order to be able to use the bcrypt encoder:如果您使用的是PHP 5.4 或更低版本，为了能够使用 **bcrypt** 编码器，您需要通过 Composer 安装 **ircmaxell/password-compat** 库：
-> 
+
 > ```
 > {
 >     "require": {
@@ -243,7 +248,7 @@ $container->loadFromExtension('security', array(
 
 ### 创建您的第一个用户
 
-要添加用户，您可以实现一个[注册表单](http://symfony.com/doc/current/cookbook/doctrine/registration_form.html)或添加一些[fixtures](https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html)。这只是一个普通的对象，所以没什么棘手，除了您需要对每个用户的密码进行加密。但别担心，Symfony 会给您一个用来实现此事的服务。有关详细信息，请参见[动态编码密码](http://symfony.com/doc/current/book/security.html#security-encoding-password)。
+要添加用户，您可以实现一个[注册表单](http://symfony.com/doc/current/cookbook/doctrine/registration_form.html)或添加一些 [fixtures](https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html)。这只是一个普通的对象，所以没什么棘手，除了您需要对每个用户的密码进行加密。但别担心，Symfony 会给您一个用来实现此事的服务。有关详细信息，请参见[动态编码密码](http://symfony.com/doc/current/book/security.html#security-encoding-password)。
 
 下面是从 MySQL 中导出的 app\_users 表，包含了用户 admin 和密码 admin （密码是加密过的）。
 
@@ -261,7 +266,7 @@ $ mysql> SELECT * FROM app_users;
 
 ## 禁止非活动用户(AdvancedUserInterface)
 
-如果用户 **isActive** 属性设置为 **false** (例如，**is_active** 在数据库中是0)，用户仍然可以正常登录到网站。这是很容易修正的。
+如果用户 **isActive** 属性设置为 **false** (例如，**is_active** 在数据库中是 0)，用户仍然可以正常登录到网站。这是很容易修正的。
 
 排除非活动用户，更改您的用户类来实现 AdvancedUserInterface。这扩展了互动演示界面，所以你只需要新的界面：
 
@@ -313,27 +318,26 @@ class User implements AdvancedUserInterface, \Serializable
 }
 ```
 
-
 该 AdvancedUserInterface 接口添加四个额外的方法来验证帐户状态：
 
-- isAccountNonExpired() 检查用户帐户是否已过期;
-- isAccountNonLocked() 检查用户是否已被锁定;
-- isCredentialsNonExpired() 检查用户凭据是否(密码)已过期;
-- isEnabled() 检查用户是否已启用.
+- [isAccountNonExpired()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/AdvancedUserInterface.html#isAccountNonExpired()) 检查用户帐户是否已过期;
+- [isAccountNonLocked()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/AdvancedUserInterface.html#isAccountNonLocked()) 检查用户是否已被锁定;
+- [isCredentialsNonExpired()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/AdvancedUserInterface.html#isCredentialsNonExpired()) 检查用户凭据是否(密码)已过期;
+- [isEnabled()](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/AdvancedUserInterface.html#isEnabled()) 检查用户是否已启用.
 
-如果任何这些返回 **false**，则用户不会被允许登录。你可以选择坚持所有这些的属性，或任何你需要的(在这个例子中，**isActive** 是从数据库中选出的唯一属性)。
+如果*任何*这些返回 **false**，则用户不会被允许登录。你可以选择坚持所有这些的属性，或任何你需要的(在这个例子中，**isActive** 是从数据库中选出的唯一属性)。
 
 那么方法之间的区别是什么？每个方法返回一个略有不同的错误消息(当你在登录模板提交它们到自定义模式时，这些可以被转换)。
 
 > 如果您使用 **AdvancedUserInterface**，您还需要添加任何由这些方法使用的属性(如 **isActive**)到 **serialize()** 和 **unserialize()** 方法。如果你不这样做，您的用户可能无法从每个请求上的会话中正确反序列化。
 
-恭喜您！ 您的数据库加载安全系统已完成所有设置！接下来，添加一个真正的登录表单代替 HTTP 基本身份验证或继续阅读其他主题。
+恭喜您！您的数据库加载安全系统已完成所有设置！接下来，添加一个真正的登录表单代替 HTTP 基本身份验证或继续阅读其他主题。
 
 ## 使用自定义查询加载用户
 
 如果用户可以用他们的用户名或电子邮件登录，这将是很好的，这在数据库中都是独特的。不幸的是，本机实体提供者只能通过单个用户的属性处理查询。
 
-要做到这一点，使您的**用户资料库**执行一个特殊的 [UserProviderInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserProviderInterface.html)。此接口需要三个方法：**loadUserByUsername($username)**，**refreshUser(UserInterface $user)**和**supportsClass($class)**：
+要做到这一点，使您的**用户资料库**执行一个特殊的 [UserProviderInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/UserProviderInterface.html)。此接口需要三个方法：**loadUserByUsername($username)**，**refreshUser(UserInterface $user)** 和 **supportsClass($class)**：
 
 ```
 // src/AppBundle/Entity/UserRepository.php
@@ -397,6 +401,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
 为了完成这一点，只需在 **security.yml** 中移除用户提供者的 **property** 键值。
 
 YAML:
+
 ```
 # app/config/security.yml
 security:
@@ -409,6 +414,7 @@ security:
 ```
 
 XML:
+
 ```
 <!-- app/config/security.xml -->
 <config>
@@ -423,6 +429,7 @@ XML:
 ```
 
 PHP:
+
 ```
 // app/config/security.php
 $container->loadFromExtension('security', array(
@@ -451,4 +458,3 @@ $container->loadFromExtension('security', array(
 首先，[Serializable](http://php.net/manual/en/class.serializable.php)  接口和其**序列化**和**反序列化**方法被添加到允许**用户**类序列化的会话。这可能是也可能不是根据您的设置完成的，但它可能是个好主意。从理论上讲，只有 **id** 需要被序列化，因为 [refreshUser()](http://api.symfony.com/2.7/Symfony/Bridge/Doctrine/Security/User/EntityUserProvider.html#refreshUser()) 方法在每个使用该 **id** 的请求上刷新用户(如上所述)。这给我们一个 "fresh" 用户对象。
 
 但 Symfony 也使用**用户名**、**salt** 和**密码**来验证用户请求之间没有改变(如果你执行它，它也会调用你的 **AdvancedUserInterface** 方法)。未能序列化这些会导致你在每个请求上被注销。如果您的用户实现 [EquatableInterface](http://api.symfony.com/2.7/Symfony/Component/Security/Core/User/EquatableInterface.html)，而不是检查这些属性，你的 **isEqualTo** 方法只是调用，那么您可以检查所需的任何属性。除非你理解这一点，您可能不需要实现该接口或担心这些。
-
