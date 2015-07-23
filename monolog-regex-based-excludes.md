@@ -1,6 +1,6 @@
 # 如何配置 Monolog 从日志中排除 404 错误
 
-有时候你的日志充满了不想看到的 404 HTTP 错误，举例来说，当攻击者扫描你的应用的一些知名的应用程序路径时（例如 /phpmyadmin）。当使用 **fingers_crossed** handler 时，你可以基于一个在 MonologBundle 配置中的正常的解释来拒绝记录这些日志：  
+有时候你的日志充满了不想看到的 404 HTTP 错误，举例来说，当攻击者扫描你的应用的一些知名的应用程序路径时（例如 /phpmyadmin）。当使用 **fingers_crossed** handler 时，你可以基于一个在 MonologBundle 配置中正常的解释来拒绝记录这些日志：  
 
 YAML:  
 
@@ -54,5 +54,3 @@ $container->loadFromExtension('monolog', array(
     ),
 ));
 ```
-
-
