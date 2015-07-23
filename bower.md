@@ -1,6 +1,6 @@
 # 使用 Bower 安装 Symfony
 
-Symfony 以及它的所有的包都是完美的由 Composer 所管理。Bower 是前端依赖性管理的附属工具，就像 Bootstrap 或者 jQuery。由于 Symfony 是一个纯的后端框架，因此他不能使用 Bower 来帮助你。幸运的是，它很好用！  
+Symfony 以及它的所有的包都是由 Composer 所完美管理的。Bower 是前端依赖性管理的附属工具，就像 Bootstrap 或者 jQuery。由于 Symfony 是一个纯的后端框架，因此它不能使用 Bower 来帮助你。幸运的是，它很好用！  
 
 ## 安装 Bower
 
@@ -12,7 +12,7 @@ $ npm install -g bower
 
 在完成这个命令之后，在你终端运行 **bower** 来检查它是否正确安装了。  
 
->如果你的电脑上没有安装 NodeJS，你也可以使用 [BowerPHP](http://bowerphp.org/)（一个非官方的 Bower 的 PHP 接口）。注意这个依然运行在阿尔法状态下。如果你使用 BowerPHP，那么就用 **BowerPHP** 代替例子中的 **bower**。  
+> 如果你的电脑上没有安装 NodeJS，你也可以使用 [BowerPHP](http://bowerphp.org/)（一个非官方的 Bower 的 PHP 接口）。注意这个依然运行在阿尔法状态下。如果你使用 BowerPHP，那么就用 **BowerPHP** 代替例子中的 **bower**。  
 
 ## 在你的工程中配置 Bower
 
@@ -24,7 +24,7 @@ $ npm install -g bower
 }
 ```
 
->如果你在使用基于前端的系统例如 Gulp 或者 Grunt，那么你就可以随意按照你想的来配置目录。典型地，你最终将使用这些工具来将你的所有资产移动到 **web/** 目录。  
+> 如果你在使用基于前端的系统例如 Gulp 或者 Grunt，那么你就可以随意按照你想的来配置目录。典型地，你最终将使用这些工具来将你的所有资产移动到 **web/** 目录。  
 
 ## 一个例子：安装 Bootstrap
 
@@ -40,7 +40,7 @@ $ bower install --save bootstrap
 
 这个将会在 **web/assets/vendor/** 中（或者你在 **.bowerrc** 中设置的其他路径）安装 Bootstrap 以及它的依赖性。  
 
->获取更多如何使用 Bower 的信息，请查阅 [Bower 文档](http://bower.io/)。  
+> 获取更多如何使用 Bower 的信息，请查阅 [Bower 文档](http://bower.io/)。  
 
 ### 在你的模板中包含依赖性
 
@@ -94,5 +94,3 @@ $ git add web/assets/vendor
 为什么呢？不像 Composer，Bower 目前没有“锁定”特征，这就意味着在不同的服务器上运行 **bower install** 将会给你*额外*的你在其它机器上的资产这没有保障。更多细节，详见[检查前端的依赖性](http://addyosmani.com/blog/checking-in-front-end-dependencies/)这篇文章。  
 
 但是，在将来 Bower 很可能添加锁定特征（例如 [bower/bower#1748](https://github.com/bower/bower/pull/1748)）。  
-
-
