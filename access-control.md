@@ -142,7 +142,7 @@ $container->loadFromExtension('security', array(
 <td>example.com</td>
 <td>POST</td>
 <td>rule #3 (<strong>ROLE_USER_METHOD</strong>)</td>
-<td><strong>Ip</strong> 和<strong>主机</strong>与前两项不匹配，但和第三项 -<strong>ROLE_USER_METHOD</strong>- 匹配，并且它会被使用。</td>
+<td><strong>Ip</strong> 和<strong>主机</strong>与前两项不匹配，但和第三项 - <strong>ROLE_USER_METHOD</strong> - 匹配，并且它会被使用。</td>
 </tr>
 <tr><td><strong>/admin/user</strong></td>
 <td>168.0.0.1</td>
@@ -171,15 +171,15 @@ $container->loadFromExtension('security', array(
 
 - **requires_channel** 如果传入请求通道 (例如 **http**) 和该值不匹配 (例如 **https**)，那么用户将被重定向 (例如从 **http** 重定向到 **https**，反之亦然)。
 
-> 如果访问被拒绝，如果一个用户还没有经过身份认证，那么系统将尝试对用户进行身份验证 (如：把用户重定向到登录页)。如果用户已经登录，则将显示 403"拒绝访问"错误页。请参阅[如何自定义错误页](http://symfony.com/doc/current/cookbook/controller/error_pages.html)的详细信息。
+> 如果访问被拒绝，如果一个用户还没有经过身份认证，那么系统将尝试对用户进行身份验证 (如：把用户重定向到登录页)。如果用户已经登录，则将显示 403 "拒绝访问"错误页。请参阅[如何自定义错误页](http://symfony.com/doc/current/cookbook/controller/error_pages.html)的详细信息。
 
-## 使用IP来匹配 access_control
+## 使用 IP 来匹配 access_control
 
 当您需要只和某些 IP 地址或范围请求所匹配的 **access_control** 项，那么会出现某些特定的情况。例如，可以使用它来拒绝访问除了那些从受信任的内部服务器之外的所有请求的 URL 模式。
 
-> 你会看到在下面的例子解释，**ips** 选项并不限制到特定的 IP 地址。相反，使用 **ips** 秘钥意味着 **access_control** 条目将仅匹配此 IP 地址，并且用户会根据 **access_control** 列表从不同的 IP 地址依次访问它。
+> 你会看到在下面的例子解释，**ips** 选项并不限制到特定的 IP 地址。相反，使用 **ips** 密钥意味着 **access_control** 条目将仅匹配此 IP 地址，并且用户会根据 **access_control** 列表从不同的 IP 地址依次访问它。
 
-这里是关于您如何配置一些示例 **/ 内部 \*** URL 模式的示例，所以它只能从本地服务器的请求来访问：
+这里是关于您如何配置一些示例 **/internal*** URL 模式的示例，所以它只能从本地服务器的请求来访问：
 
 YAML:
 
@@ -249,7 +249,7 @@ $container->loadFromExtension('security', array(
 
 ## 通过表达式来保护
 
-一旦 **access_control** 条目相匹配，你可以通过角色秘钥或使用更复杂的逻辑与表达式中 **allow_if** 秘钥拒绝访问：
+一旦 **access_control** 条目相匹配，你可以通过角色秘钥或使用更复杂的逻辑与表达式中 **allow_if** 密钥拒绝访问：
 
 YAML:
 
@@ -291,7 +291,7 @@ PHP:
 
 ## 迫使通道 (http,https)
 
-您还可以要求用户通过 SSL 访问 URL ;只需要使用任何 **access_control** 条目中的 **requires_channel** 参数。如果该 **access_control** 匹配成功并且请求使用的是 **http** 通道，用户将被重定向到 **https**：
+您还可以要求用户通过 SSL 访问 URL；只需要使用任何 **access_control** 条目中的 **requires_channel** 参数。如果该 **access_control** 匹配成功并且请求使用的是 **http** 通道，用户将被重定向到 **https**：
 
 YAML:
 
